@@ -1,0 +1,348 @@
+{
+  "applications": [
+    {
+      "id": "APP-001",
+      "name": "Healthcare Training Initiative",
+      "type": "research",
+      "status": "active",
+      "priority": "high",
+      "department": "Medical",
+      "requestedAmount": 150000,
+      "assignee": {
+        "id": "USR-001",
+        "name": "Dr. Sarah Chen",
+        "email": "sarah.chen@health.mil",
+        "role": "Principal Investigator"
+      },
+      "description": "This program aims to provide comprehensive training for healthcare professionals in emerging medical technologies and AI-assisted diagnostic tools.",
+      "createdAt": "2025-11-15T10:00:00Z",
+      "updatedAt": "2025-12-09T08:30:00Z",
+      "progress": 60,
+      "currentStep": 3,
+      "totalSteps": 5,
+      "steps": [
+        { "name": "Initial Submission", "status": "completed" },
+        { "name": "Documentation", "status": "completed" },
+        { "name": "Program Details", "status": "in_progress" },
+        { "name": "Budget Review", "status": "pending" },
+        { "name": "Final Approval", "status": "pending" }
+      ],
+      "documents": [
+        { "id": "DOC-001", "name": "proposal.pdf", "size": 2300000, "type": "application/pdf", "uploadedAt": "2025-11-15T10:30:00Z" },
+        { "id": "DOC-002", "name": "budget.xlsx", "size": 156000, "type": "application/vnd.ms-excel", "uploadedAt": "2025-11-16T14:20:00Z" }
+      ],
+      "aiInsights": [
+        {
+          "id": "AI-001",
+          "type": "suggestion",
+          "icon": "lightbulb",
+          "message": "Similar approved programs in your category averaged $175,000 in funding.",
+          "confidence": 0.87,
+          "action": "Review budget"
+        },
+        {
+          "id": "AI-002",
+          "type": "recommendation",
+          "icon": "clipboard",
+          "message": "Consider adding specific metrics for success measurement in your description.",
+          "confidence": 0.92,
+          "action": "Edit description"
+        },
+        {
+          "id": "AI-003",
+          "type": "compliance",
+          "icon": "check-circle",
+          "message": "HIPAA compliance check passed.",
+          "confidence": 0.99,
+          "action": null
+        }
+      ]
+    },
+    {
+      "id": "APP-002",
+      "name": "Medical Equipment Procurement",
+      "type": "procurement",
+      "status": "draft",
+      "priority": "medium",
+      "department": "Medical",
+      "requestedAmount": 450000,
+      "assignee": {
+        "id": "USR-002",
+        "name": "Marcus Johnson",
+        "email": "marcus.johnson@health.mil",
+        "role": "Procurement Officer"
+      },
+      "description": "Procurement request for advanced diagnostic imaging equipment for military treatment facilities.",
+      "createdAt": "2025-12-05T09:00:00Z",
+      "updatedAt": "2025-12-09T06:15:00Z",
+      "progress": 20,
+      "currentStep": 1,
+      "totalSteps": 5,
+      "steps": [
+        { "name": "Initial Submission", "status": "in_progress" },
+        { "name": "Documentation", "status": "pending" },
+        { "name": "Program Details", "status": "pending" },
+        { "name": "Budget Review", "status": "pending" },
+        { "name": "Final Approval", "status": "pending" }
+      ],
+      "documents": [],
+      "aiInsights": [
+        {
+          "id": "AI-004",
+          "type": "warning",
+          "icon": "alert-triangle",
+          "message": "Missing required vendor documentation.",
+          "confidence": 0.95,
+          "action": "Upload documents"
+        }
+      ]
+    },
+    {
+      "id": "APP-003",
+      "name": "Cybersecurity Training Program",
+      "type": "training",
+      "status": "active",
+      "priority": "high",
+      "department": "IT Security",
+      "requestedAmount": 85000,
+      "assignee": {
+        "id": "USR-003",
+        "name": "Jennifer Martinez",
+        "email": "jennifer.martinez@health.mil",
+        "role": "Security Training Lead"
+      },
+      "description": "Comprehensive cybersecurity awareness and technical training program for all EIDS personnel.",
+      "createdAt": "2025-11-20T14:00:00Z",
+      "updatedAt": "2025-12-08T11:45:00Z",
+      "progress": 80,
+      "currentStep": 4,
+      "totalSteps": 5,
+      "steps": [
+        { "name": "Initial Submission", "status": "completed" },
+        { "name": "Documentation", "status": "completed" },
+        { "name": "Program Details", "status": "completed" },
+        { "name": "Budget Review", "status": "in_progress" },
+        { "name": "Final Approval", "status": "pending" }
+      ],
+      "documents": [
+        { "id": "DOC-003", "name": "training-curriculum.pdf", "size": 4500000, "type": "application/pdf", "uploadedAt": "2025-11-20T14:30:00Z" },
+        { "id": "DOC-004", "name": "vendor-quote.pdf", "size": 890000, "type": "application/pdf", "uploadedAt": "2025-11-21T09:00:00Z" },
+        { "id": "DOC-005", "name": "timeline.xlsx", "size": 234000, "type": "application/vnd.ms-excel", "uploadedAt": "2025-11-22T16:00:00Z" }
+      ],
+      "aiInsights": [
+        {
+          "id": "AI-005",
+          "type": "success",
+          "icon": "check-circle",
+          "message": "All required documentation complete.",
+          "confidence": 1.0,
+          "action": null
+        }
+      ]
+    },
+    {
+      "id": "APP-004",
+      "name": "Data Analytics Platform Upgrade",
+      "type": "modernization",
+      "status": "completed",
+      "priority": "medium",
+      "department": "Data Services",
+      "requestedAmount": 275000,
+      "assignee": {
+        "id": "USR-004",
+        "name": "Robert Williams",
+        "email": "robert.williams@health.mil",
+        "role": "Program Manager"
+      },
+      "description": "Upgrade existing analytics platform to support real-time data processing and AI/ML workloads.",
+      "createdAt": "2025-10-01T08:00:00Z",
+      "updatedAt": "2025-12-07T17:30:00Z",
+      "progress": 100,
+      "currentStep": 5,
+      "totalSteps": 5,
+      "steps": [
+        { "name": "Initial Submission", "status": "completed" },
+        { "name": "Documentation", "status": "completed" },
+        { "name": "Program Details", "status": "completed" },
+        { "name": "Budget Review", "status": "completed" },
+        { "name": "Final Approval", "status": "completed" }
+      ],
+      "documents": [
+        { "id": "DOC-006", "name": "technical-spec.pdf", "size": 3200000, "type": "application/pdf", "uploadedAt": "2025-10-01T09:00:00Z" },
+        { "id": "DOC-007", "name": "architecture-diagram.pdf", "size": 1500000, "type": "application/pdf", "uploadedAt": "2025-10-02T11:00:00Z" }
+      ],
+      "aiInsights": []
+    },
+    {
+      "id": "APP-005",
+      "name": "Telehealth Infrastructure",
+      "type": "infrastructure",
+      "status": "review",
+      "priority": "high",
+      "department": "Medical",
+      "requestedAmount": 520000,
+      "assignee": {
+        "id": "USR-005",
+        "name": "Dr. Amanda Foster",
+        "email": "amanda.foster@health.mil",
+        "role": "Telehealth Director"
+      },
+      "description": "Deploy secure telehealth infrastructure to enable remote patient consultations across military medical facilities.",
+      "createdAt": "2025-11-28T10:00:00Z",
+      "updatedAt": "2025-12-06T14:20:00Z",
+      "progress": 70,
+      "currentStep": 4,
+      "totalSteps": 5,
+      "steps": [
+        { "name": "Initial Submission", "status": "completed" },
+        { "name": "Documentation", "status": "completed" },
+        { "name": "Program Details", "status": "completed" },
+        { "name": "Budget Review", "status": "in_progress" },
+        { "name": "Final Approval", "status": "pending" }
+      ],
+      "documents": [
+        { "id": "DOC-008", "name": "telehealth-proposal.pdf", "size": 5600000, "type": "application/pdf", "uploadedAt": "2025-11-28T10:30:00Z" },
+        { "id": "DOC-009", "name": "hipaa-compliance.pdf", "size": 2100000, "type": "application/pdf", "uploadedAt": "2025-11-29T09:00:00Z" },
+        { "id": "DOC-010", "name": "vendor-assessment.xlsx", "size": 456000, "type": "application/vnd.ms-excel", "uploadedAt": "2025-11-30T15:00:00Z" }
+      ],
+      "aiInsights": [
+        {
+          "id": "AI-006",
+          "type": "warning",
+          "icon": "alert-circle",
+          "message": "Security review pending - estimated 3 days.",
+          "confidence": 0.88,
+          "action": "Contact security team"
+        }
+      ]
+    },
+    {
+      "id": "APP-006",
+      "name": "Patient Records Modernization",
+      "type": "modernization",
+      "status": "active",
+      "priority": "critical",
+      "department": "Medical",
+      "requestedAmount": 890000,
+      "assignee": {
+        "id": "USR-006",
+        "name": "Dr. Michael Chang",
+        "email": "michael.chang@health.mil",
+        "role": "Chief Medical Informatics Officer"
+      },
+      "description": "Modernize legacy patient records system to support interoperability with VA and civilian healthcare systems.",
+      "createdAt": "2025-11-10T08:00:00Z",
+      "updatedAt": "2025-12-06T09:00:00Z",
+      "progress": 45,
+      "currentStep": 2,
+      "totalSteps": 5,
+      "steps": [
+        { "name": "Initial Submission", "status": "completed" },
+        { "name": "Documentation", "status": "in_progress" },
+        { "name": "Program Details", "status": "pending" },
+        { "name": "Budget Review", "status": "pending" },
+        { "name": "Final Approval", "status": "pending" }
+      ],
+      "documents": [
+        { "id": "DOC-011", "name": "modernization-plan.pdf", "size": 7800000, "type": "application/pdf", "uploadedAt": "2025-11-10T09:00:00Z" }
+      ],
+      "aiInsights": [
+        {
+          "id": "AI-007",
+          "type": "recommendation",
+          "icon": "lightbulb",
+          "message": "Consider phased rollout to minimize operational disruption.",
+          "confidence": 0.91,
+          "action": "View recommendations"
+        },
+        {
+          "id": "AI-008",
+          "type": "info",
+          "icon": "info",
+          "message": "Similar DHA projects typically take 18-24 months.",
+          "confidence": 0.85,
+          "action": null
+        }
+      ]
+    },
+    {
+      "id": "APP-007",
+      "name": "Staff Wellness Program",
+      "type": "training",
+      "status": "draft",
+      "priority": "low",
+      "department": "Human Resources",
+      "requestedAmount": 45000,
+      "assignee": {
+        "id": "USR-007",
+        "name": "Lisa Thompson",
+        "email": "lisa.thompson@health.mil",
+        "role": "HR Program Manager"
+      },
+      "description": "Implement comprehensive wellness program for EIDS staff including mental health resources.",
+      "createdAt": "2025-12-08T11:00:00Z",
+      "updatedAt": "2025-12-05T16:30:00Z",
+      "progress": 10,
+      "currentStep": 1,
+      "totalSteps": 5,
+      "steps": [
+        { "name": "Initial Submission", "status": "in_progress" },
+        { "name": "Documentation", "status": "pending" },
+        { "name": "Program Details", "status": "pending" },
+        { "name": "Budget Review", "status": "pending" },
+        { "name": "Final Approval", "status": "pending" }
+      ],
+      "documents": [],
+      "aiInsights": []
+    },
+    {
+      "id": "APP-008",
+      "name": "Cloud Migration Phase 2",
+      "type": "infrastructure",
+      "status": "review",
+      "priority": "high",
+      "department": "IT Operations",
+      "requestedAmount": 675000,
+      "assignee": {
+        "id": "USR-008",
+        "name": "David Park",
+        "email": "david.park@health.mil",
+        "role": "Cloud Architect"
+      },
+      "description": "Continue migration of legacy applications to AWS GovCloud with enhanced security controls.",
+      "createdAt": "2025-11-25T09:00:00Z",
+      "updatedAt": "2025-12-04T11:00:00Z",
+      "progress": 75,
+      "currentStep": 4,
+      "totalSteps": 5,
+      "steps": [
+        { "name": "Initial Submission", "status": "completed" },
+        { "name": "Documentation", "status": "completed" },
+        { "name": "Program Details", "status": "completed" },
+        { "name": "Budget Review", "status": "in_progress" },
+        { "name": "Final Approval", "status": "pending" }
+      ],
+      "documents": [
+        { "id": "DOC-012", "name": "migration-plan.pdf", "size": 4300000, "type": "application/pdf", "uploadedAt": "2025-11-25T10:00:00Z" },
+        { "id": "DOC-013", "name": "security-assessment.pdf", "size": 2900000, "type": "application/pdf", "uploadedAt": "2025-11-26T14:00:00Z" },
+        { "id": "DOC-014", "name": "cost-analysis.xlsx", "size": 567000, "type": "application/vnd.ms-excel", "uploadedAt": "2025-11-27T09:00:00Z" }
+      ],
+      "aiInsights": [
+        {
+          "id": "AI-009",
+          "type": "success",
+          "icon": "shield-check",
+          "message": "Security assessment complete - all controls satisfied.",
+          "confidence": 0.97,
+          "action": null
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "total": 8,
+    "page": 1,
+    "perPage": 10,
+    "totalPages": 1
+  }
+}

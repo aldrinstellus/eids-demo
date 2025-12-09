@@ -1,0 +1,138 @@
+{
+  "currentUser": {
+    "id": "USR-001",
+    "name": "Dr. Sarah Chen",
+    "email": "sarah.chen@health.mil",
+    "role": "Healthcare Provider",
+    "department": "Medical",
+    "title": "Principal Investigator",
+    "avatar": "/avatars/sarah-chen.jpg",
+    "permissions": ["view", "create", "edit", "submit"],
+    "preferences": {
+      "theme": "light",
+      "notifications": true,
+      "aiAssistant": true,
+      "compactView": false
+    },
+    "stats": {
+      "applicationsSubmitted": 12,
+      "applicationsApproved": 10,
+      "pendingReview": 2,
+      "avgProcessingDays": 2.8
+    }
+  },
+  "users": [
+    {
+      "id": "USR-001",
+      "name": "Dr. Sarah Chen",
+      "email": "sarah.chen@health.mil",
+      "role": "Healthcare Provider",
+      "department": "Medical",
+      "title": "Principal Investigator",
+      "status": "active",
+      "lastActive": "2025-12-09T10:30:00Z"
+    },
+    {
+      "id": "USR-002",
+      "name": "Marcus Johnson",
+      "email": "marcus.johnson@health.mil",
+      "role": "Data Analyst",
+      "department": "Data Services",
+      "title": "Senior Analyst",
+      "status": "active",
+      "lastActive": "2025-12-09T09:45:00Z"
+    },
+    {
+      "id": "USR-003",
+      "name": "Jennifer Martinez",
+      "email": "jennifer.martinez@health.mil",
+      "role": "System Administrator",
+      "department": "IT Security",
+      "title": "DevSecOps Engineer",
+      "status": "active",
+      "lastActive": "2025-12-09T10:15:00Z"
+    },
+    {
+      "id": "USR-004",
+      "name": "Robert Williams",
+      "email": "robert.williams@health.mil",
+      "role": "Program Manager",
+      "department": "EIDS PMO",
+      "title": "Senior Program Manager",
+      "status": "active",
+      "lastActive": "2025-12-09T08:30:00Z"
+    },
+    {
+      "id": "USR-005",
+      "name": "Dr. Amanda Foster",
+      "email": "amanda.foster@health.mil",
+      "role": "Healthcare Provider",
+      "department": "Medical",
+      "title": "Telehealth Director",
+      "status": "active",
+      "lastActive": "2025-12-08T17:20:00Z"
+    },
+    {
+      "id": "USR-006",
+      "name": "Dr. Michael Chang",
+      "email": "michael.chang@health.mil",
+      "role": "Healthcare Provider",
+      "department": "Medical",
+      "title": "Chief Medical Informatics Officer",
+      "status": "active",
+      "lastActive": "2025-12-09T07:00:00Z"
+    },
+    {
+      "id": "USR-007",
+      "name": "Lisa Thompson",
+      "email": "lisa.thompson@health.mil",
+      "role": "Program Manager",
+      "department": "Human Resources",
+      "title": "HR Program Manager",
+      "status": "active",
+      "lastActive": "2025-12-08T16:45:00Z"
+    },
+    {
+      "id": "USR-008",
+      "name": "David Park",
+      "email": "david.park@health.mil",
+      "role": "System Administrator",
+      "department": "IT Operations",
+      "title": "Cloud Architect",
+      "status": "active",
+      "lastActive": "2025-12-09T06:30:00Z"
+    }
+  ],
+  "roles": [
+    {
+      "id": "ROLE-001",
+      "name": "Healthcare Provider",
+      "permissions": ["view", "create", "edit", "submit"],
+      "description": "Clinical staff who submit and manage healthcare-related applications"
+    },
+    {
+      "id": "ROLE-002",
+      "name": "Data Analyst",
+      "permissions": ["view", "create", "edit", "submit", "analytics", "export"],
+      "description": "Analysts with access to reporting and data exploration tools"
+    },
+    {
+      "id": "ROLE-003",
+      "name": "Program Manager",
+      "permissions": ["view", "create", "edit", "submit", "approve", "analytics"],
+      "description": "Managers who oversee programs and approve applications"
+    },
+    {
+      "id": "ROLE-004",
+      "name": "System Administrator",
+      "permissions": ["view", "create", "edit", "submit", "admin", "analytics", "audit"],
+      "description": "IT staff with system administration capabilities"
+    },
+    {
+      "id": "ROLE-005",
+      "name": "Reviewer",
+      "permissions": ["view", "review", "comment", "approve", "reject"],
+      "description": "Staff responsible for reviewing and approving applications"
+    }
+  ]
+}

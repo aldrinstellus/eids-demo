@@ -1,0 +1,296 @@
+{
+  "aiSummary": {
+    "totalAnalyzed": 247,
+    "insightsGenerated": 156,
+    "predictionsAccuracy": 94.2,
+    "lastUpdated": "2025-12-09T10:00:00Z",
+    "highlights": [
+      {
+        "id": "HL-001",
+        "type": "prediction",
+        "icon": "trending-up",
+        "title": "12 applications predicted to need additional review",
+        "description": "Based on historical patterns, these applications may require additional documentation or clarification.",
+        "severity": "warning",
+        "actionable": true,
+        "action": "View applications"
+      },
+      {
+        "id": "HL-002",
+        "type": "compliance",
+        "icon": "shield-alert",
+        "title": "3 potential compliance issues detected",
+        "description": "HIPAA documentation missing or incomplete in flagged applications.",
+        "severity": "error",
+        "actionable": true,
+        "action": "Review issues"
+      },
+      {
+        "id": "HL-003",
+        "type": "forecast",
+        "icon": "check-circle",
+        "title": "Estimated completion rate: 94% within SLA",
+        "description": "Current pipeline is on track to meet service level agreements.",
+        "severity": "success",
+        "actionable": false,
+        "action": null
+      },
+      {
+        "id": "HL-004",
+        "type": "optimization",
+        "icon": "zap",
+        "title": "Processing time improved 15% this month",
+        "description": "AI-assisted form validation has reduced manual review time.",
+        "severity": "info",
+        "actionable": false,
+        "action": null
+      }
+    ]
+  },
+  "riskAssessments": {
+    "APP-001": {
+      "applicationId": "APP-001",
+      "applicationName": "Healthcare Training Initiative",
+      "riskLevel": "medium",
+      "riskScore": 0.42,
+      "confidence": 0.68,
+      "assessedAt": "2025-12-09T08:00:00Z",
+      "factors": [
+        {
+          "name": "Budget Amount",
+          "value": "$150,000",
+          "impact": 0.35,
+          "direction": "positive",
+          "explanation": "Requested amount is 14% below similar approved programs"
+        },
+        {
+          "name": "Missing Documents",
+          "value": "2 pending",
+          "impact": 0.28,
+          "direction": "positive",
+          "explanation": "Additional documentation typically required for this category"
+        },
+        {
+          "name": "Department History",
+          "value": "Medical - 94% approval",
+          "impact": 0.12,
+          "direction": "positive",
+          "explanation": "Department has strong historical approval rate"
+        },
+        {
+          "name": "Timeline",
+          "value": "12 months",
+          "impact": -0.08,
+          "direction": "negative",
+          "explanation": "Timeline is reasonable for scope"
+        },
+        {
+          "name": "Completeness Score",
+          "value": "78%",
+          "impact": 0.15,
+          "direction": "positive",
+          "explanation": "Application is mostly complete"
+        }
+      ],
+      "recommendation": "Request additional budget justification documentation before final review.",
+      "similarCases": [
+        { "id": "APP-2024-089", "outcome": "approved", "similarity": 0.89 },
+        { "id": "APP-2024-156", "outcome": "approved", "similarity": 0.84 },
+        { "id": "APP-2024-203", "outcome": "revision_requested", "similarity": 0.78 }
+      ]
+    },
+    "APP-005": {
+      "applicationId": "APP-005",
+      "applicationName": "Telehealth Infrastructure",
+      "riskLevel": "low",
+      "riskScore": 0.22,
+      "confidence": 0.85,
+      "assessedAt": "2025-12-09T07:30:00Z",
+      "factors": [
+        {
+          "name": "Budget Amount",
+          "value": "$520,000",
+          "impact": 0.08,
+          "direction": "positive",
+          "explanation": "Within expected range for infrastructure projects"
+        },
+        {
+          "name": "Documentation",
+          "value": "Complete",
+          "impact": -0.15,
+          "direction": "negative",
+          "explanation": "All required documents submitted"
+        },
+        {
+          "name": "HIPAA Compliance",
+          "value": "Verified",
+          "impact": -0.12,
+          "direction": "negative",
+          "explanation": "Compliance documentation thorough"
+        },
+        {
+          "name": "Sponsor Level",
+          "value": "Director",
+          "impact": -0.10,
+          "direction": "negative",
+          "explanation": "Strong executive sponsorship"
+        }
+      ],
+      "recommendation": "Application is well-prepared. Recommend expedited review.",
+      "similarCases": [
+        { "id": "APP-2024-312", "outcome": "approved", "similarity": 0.92 },
+        { "id": "APP-2024-287", "outcome": "approved", "similarity": 0.88 }
+      ]
+    },
+    "APP-006": {
+      "applicationId": "APP-006",
+      "applicationName": "Patient Records Modernization",
+      "riskLevel": "high",
+      "riskScore": 0.71,
+      "confidence": 0.78,
+      "assessedAt": "2025-12-09T06:45:00Z",
+      "factors": [
+        {
+          "name": "Budget Amount",
+          "value": "$890,000",
+          "impact": 0.45,
+          "direction": "positive",
+          "explanation": "Large budget requires additional scrutiny"
+        },
+        {
+          "name": "Complexity Score",
+          "value": "High",
+          "impact": 0.38,
+          "direction": "positive",
+          "explanation": "Multi-system integration increases risk"
+        },
+        {
+          "name": "Timeline",
+          "value": "24 months",
+          "impact": 0.22,
+          "direction": "positive",
+          "explanation": "Extended timeline introduces uncertainty"
+        },
+        {
+          "name": "Documentation",
+          "value": "45% complete",
+          "impact": 0.35,
+          "direction": "positive",
+          "explanation": "Significant documentation gaps"
+        },
+        {
+          "name": "Dependencies",
+          "value": "6 systems",
+          "impact": 0.28,
+          "direction": "positive",
+          "explanation": "Multiple system dependencies increase coordination needs"
+        }
+      ],
+      "recommendation": "Request detailed risk mitigation plan and phased implementation approach.",
+      "similarCases": [
+        { "id": "APP-2023-445", "outcome": "approved_with_conditions", "similarity": 0.86 },
+        { "id": "APP-2024-102", "outcome": "revision_requested", "similarity": 0.81 }
+      ]
+    }
+  },
+  "documentExtraction": {
+    "sampleDocument": {
+      "documentId": "DOC-SAMPLE-001",
+      "documentName": "sample-application.pdf",
+      "processingTime": "2.3 seconds",
+      "confidence": 0.94,
+      "extractedFields": [
+        { "field": "Program Name", "value": "Healthcare Training Initiative", "confidence": 0.98, "location": "Page 1, Section 1" },
+        { "field": "Requested Amount", "value": "$150,000.00", "confidence": 0.96, "location": "Page 2, Budget Section" },
+        { "field": "Department", "value": "Medical Research Division", "confidence": 0.94, "location": "Page 1, Header" },
+        { "field": "Start Date", "value": "January 15, 2025", "confidence": 0.92, "location": "Page 1, Section 2" },
+        { "field": "End Date", "value": "December 31, 2025", "confidence": 0.92, "location": "Page 1, Section 2" },
+        { "field": "Principal Investigator", "value": "Dr. Sarah Chen", "confidence": 0.97, "location": "Page 1, Contact Section" },
+        { "field": "Email", "value": "sarah.chen@health.mil", "confidence": 0.95, "location": "Page 1, Contact Section" },
+        { "field": "Objectives", "value": "Train 500 healthcare professionals in AI-assisted diagnostics", "confidence": 0.88, "location": "Page 2, Objectives" }
+      ],
+      "validationResults": [
+        { "check": "Budget within limits", "status": "passed", "message": "Amount is within department allocation" },
+        { "check": "Required fields", "status": "passed", "message": "All mandatory fields present" },
+        { "check": "Date validation", "status": "passed", "message": "Start date is after submission date" },
+        { "check": "Email format", "status": "passed", "message": "Valid .mil email address" }
+      ],
+      "suggestions": [
+        "Consider adding measurable success metrics",
+        "Budget breakdown by quarter recommended",
+        "Add risk mitigation section"
+      ]
+    }
+  },
+  "naturalLanguageQueries": {
+    "examples": [
+      {
+        "query": "Show me all high priority medical applications",
+        "interpretation": "Filter: department=Medical AND priority=high",
+        "resultCount": 23,
+        "confidence": 0.95
+      },
+      {
+        "query": "Which applications are overdue for review?",
+        "interpretation": "Filter: status=review AND daysInStatus > 5",
+        "resultCount": 7,
+        "confidence": 0.92
+      },
+      {
+        "query": "What's the average processing time this month?",
+        "interpretation": "Aggregate: AVG(processingDays) WHERE month=current",
+        "resultCount": 1,
+        "resultValue": "3.2 days",
+        "confidence": 0.98
+      }
+    ]
+  },
+  "predictions": {
+    "completionForecast": {
+      "next7Days": { "expected": 45, "confidence": 0.89 },
+      "next30Days": { "expected": 178, "confidence": 0.82 },
+      "endOfQuarter": { "expected": 312, "confidence": 0.75 }
+    },
+    "bottleneckPrediction": {
+      "department": "Medical",
+      "expectedDelay": "2-3 days",
+      "reason": "High volume of submissions expected",
+      "recommendation": "Consider temporary staff augmentation",
+      "confidence": 0.78
+    },
+    "budgetForecast": {
+      "totalRequested": 4250000,
+      "expectedApproved": 3825000,
+      "approvalRate": 0.90,
+      "confidence": 0.85
+    }
+  },
+  "explainability": {
+    "modelInfo": {
+      "name": "EIDS Risk Assessment Model v2.1",
+      "type": "Gradient Boosting Classifier",
+      "trainedOn": "2025-11-01",
+      "accuracy": 0.94,
+      "f1Score": 0.91,
+      "features": 47,
+      "trainingDataSize": "125,000 historical applications"
+    },
+    "featureImportance": [
+      { "feature": "budget_amount", "importance": 0.18, "description": "Requested funding amount relative to program type" },
+      { "feature": "document_completeness", "importance": 0.15, "description": "Percentage of required documents submitted" },
+      { "feature": "department_history", "importance": 0.12, "description": "Historical approval rate for department" },
+      { "feature": "complexity_score", "importance": 0.11, "description": "Calculated based on integrations and dependencies" },
+      { "feature": "sponsor_level", "importance": 0.09, "description": "Seniority of executive sponsor" },
+      { "feature": "timeline_reasonableness", "importance": 0.08, "description": "Timeline compared to similar projects" },
+      { "feature": "compliance_indicators", "importance": 0.08, "description": "HIPAA, security, accessibility compliance" },
+      { "feature": "past_performance", "importance": 0.07, "description": "Submitter's historical success rate" }
+    ],
+    "biasMetrics": {
+      "demographicParity": 0.98,
+      "equalOpportunity": 0.96,
+      "predictiveParity": 0.97,
+      "lastAudit": "2025-11-15",
+      "status": "passed"
+    }
+  }
+}

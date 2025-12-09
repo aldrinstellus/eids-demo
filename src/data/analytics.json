@@ -1,0 +1,158 @@
+{
+  "summary": {
+    "totalApplications": 247,
+    "activeApplications": 112,
+    "completedThisWeek": 89,
+    "pendingReview": 34,
+    "aiTasksRunning": 12,
+    "avgProcessingDays": 3.2
+  },
+  "recentActivity": [
+    {
+      "id": "ACT-001",
+      "type": "update",
+      "application": "APP-001",
+      "applicationName": "Healthcare Training Initiative",
+      "action": "Status updated to Active",
+      "user": "Dr. Sarah Chen",
+      "timestamp": "2025-12-09T08:30:00Z",
+      "timeAgo": "2 hours ago"
+    },
+    {
+      "id": "ACT-002",
+      "type": "submit",
+      "application": "APP-002",
+      "applicationName": "Medical Equipment Procurement",
+      "action": "Application submitted for review",
+      "user": "Marcus Johnson",
+      "timestamp": "2025-12-09T06:15:00Z",
+      "timeAgo": "4 hours ago"
+    },
+    {
+      "id": "ACT-003",
+      "type": "complete",
+      "application": "APP-004",
+      "applicationName": "Data Analytics Platform Upgrade",
+      "action": "Application approved and completed",
+      "user": "Robert Williams",
+      "timestamp": "2025-12-07T17:30:00Z",
+      "timeAgo": "Yesterday"
+    },
+    {
+      "id": "ACT-004",
+      "type": "document",
+      "application": "APP-005",
+      "applicationName": "Telehealth Infrastructure",
+      "action": "New document uploaded",
+      "user": "Dr. Amanda Foster",
+      "timestamp": "2025-12-06T14:20:00Z",
+      "timeAgo": "Dec 6"
+    },
+    {
+      "id": "ACT-005",
+      "type": "ai",
+      "application": "APP-006",
+      "applicationName": "Patient Records Modernization",
+      "action": "AI analysis completed",
+      "user": "System",
+      "timestamp": "2025-12-06T09:00:00Z",
+      "timeAgo": "Dec 6"
+    }
+  ],
+  "monthlyVolume": [
+    { "month": "Jan", "year": 2025, "submitted": 145, "completed": 132, "rejected": 8 },
+    { "month": "Feb", "year": 2025, "submitted": 162, "completed": 148, "rejected": 6 },
+    { "month": "Mar", "year": 2025, "submitted": 198, "completed": 175, "rejected": 12 },
+    { "month": "Apr", "year": 2025, "submitted": 187, "completed": 169, "rejected": 9 },
+    { "month": "May", "year": 2025, "submitted": 210, "completed": 195, "rejected": 7 },
+    { "month": "Jun", "year": 2025, "submitted": 225, "completed": 208, "rejected": 11 },
+    { "month": "Jul", "year": 2025, "submitted": 198, "completed": 182, "rejected": 8 },
+    { "month": "Aug", "year": 2025, "submitted": 215, "completed": 198, "rejected": 10 },
+    { "month": "Sep", "year": 2025, "submitted": 234, "completed": 215, "rejected": 12 },
+    { "month": "Oct", "year": 2025, "submitted": 256, "completed": 238, "rejected": 9 },
+    { "month": "Nov", "year": 2025, "submitted": 278, "completed": 256, "rejected": 14 },
+    { "month": "Dec", "year": 2025, "submitted": 89, "completed": 78, "rejected": 4 }
+  ],
+  "byStatus": [
+    { "status": "Active", "count": 112, "percentage": 45, "color": "#22c55e" },
+    { "status": "In Review", "count": 62, "percentage": 25, "color": "#f59e0b" },
+    { "status": "Draft", "count": 45, "percentage": 18, "color": "#6b7280" },
+    { "status": "Completed", "count": 28, "percentage": 12, "color": "#3b82f6" }
+  ],
+  "byDepartment": [
+    { "department": "Medical", "count": 111, "percentage": 45, "color": "#ef4444" },
+    { "department": "Research", "count": 69, "percentage": 28, "color": "#8b5cf6" },
+    { "department": "Training", "count": 37, "percentage": 15, "color": "#06b6d4" },
+    { "department": "Admin", "count": 30, "percentage": 12, "color": "#f97316" }
+  ],
+  "byPriority": [
+    { "priority": "Critical", "count": 23, "percentage": 9, "color": "#dc2626" },
+    { "priority": "High", "count": 89, "percentage": 36, "color": "#f59e0b" },
+    { "priority": "Medium", "count": 98, "percentage": 40, "color": "#3b82f6" },
+    { "priority": "Low", "count": 37, "percentage": 15, "color": "#6b7280" }
+  ],
+  "kpis": {
+    "avgProcessingDays": {
+      "value": 3.2,
+      "trend": -15,
+      "trendDirection": "down",
+      "isPositive": true,
+      "unit": "days",
+      "previousPeriod": 3.8
+    },
+    "userSatisfaction": {
+      "value": 4.5,
+      "trend": 0.3,
+      "trendDirection": "up",
+      "isPositive": true,
+      "unit": "/5",
+      "previousPeriod": 4.2
+    },
+    "complianceScore": {
+      "value": 98.5,
+      "trend": 2.1,
+      "trendDirection": "up",
+      "isPositive": true,
+      "unit": "%",
+      "previousPeriod": 96.4
+    },
+    "aiUsageRate": {
+      "value": 67,
+      "trend": 12,
+      "trendDirection": "up",
+      "isPositive": true,
+      "unit": "%",
+      "previousPeriod": 55
+    },
+    "firstTimeApproval": {
+      "value": 82,
+      "trend": 5,
+      "trendDirection": "up",
+      "isPositive": true,
+      "unit": "%",
+      "previousPeriod": 77
+    },
+    "documentCompleteness": {
+      "value": 91,
+      "trend": 3,
+      "trendDirection": "up",
+      "isPositive": true,
+      "unit": "%",
+      "previousPeriod": 88
+    }
+  },
+  "topPerformers": [
+    { "department": "Medical", "completionRate": 94, "avgDays": 2.8 },
+    { "department": "Research", "completionRate": 91, "avgDays": 3.1 },
+    { "department": "Training", "completionRate": 89, "avgDays": 3.4 },
+    { "department": "IT Operations", "completionRate": 88, "avgDays": 3.6 }
+  ],
+  "weeklyTrend": [
+    { "week": "Week 45", "applications": 62 },
+    { "week": "Week 46", "applications": 71 },
+    { "week": "Week 47", "applications": 58 },
+    { "week": "Week 48", "applications": 84 },
+    { "week": "Week 49", "applications": 76 },
+    { "week": "Week 50", "applications": 89 }
+  ]
+}
