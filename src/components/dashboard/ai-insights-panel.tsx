@@ -15,7 +15,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-interface AIInsight {
+export interface AIInsight {
   id: string;
   type: "prediction" | "compliance" | "forecast" | "optimization";
   icon: string;

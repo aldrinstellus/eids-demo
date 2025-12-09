@@ -11,6 +11,7 @@ import { StatsCard } from "@/components/dashboard/stats-card";
 import { AIInsightsPanel } from "@/components/dashboard/ai-insights-panel";
 import { TrendChart } from "@/components/dashboard/trend-chart";
 import { RecentActivity, type Activity } from "@/components/dashboard/recent-activity";
+import { type AIInsight } from "@/components/dashboard/ai-insights-panel";
 
 import analyticsData from "@/data/analytics.json";
 import aiData from "@/data/ai-responses.json";
@@ -21,7 +22,14 @@ export default function DashboardPage() {
     monthlyVolume: typeof analyticsData.monthlyVolume;
     recentActivity: Activity[];
   };
-  const { aiSummary } = aiData;
+  const { aiSummary } = aiData as {
+    aiSummary: {
+      highlights: AIInsight[];
+      totalAnalyzed: number;
+      insightsGenerated: number;
+      predictionsAccuracy: number;
+    };
+  };
 
   const stats = [
     {
