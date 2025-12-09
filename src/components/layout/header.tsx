@@ -11,9 +11,9 @@ import {
   HelpCircle,
   Bell,
   User,
-  Building2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { EIDSLogo } from "@/components/brand/eids-logo";
 
 const navigation = [
   { name: "Dashboard", href: "/", icon: LayoutDashboard },
@@ -37,11 +37,8 @@ export function Header() {
 
       <div className="flex h-16 items-center px-6">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 mr-8">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-            <Building2 className="h-5 w-5 text-primary-foreground" />
-          </div>
-          <span className="font-bold text-xl">EIDS</span>
+        <Link href="/" className="flex items-center mr-8">
+          <EIDSLogo size="md" />
         </Link>
 
         {/* Navigation */}
