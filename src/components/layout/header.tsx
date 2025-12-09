@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import {
@@ -9,12 +8,12 @@ import {
   FileText,
   BarChart3,
   Brain,
-  HelpCircle,
-  Bell,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { EIDSLogo } from "@/components/brand/eids-logo";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { NotificationsDropdown } from "@/components/layout/notifications-dropdown";
+import { HelpDropdown } from "@/components/layout/help-dropdown";
+import { UserDropdown } from "@/components/layout/user-dropdown";
 
 const navigation = [
   { name: "Dashboard", href: "/", icon: LayoutDashboard },
@@ -78,48 +77,12 @@ export function Header() {
         {/* Right side actions */}
         <div className="ml-auto flex items-center gap-2">
           <ThemeToggle />
-
-          {/* Notification button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            aria-label="Notifications"
-            className="relative hover:bg-secondary/50 transition-colors duration-200"
-          >
-            <Bell className="h-5 w-5" />
-            {/* Notification indicator */}
-            <span className="absolute top-1 right-1 w-2 h-2 bg-destructive rounded-full" />
-          </Button>
-
-          <Button
-            variant="ghost"
-            size="icon"
-            aria-label="Help"
-            className="hover:bg-secondary/50 transition-colors duration-200"
-          >
-            <HelpCircle className="h-5 w-5" />
-          </Button>
+          <NotificationsDropdown />
+          <HelpDropdown />
 
           {/* User section - clean professional */}
-          <div className="flex items-center gap-3 ml-2 pl-4 border-l border-border">
-            <div className="text-right hidden sm:block">
-              <p className="text-sm font-medium">Dr. Sarah Chen</p>
-              <p className="text-xs text-muted-foreground">Principal Investigator</p>
-            </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="rounded-full border border-border hover:border-primary/50 transition-colors duration-200 p-0 overflow-hidden"
-              aria-label="Dr. Sarah Chen"
-            >
-              <Image
-                src="/avatars/dr-sarah-chen.jpg"
-                alt="Dr. Sarah Chen"
-                width={36}
-                height={36}
-                className="rounded-full object-cover"
-              />
-            </Button>
+          <div className="ml-2 pl-4 border-l border-border">
+            <UserDropdown />
           </div>
         </div>
       </div>
