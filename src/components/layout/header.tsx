@@ -11,6 +11,7 @@ import {
   HelpCircle,
   Bell,
   User,
+  ChevronRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { EIDSLogo } from "@/components/brand/eids-logo";
@@ -27,24 +28,23 @@ export function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      {/* Skip link for accessibility */}
-      <a
-        href="#main-content"
-        className="skip-link"
-      >
-        Skip to main content
-      </a>
+    <header className="sticky top-0 z-50 w-full glass-card border-b border-glass-border rounded-none">
+      {/* Cyber scan line effect */}
+      <div className="scanner-line" />
 
-      <div className="flex h-16 items-center px-6">
-        {/* Logo */}
-        <Link href="/" className="flex items-center mr-8">
-          <EIDSLogo size="md" />
+      <div className="flex h-16 items-center px-6 relative">
+        {/* Logo with glow */}
+        <Link href="/" className="flex items-center mr-8 group">
+          <div className="relative">
+            <EIDSLogo size="md" />
+            {/* Glow effect on hover */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl bg-primary/20 -z-10" />
+          </div>
         </Link>
 
-        {/* Navigation */}
+        {/* Navigation with double arrow indicators */}
         <nav aria-label="Main navigation" className="flex items-center gap-1">
-          {navigation.map((item) => {
+          {navigation.map((item, index) => {
             const isActive =
               item.href === "/"
                 ? pathname === "/"
@@ -56,15 +56,37 @@ export function Header() {
                 key={item.name}
                 href={item.href}
                 className={cn(
-                  "flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors",
+                  "relative flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300",
+                  "hover:bg-secondary/50",
                   isActive
-                    ? "bg-primary/10 text-primary"
-                    : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                    ? "bg-primary/10 text-primary glow-primary"
+                    : "text-muted-foreground hover:text-foreground",
+                  "fade-enter"
                 )}
+                style={{ animationDelay: `${index * 0.1}s` }}
                 aria-current={isActive ? "page" : undefined}
               >
-                <Icon className="h-4 w-4" aria-hidden="true" />
-                {item.name}
+                {/* Double arrow indicator for active state */}
+                {isActive && (
+                  <span className="absolute -left-1 text-primary font-mono font-bold animate-arrow-pulse neon-text">
+                    ››
+                  </span>
+                )}
+                <Icon
+                  className={cn(
+                    "h-4 w-4 transition-all duration-300",
+                    isActive && "text-primary drop-shadow-[0_0_8px_hsl(var(--primary-glow))]"
+                  )}
+                  aria-hidden="true"
+                />
+                <span className={cn(isActive && "ml-1")}>{item.name}</span>
+                {/* Subtle chevron on hover */}
+                <ChevronRight
+                  className={cn(
+                    "h-3 w-3 opacity-0 -ml-1 transition-all duration-300",
+                    "group-hover:opacity-50 group-hover:ml-0"
+                  )}
+                />
               </Link>
             );
           })}
@@ -73,18 +95,39 @@ export function Header() {
         {/* Right side actions */}
         <div className="ml-auto flex items-center gap-2">
           <ThemeToggle />
-          <Button variant="ghost" size="icon" aria-label="Notifications">
+
+          {/* Notification button with glow badge */}
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label="Notifications"
+            className="relative hover:bg-secondary/50 hover:text-primary transition-all duration-300"
+          >
             <Bell className="h-5 w-5" />
+            {/* Notification indicator */}
+            <span className="absolute top-1 right-1 w-2 h-2 bg-destructive rounded-full animate-glow-pulse" />
           </Button>
-          <Button variant="ghost" size="icon" aria-label="Help">
+
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label="Help"
+            className="hover:bg-secondary/50 hover:text-primary transition-all duration-300"
+          >
             <HelpCircle className="h-5 w-5" />
           </Button>
-          <div className="flex items-center gap-3 ml-2 pl-4 border-l">
+
+          {/* User section with cyber border */}
+          <div className="flex items-center gap-3 ml-2 pl-4 border-l border-glass-border">
             <div className="text-right hidden sm:block">
-              <p className="text-sm font-medium">Dr. Sarah Chen</p>
-              <p className="text-xs text-muted-foreground">Principal Investigator</p>
+              <p className="text-sm font-medium font-display tracking-wide">Dr. Sarah Chen</p>
+              <p className="text-xs text-muted-foreground font-mono">Principal Investigator</p>
             </div>
-            <Button variant="ghost" size="icon" className="rounded-full">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="rounded-full cyber-border hover:glow-primary transition-all duration-300"
+            >
               <User className="h-5 w-5" />
             </Button>
           </div>

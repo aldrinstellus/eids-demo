@@ -1,32 +1,32 @@
 import type { Metadata } from "next";
-import { Rajdhani, IBM_Plex_Mono, Exo_2 } from "next/font/google";
+import { Orbitron, JetBrains_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { ThemeProvider } from "@/components/theme-provider";
 
-// Edgy military-tech font stack
-const rajdhani = Rajdhani({
+// Neo-futuristic font stack
+const orbitron = Orbitron({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800", "900"],
   variable: "--font-display",
 });
 
-const exo2 = Exo_2({
+const inter = Inter({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-sans",
 });
 
-const ibmPlexMono = IBM_Plex_Mono({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-mono",
 });
 
 export const metadata: Metadata = {
-  title: "EIDS Data Applications",
-  description: "Enterprise Integrated Data Services - Application Management Platform",
+  title: "EIDS Data Applications | Neo-Futuristic Interface",
+  description: "Enterprise Integrated Data Services - Next Generation Application Management Platform",
 };
 
 export default function RootLayout({
@@ -37,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${rajdhani.variable} ${exo2.variable} ${ibmPlexMono.variable} font-sans antialiased min-h-screen flex flex-col`}
+        className={`${orbitron.variable} ${inter.variable} ${jetbrainsMono.variable} font-sans antialiased min-h-screen flex flex-col`}
       >
         <ThemeProvider
           attribute="class"
@@ -45,6 +45,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          {/* Skip link for accessibility */}
+          <a href="#main-content" className="skip-link">
+            Skip to main content
+          </a>
           <Header />
           <main id="main-content" className="flex-1">
             {children}
