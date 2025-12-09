@@ -1,7 +1,8 @@
 "use client";
 
-// EIDS Neo-Futuristic Logo - Cyber Brand Identity
+// EIDS Logo - Enterprise Blend
 // Enterprise Integrated Data System - Defense Health Agency
+// Clean, professional design with subtle modern accents
 
 interface EIDSLogoProps {
   size?: "sm" | "md" | "lg";
@@ -17,40 +18,35 @@ export function EIDSLogo({ size = "md", showText = true }: EIDSLogoProps) {
 
   return (
     <div className={`flex items-center ${sizes[size].gap}`}>
-      {/* Shield Icon with Data Bars - Cyber Glow */}
+      {/* Shield Icon with Data Bars - Clean professional look */}
       <div className="relative group">
-        {/* Glow effect behind icon */}
-        <div className="absolute inset-0 blur-md bg-primary/30 rounded-full scale-75 group-hover:scale-100 transition-transform duration-300" />
-        <svg viewBox="0 0 48 56" className={`${sizes[size].icon} relative z-10 drop-shadow-[0_0_8px_hsl(var(--primary-glow)/0.5)]`}>
-          {/* Shield outline - Primary Cyan with glow */}
+        <svg viewBox="0 0 48 56" className={`${sizes[size].icon} relative z-10`}>
+          {/* Shield outline - Primary Teal, clean stroke */}
           <path
             d="M24 2 L44 10 L44 28 C44 40 24 54 24 54 C24 54 4 40 4 28 L4 10 Z"
             fill="none"
             stroke="hsl(var(--primary))"
             strokeWidth="2.5"
-            className="drop-shadow-[0_0_4px_hsl(var(--primary-glow))]"
           />
-          {/* Inner shield fill - cyber glass effect */}
+          {/* Inner shield fill - subtle tint */}
           <path
             d="M24 5 L41 12 L41 28 C41 38 24 50 24 50 C24 50 7 38 7 28 L7 12 Z"
-            fill="hsl(var(--primary) / 0.15)"
+            fill="hsl(var(--primary) / 0.12)"
           />
-          {/* Data bars - staggered widths with glow */}
-          <rect x="12" y="16" width="24" height="4" rx="1" fill="hsl(var(--primary))" />
-          <rect x="12" y="24" width="18" height="4" rx="1" fill="hsl(var(--accent-cyber))" />
-          <rect x="12" y="32" width="21" height="4" rx="1" fill="hsl(var(--primary))" />
-          <rect x="12" y="40" width="14" height="4" rx="1" fill="hsl(var(--accent-cyber))" />
+          {/* Data bars - clean, professional colors */}
+          <rect x="12" y="16" width="24" height="4" rx="1.5" fill="hsl(var(--primary))" />
+          <rect x="12" y="24" width="18" height="4" rx="1.5" fill="hsl(var(--accent))" />
+          <rect x="12" y="32" width="21" height="4" rx="1.5" fill="hsl(var(--primary))" />
+          <rect x="12" y="40" width="14" height="4" rx="1.5" fill="hsl(var(--accent))" />
         </svg>
       </div>
 
-      {/* Wordmark - Orbitron Display Font with Neon Effect */}
+      {/* Wordmark - Clean Inter font, professional */}
       {showText && (
-        <div
-          className={`font-display font-bold tracking-[0.2em] ${sizes[size].text} neon-text`}
-        >
-          <span className="text-foreground drop-shadow-[0_0_10px_hsl(var(--foreground)/0.3)]">E</span>
-          <span className="text-primary drop-shadow-[0_0_12px_hsl(var(--primary-glow)/0.8)]">I</span>
-          <span className="text-foreground drop-shadow-[0_0_10px_hsl(var(--foreground)/0.3)]">DS</span>
+        <div className={`font-semibold tracking-wide ${sizes[size].text}`}>
+          <span className="text-foreground">E</span>
+          <span className="text-primary">I</span>
+          <span className="text-foreground">DS</span>
         </div>
       )}
     </div>

@@ -128,27 +128,22 @@ export function ChatFAB() {
 
   return (
     <>
-      {/* Floating Action Button */}
+      {/* Floating Action Button - Clean enterprise style */}
       <motion.button
         onClick={() => setIsOpen(true)}
         className={cn(
           "fixed bottom-6 right-6 z-50 p-4 rounded-full",
           "bg-primary text-primary-foreground",
-          "shadow-lg shadow-primary/25",
-          "hover:shadow-xl hover:shadow-primary/40",
-          "transition-all duration-300",
-          "group",
+          "shadow-lg hover:shadow-xl",
+          "transition-all duration-200",
           isOpen && "hidden"
         )}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.98 }}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         aria-label="Open AI Assistant chat"
       >
-        {/* Glow ring - slower pulse animation */}
-        <span className="absolute inset-0 rounded-full bg-primary/50 animate-pulse opacity-75" />
-        <span className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-accent-cyber opacity-0 group-hover:opacity-100 transition-opacity blur-md" />
         <Bot className="h-6 w-6 relative z-10" />
       </motion.button>
 
@@ -160,12 +155,12 @@ export function ChatFAB() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-6 right-6 z-50 w-[400px] max-w-[calc(100vw-48px)] h-[600px] max-h-[calc(100vh-100px)] flex flex-col rounded-2xl shadow-2xl shadow-primary/20"
+            className="fixed bottom-6 right-6 z-50 w-[400px] max-w-[calc(100vw-48px)] h-[600px] max-h-[calc(100vh-100px)] flex flex-col rounded-xl shadow-2xl"
             role="dialog"
             aria-label="AI Assistant chat panel"
           >
-            {/* Glass card styling - lighter in dark mode, darker in light mode */}
-            <div className="absolute inset-0 rounded-2xl overflow-hidden bg-[hsl(220,15%,92%)] dark:bg-[hsl(220,20%,16%)] border border-glass-border backdrop-blur-xl" />
+            {/* Clean card styling - enterprise look */}
+            <div className="absolute inset-0 rounded-xl overflow-hidden bg-card border border-border" />
 
             {/* Close button - positioned absolutely with high z-index */}
             <button
@@ -177,16 +172,16 @@ export function ChatFAB() {
             </button>
 
             {/* Header */}
-            <div className="relative z-10 flex items-center p-4 pr-14 border-b border-glass-border">
+            <div className="relative z-10 flex items-center p-4 pr-14 border-b border-border">
               <div className="flex items-center gap-3">
                 <div className="relative">
-                  <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-full bg-primary/15 flex items-center justify-center">
                     <Sparkles className="h-5 w-5 text-primary" />
                   </div>
-                  <span className="absolute bottom-0 right-0 w-3 h-3 bg-success rounded-full border-2 border-background" />
+                  <span className="absolute bottom-0 right-0 w-3 h-3 bg-success rounded-full border-2 border-card" />
                 </div>
                 <div>
-                  <h3 className="font-display font-semibold text-sm tracking-wide">EIDS AI ASSISTANT</h3>
+                  <h3 className="font-semibold text-sm">EIDS AI Assistant</h3>
                   <p className="text-xs text-muted-foreground">Powered by NLP</p>
                 </div>
               </div>
@@ -206,10 +201,10 @@ export function ChatFAB() {
                 >
                   <div
                     className={cn(
-                      "max-w-[85%] rounded-2xl px-4 py-3 text-sm",
+                      "max-w-[85%] rounded-xl px-4 py-3 text-sm",
                       message.type === "user"
-                        ? "bg-primary text-primary-foreground rounded-br-md"
-                        : "bg-secondary/50 border border-glass-border rounded-bl-md"
+                        ? "bg-primary text-primary-foreground rounded-br-sm"
+                        : "bg-muted/50 border border-border rounded-bl-sm"
                     )}
                   >
                     <p className="whitespace-pre-line">{message.content}</p>
@@ -229,11 +224,11 @@ export function ChatFAB() {
                   animate={{ opacity: 1 }}
                   className="flex justify-start"
                 >
-                  <div className="bg-secondary/50 border border-glass-border rounded-2xl rounded-bl-md px-4 py-3">
+                  <div className="bg-muted/50 border border-border rounded-xl rounded-bl-sm px-4 py-3">
                     <div className="flex gap-1">
-                      <span className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-                      <span className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-                      <span className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+                      <span className="w-2 h-2 bg-primary/60 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+                      <span className="w-2 h-2 bg-primary/60 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+                      <span className="w-2 h-2 bg-primary/60 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
                     </div>
                   </div>
                 </motion.div>
@@ -249,7 +244,7 @@ export function ChatFAB() {
                     <button
                       key={query.text}
                       onClick={() => handleSend(query.text)}
-                      className="text-xs px-3 py-1.5 rounded-full bg-secondary/50 border border-glass-border hover:bg-primary/20 hover:border-primary/50 transition-colors"
+                      className="text-xs px-3 py-1.5 rounded-lg bg-muted/50 border border-border hover:bg-primary/10 hover:border-primary/40 transition-colors"
                     >
                       {query.icon} {query.text}
                     </button>
@@ -259,7 +254,7 @@ export function ChatFAB() {
             )}
 
             {/* Input */}
-            <div className="relative z-10 p-4 border-t border-glass-border">
+            <div className="relative z-10 p-4 border-t border-border">
               <div className="flex gap-2">
                 <input
                   type="text"
@@ -267,14 +262,14 @@ export function ChatFAB() {
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyPress={handleKeyPress}
                   placeholder="Ask me anything..."
-                  className="flex-1 h-10 px-4 rounded-full bg-secondary/50 border border-glass-border text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                  className="flex-1 h-10 px-4 rounded-lg bg-muted/30 border border-border text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
                   aria-label="Type your message"
                 />
                 <Button
                   onClick={() => handleSend(inputValue)}
                   disabled={!inputValue.trim() || isTyping}
                   size="icon"
-                  className="rounded-full h-10 w-10"
+                  className="rounded-lg h-10 w-10"
                   aria-label="Send message"
                 >
                   <Send className="h-4 w-4" />
