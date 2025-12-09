@@ -14,7 +14,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-interface Activity {
+export interface Activity {
   id: string;
   type: "update" | "submit" | "complete" | "document" | "ai";
   application: string;

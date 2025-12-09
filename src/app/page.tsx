@@ -10,13 +10,17 @@ import {
 import { StatsCard } from "@/components/dashboard/stats-card";
 import { AIInsightsPanel } from "@/components/dashboard/ai-insights-panel";
 import { TrendChart } from "@/components/dashboard/trend-chart";
-import { RecentActivity } from "@/components/dashboard/recent-activity";
+import { RecentActivity, type Activity } from "@/components/dashboard/recent-activity";
 
 import analyticsData from "@/data/analytics.json";
 import aiData from "@/data/ai-responses.json";
 
 export default function DashboardPage() {
-  const { summary, monthlyVolume, recentActivity } = analyticsData;
+  const { summary, monthlyVolume, recentActivity } = analyticsData as {
+    summary: typeof analyticsData.summary;
+    monthlyVolume: typeof analyticsData.monthlyVolume;
+    recentActivity: Activity[];
+  };
   const { aiSummary } = aiData;
 
   const stats = [
