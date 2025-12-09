@@ -146,8 +146,8 @@ export function ChatFAB() {
         animate={{ opacity: 1, y: 0 }}
         aria-label="Open AI Assistant chat"
       >
-        {/* Glow ring */}
-        <span className="absolute inset-0 rounded-full bg-primary/50 animate-ping opacity-75" />
+        {/* Glow ring - slower pulse animation */}
+        <span className="absolute inset-0 rounded-full bg-primary/50 animate-pulse opacity-75" />
         <span className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-accent-cyber opacity-0 group-hover:opacity-100 transition-opacity blur-md" />
         <Bot className="h-6 w-6 relative z-10" />
       </motion.button>
@@ -160,15 +160,24 @@ export function ChatFAB() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-6 right-6 z-50 w-[400px] max-w-[calc(100vw-48px)] h-[600px] max-h-[calc(100vh-100px)] flex flex-col rounded-2xl overflow-hidden shadow-2xl shadow-primary/20"
+            className="fixed bottom-6 right-6 z-50 w-[400px] max-w-[calc(100vw-48px)] h-[600px] max-h-[calc(100vh-100px)] flex flex-col rounded-2xl shadow-2xl shadow-primary/20"
             role="dialog"
             aria-label="AI Assistant chat panel"
           >
-            {/* Glass card styling */}
-            <div className="absolute inset-0 glass-card rounded-2xl" />
+            {/* Glass card styling - lighter in dark mode, darker in light mode */}
+            <div className="absolute inset-0 rounded-2xl overflow-hidden bg-[hsl(220,15%,92%)] dark:bg-[hsl(220,20%,16%)] border border-glass-border backdrop-blur-xl" />
+
+            {/* Close button - positioned absolutely with high z-index */}
+            <button
+              onClick={() => setIsOpen(false)}
+              aria-label="Close chat"
+              className="absolute top-3 right-3 z-[100] w-8 h-8 rounded-full flex items-center justify-center bg-background hover:bg-destructive text-foreground hover:text-destructive-foreground transition-all duration-200 border-2 border-border hover:border-destructive shadow-lg"
+            >
+              <X className="h-4 w-4" />
+            </button>
 
             {/* Header */}
-            <div className="relative z-10 flex items-center justify-between p-4 border-b border-glass-border">
+            <div className="relative z-10 flex items-center p-4 pr-14 border-b border-glass-border">
               <div className="flex items-center gap-3">
                 <div className="relative">
                   <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
@@ -181,15 +190,6 @@ export function ChatFAB() {
                   <p className="text-xs text-muted-foreground">Powered by NLP</p>
                 </div>
               </div>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setIsOpen(false)}
-                aria-label="Close chat"
-                className="hover:bg-destructive/10 hover:text-destructive"
-              >
-                <X className="h-5 w-5" />
-              </Button>
             </div>
 
             {/* Messages */}

@@ -13,9 +13,7 @@ body > nextjs-portal,
 [class*="nextjs-portal"],
 [class*="__next-build"],
 button[class*="nextjs"],
-div[style*="position: fixed"][style*="bottom"][style*="left"] > button,
-body > div:last-child button[aria-label],
-body > div[style*="z-index"]:last-of-type {
+div[style*="position: fixed"][style*="bottom"][style*="left"] > button {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
