@@ -58,11 +58,13 @@ export function StatsCard({
                   "flex items-center gap-1 text-sm",
                   trend.isPositive ? "text-success" : "text-destructive"
                 )}
+                aria-label={`${trend.isPositive ? "Positive" : "Negative"} trend: ${trend.direction === "up" ? "up" : "down"} ${Math.abs(trend.value)}% vs last period`}
               >
+                <span className="sr-only">{trend.isPositive ? "Positive trend:" : "Negative trend:"}</span>
                 {trend.direction === "up" ? (
-                  <TrendingUp className="h-4 w-4" />
+                  <TrendingUp className="h-4 w-4" aria-hidden="true" />
                 ) : (
-                  <TrendingDown className="h-4 w-4" />
+                  <TrendingDown className="h-4 w-4" aria-hidden="true" />
                 )}
                 <span>{Math.abs(trend.value)}% vs last period</span>
               </div>

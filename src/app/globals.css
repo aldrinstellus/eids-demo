@@ -36,7 +36,7 @@ body > div[style*="z-index"]:last-of-type {
     --secondary: 211.5789 8.2251% 45.2941%;
     --secondary-foreground: 0 0% 100%;
     --muted: 214.2857 31.8182% 91.3725%;
-    --muted-foreground: 218.0000 16.8539% 34.9020%;
+    --muted-foreground: 218 22% 28%; /* Darkened for WCAG AA 4.5:1 contrast */
     --accent: 211.0588 100% 50%;
     --accent-foreground: 0 0% 100%;
     --destructive: 354.2515 70.4641% 53.5294%;
@@ -65,8 +65,8 @@ body > div[style*="z-index"]:last-of-type {
     /* Success/Warning (custom) */
     --success: 133.7008 61.3527% 40.5882%;
     --success-foreground: 0 0% 100%;
-    --warning: 45 100.0000% 51.3725%;
-    --warning-foreground: 220 25.7143% 13.7255%;
+    --warning: 45 100% 35%; /* Darkened for WCAG AA contrast on light backgrounds */
+    --warning-foreground: 0 0% 100%;
 
     /* Typography & Radius - Edgy Military Tech */
     --font-sans: "Exo 2", system-ui, sans-serif;

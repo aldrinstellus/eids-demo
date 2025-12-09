@@ -270,6 +270,8 @@ export default function DashboardPage() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.3 }}
         className="hidden xl:flex flex-col w-80 border-l bg-card/50"
+        role="complementary"
+        aria-label="Recent activity feed"
       >
         <div className="p-4 border-b">
           <div className="flex items-center justify-between">

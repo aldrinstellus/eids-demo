@@ -136,6 +136,7 @@ export default function AIInsightsPage() {
                 <select
                   value={selectedApp}
                   onChange={(e) => setSelectedApp(e.target.value)}
+                  aria-label="Select application for risk assessment"
                   className="h-9 px-3 rounded-md border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring"
                 >
                   {Object.keys(riskAssessments).map((appId) => (
@@ -151,7 +152,14 @@ export default function AIInsightsPage() {
                 <div className="space-y-6">
                   {/* Risk Level */}
                   <div className="flex items-center gap-6">
-                    <div className="w-24 h-24">
+                    <div
+                      className="w-24 h-24"
+                      role="progressbar"
+                      aria-valuenow={Math.round(currentAssessment.confidence * 100)}
+                      aria-valuemin={0}
+                      aria-valuemax={100}
+                      aria-label={`Risk assessment confidence: ${Math.round(currentAssessment.confidence * 100)}%, ${currentAssessment.riskLevel} risk level`}
+                    >
                       <CircularProgressbar
                         value={currentAssessment.confidence * 100}
                         text={`${Math.round(currentAssessment.confidence * 100)}%`}

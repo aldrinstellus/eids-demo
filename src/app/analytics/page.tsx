@@ -104,11 +104,13 @@ export default function AnalyticsPage() {
                     "flex items-center gap-1 text-sm",
                     kpi.isPositive ? "text-success" : "text-destructive"
                   )}
+                  aria-label={`${kpi.isPositive ? "Positive" : "Negative"} trend: ${kpi.direction} ${Math.abs(kpi.trend)}%`}
                 >
+                  <span className="sr-only">{kpi.isPositive ? "Positive trend:" : "Negative trend:"}</span>
                   {kpi.direction === "up" ? (
-                    <TrendingUp className="h-4 w-4" />
+                    <TrendingUp className="h-4 w-4" aria-hidden="true" />
                   ) : (
-                    <TrendingDown className="h-4 w-4" />
+                    <TrendingDown className="h-4 w-4" aria-hidden="true" />
                   )}
                   <span>{Math.abs(kpi.trend)}%</span>
                 </div>
@@ -131,7 +133,7 @@ export default function AnalyticsPage() {
               <CardTitle>Applications by Status</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="h-[300px]" role="img" aria-label="Applications by status pie chart">
+              <div className="h-[300px]" role="img" aria-label="Pie chart showing application status distribution. Active: 112 (45%), In Review: 62 (25%), Draft: 45 (18%), Completed: 28 (12%). Use the View data button below for detailed numbers.">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie
@@ -192,7 +194,7 @@ export default function AnalyticsPage() {
               <CardTitle>Applications by Department</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="h-[300px]" role="img" aria-label="Applications by department bar chart">
+              <div className="h-[300px]" role="img" aria-label="Horizontal bar chart showing applications by department. Medical: 111 (45%), Research: 69 (28%), Training: 37 (15%), Admin: 30 (12%). Use the View data button below for detailed numbers.">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={byDepartment} layout="vertical" margin={{ left: 20 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="hsl(217 33% 17%)" />

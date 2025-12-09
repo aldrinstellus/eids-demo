@@ -23,6 +23,12 @@ interface TrendChartProps {
 }
 
 export function TrendChart({ data }: TrendChartProps) {
+  // Calculate summary stats for accessibility
+  const totalSubmitted = data.reduce((sum, d) => sum + d.submitted, 0);
+  const totalCompleted = data.reduce((sum, d) => sum + d.completed, 0);
+  const latestMonth = data[data.length - 1];
+  const chartAriaLabel = `Area chart showing application volume trends over ${data.length} months. Total submitted: ${totalSubmitted}, total completed: ${totalCompleted}. Most recent month (${latestMonth?.month}): ${latestMonth?.submitted} submitted, ${latestMonth?.completed} completed. Use the View data table button below for detailed numbers.`;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -37,7 +43,7 @@ export function TrendChart({ data }: TrendChartProps) {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="h-[300px]" role="img" aria-label="Application volume trends chart">
+          <div className="h-[300px]" role="img" aria-label={chartAriaLabel}>
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                 <defs>

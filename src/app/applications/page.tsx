@@ -109,6 +109,7 @@ export default function ApplicationsPage() {
             placeholder="Search applications..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            aria-label="Search applications by name, ID, or department"
             className="w-full h-10 pl-10 pr-4 rounded-md border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring"
           />
         </div>
@@ -142,46 +143,66 @@ export default function ApplicationsPage() {
             <table className="w-full" role="table">
               <thead>
                 <tr className="border-b bg-muted/50">
-                  <th scope="col" className="text-left px-4 py-3 text-sm font-medium">
+                  <th
+                    scope="col"
+                    className="text-left px-4 py-3 text-sm font-medium"
+                    aria-sort={sortField === "name" ? (sortDirection === "asc" ? "ascending" : "descending") : "none"}
+                  >
                     <button
                       onClick={() => handleSort("name")}
                       className="flex items-center gap-1 hover:text-primary transition-colors"
+                      aria-label={`Sort by application name, currently ${sortField === "name" ? (sortDirection === "asc" ? "ascending" : "descending") : "unsorted"}`}
                     >
                       Application
-                      <ArrowUpDown className="h-3 w-3" />
+                      <ArrowUpDown className="h-3 w-3" aria-hidden="true" />
                     </button>
                   </th>
                   <th scope="col" className="text-left px-4 py-3 text-sm font-medium">
                     Department
                   </th>
-                  <th scope="col" className="text-left px-4 py-3 text-sm font-medium">
+                  <th
+                    scope="col"
+                    className="text-left px-4 py-3 text-sm font-medium"
+                    aria-sort={sortField === "status" ? (sortDirection === "asc" ? "ascending" : "descending") : "none"}
+                  >
                     <button
                       onClick={() => handleSort("status")}
                       className="flex items-center gap-1 hover:text-primary transition-colors"
+                      aria-label={`Sort by status, currently ${sortField === "status" ? (sortDirection === "asc" ? "ascending" : "descending") : "unsorted"}`}
                     >
                       Status
-                      <ArrowUpDown className="h-3 w-3" />
+                      <ArrowUpDown className="h-3 w-3" aria-hidden="true" />
                     </button>
                   </th>
-                  <th scope="col" className="text-left px-4 py-3 text-sm font-medium">
+                  <th
+                    scope="col"
+                    className="text-left px-4 py-3 text-sm font-medium"
+                    aria-sort={sortField === "requestedAmount" ? (sortDirection === "asc" ? "ascending" : "descending") : "none"}
+                  >
                     <button
                       onClick={() => handleSort("requestedAmount")}
                       className="flex items-center gap-1 hover:text-primary transition-colors"
+                      aria-label={`Sort by amount, currently ${sortField === "requestedAmount" ? (sortDirection === "asc" ? "ascending" : "descending") : "unsorted"}`}
                     >
                       Amount
-                      <ArrowUpDown className="h-3 w-3" />
+                      <ArrowUpDown className="h-3 w-3" aria-hidden="true" />
                     </button>
                   </th>
                   <th scope="col" className="text-left px-4 py-3 text-sm font-medium">
                     Progress
                   </th>
-                  <th scope="col" className="text-left px-4 py-3 text-sm font-medium">
+                  <th
+                    scope="col"
+                    className="text-left px-4 py-3 text-sm font-medium"
+                    aria-sort={sortField === "updatedAt" ? (sortDirection === "asc" ? "ascending" : "descending") : "none"}
+                  >
                     <button
                       onClick={() => handleSort("updatedAt")}
                       className="flex items-center gap-1 hover:text-primary transition-colors"
+                      aria-label={`Sort by updated date, currently ${sortField === "updatedAt" ? (sortDirection === "asc" ? "ascending" : "descending") : "unsorted"}`}
                     >
                       Updated
-                      <ArrowUpDown className="h-3 w-3" />
+                      <ArrowUpDown className="h-3 w-3" aria-hidden="true" />
                     </button>
                   </th>
                   <th scope="col" className="text-right px-4 py-3 text-sm font-medium">
@@ -259,10 +280,10 @@ export default function ApplicationsPage() {
               Showing {sortedApps.length} of {applications.length} applications
             </p>
             <div className="flex gap-2">
-              <Button variant="outline" size="sm" disabled>
+              <Button variant="outline" size="sm" disabled aria-label="Previous page (disabled - on first page)">
                 Previous
               </Button>
-              <Button variant="outline" size="sm" disabled>
+              <Button variant="outline" size="sm" disabled aria-label="Next page (disabled - on last page)">
                 Next
               </Button>
             </div>

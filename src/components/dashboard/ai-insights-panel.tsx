@@ -89,6 +89,11 @@ export function AIInsightsPanel({ insights }: AIInsightsPanelProps) {
                 className="flex gap-3 p-3 rounded-lg bg-background/50 hover:bg-background/80 transition-colors"
               >
                 <div className={cn("mt-0.5", severityStyles[insight.severity])}>
+                  <span className="sr-only">
+                    {insight.severity === "success" ? "Success:" :
+                     insight.severity === "warning" ? "Warning:" :
+                     insight.severity === "error" ? "Error:" : "Info:"}
+                  </span>
                   <Icon className="h-5 w-5" aria-hidden="true" />
                 </div>
                 <div className="flex-1 min-w-0">
