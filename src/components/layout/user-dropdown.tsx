@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import {
   User,
   Settings,
@@ -9,7 +10,6 @@ import {
   Moon,
   Sun,
   Monitor,
-  ChevronRight,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
@@ -82,19 +82,25 @@ export function UserDropdown() {
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem className="cursor-pointer">
-          <User className="h-4 w-4 mr-2" />
-          View Profile
+        <DropdownMenuItem asChild className="cursor-pointer">
+          <Link href="/profile">
+            <User className="h-4 w-4 mr-2" />
+            View Profile
+          </Link>
         </DropdownMenuItem>
 
-        <DropdownMenuItem className="cursor-pointer">
-          <Settings className="h-4 w-4 mr-2" />
-          Account Settings
+        <DropdownMenuItem asChild className="cursor-pointer">
+          <Link href="/settings">
+            <Settings className="h-4 w-4 mr-2" />
+            Account Settings
+          </Link>
         </DropdownMenuItem>
 
-        <DropdownMenuItem className="cursor-pointer">
-          <Shield className="h-4 w-4 mr-2" />
-          Security & Privacy
+        <DropdownMenuItem asChild className="cursor-pointer">
+          <Link href="/security">
+            <Shield className="h-4 w-4 mr-2" />
+            Security & Privacy
+          </Link>
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
@@ -131,9 +137,13 @@ export function UserDropdown() {
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem className="cursor-pointer text-destructive focus:text-destructive">
+        <DropdownMenuItem
+          className="cursor-not-allowed text-muted-foreground/50"
+          disabled
+        >
           <LogOut className="h-4 w-4 mr-2" />
           Sign Out
+          <span className="ml-auto text-[10px]">(Demo)</span>
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
