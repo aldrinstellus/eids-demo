@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import {
@@ -10,7 +11,6 @@ import {
   Brain,
   HelpCircle,
   Bell,
-  User,
   ChevronRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -126,9 +126,15 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="rounded-full cyber-border hover:glow-primary transition-all duration-300"
+              className="rounded-full cyber-border hover:glow-primary transition-all duration-300 p-0 overflow-hidden"
             >
-              <User className="h-5 w-5" />
+              <Image
+                src="/avatars/dr-sarah-chen.jpg"
+                alt="Dr. Sarah Chen"
+                width={36}
+                height={36}
+                className="rounded-full object-cover"
+              />
             </Button>
           </div>
         </div>

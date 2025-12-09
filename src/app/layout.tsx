@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { ThemeProvider } from "@/components/theme-provider";
+import { ChatFAB } from "@/components/chat/chat-fab";
 
 // Neo-futuristic font stack
 const orbitron = Orbitron({
@@ -54,6 +55,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <ChatFAB />
         </ThemeProvider>
       </body>
     </html>
