@@ -10,6 +10,8 @@ import {
   ChevronRight,
   ArrowUpDown,
   FileX2,
+  X,
+  SlidersHorizontal,
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -24,10 +26,17 @@ type SortDirection = "asc" | "desc";
 export default function ApplicationsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [departmentFilter, setDepartmentFilter] = useState<string>("all");
+  const [priorityFilter, setPriorityFilter] = useState<string>("all");
   const [sortField, setSortField] = useState<SortField>("updatedAt");
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
+  const [showFilterPanel, setShowFilterPanel] = useState(false);
 
   const { applications } = applicationsData;
+
+  // Get unique departments and priorities from data
+  const departments = ["all", ...Array.from(new Set(applications.map(app => app.department)))];
+  const priorities = ["all", "critical", "high", "medium", "low"];
 
   // Filter applications
   const filteredApps = applications.filter((app) => {
@@ -36,8 +45,21 @@ export default function ApplicationsPage() {
       app.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
       app.department.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesStatus = statusFilter === "all" || app.status === statusFilter;
-    return matchesSearch && matchesStatus;
+    const matchesDepartment = departmentFilter === "all" || app.department === departmentFilter;
+    const matchesPriority = priorityFilter === "all" || app.priority === priorityFilter;
+    return matchesSearch && matchesStatus && matchesDepartment && matchesPriority;
   });
+
+  // Count active filters
+  const activeFilterCount = [statusFilter, departmentFilter, priorityFilter].filter(f => f !== "all").length;
+
+  // Clear all filters
+  const clearAllFilters = () => {
+    setSearchQuery("");
+    setStatusFilter("all");
+    setDepartmentFilter("all");
+    setPriorityFilter("all");
+  };
 
   // Sort applications
   const sortedApps = [...filteredApps].sort((a, b) => {
@@ -129,11 +151,119 @@ export default function ApplicationsPage() {
               </option>
             ))}
           </select>
-          <Button variant="outline" size="icon">
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => setShowFilterPanel(!showFilterPanel)}
+            className={`relative ${activeFilterCount > 0 ? "border-primary text-primary" : ""}`}
+            aria-label={`Toggle advanced filters${activeFilterCount > 0 ? ` (${activeFilterCount} active)` : ""}`}
+            aria-expanded={showFilterPanel}
+          >
             <Filter className="h-4 w-4" />
+            {activeFilterCount > 0 && (
+              <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-primary text-[10px] text-primary-foreground flex items-center justify-center">
+                {activeFilterCount}
+              </span>
+            )}
           </Button>
         </div>
       </motion.div>
+
+      {/* Advanced Filter Panel */}
+      <AnimatePresence>
+        {showFilterPanel && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden"
+          >
+            <Card className="p-4 mb-6">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <SlidersHorizontal className="h-4 w-4 text-muted-foreground" />
+                  <span className="font-medium">Advanced Filters</span>
+                  {activeFilterCount > 0 && (
+                    <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">
+                      {activeFilterCount} active
+                    </span>
+                  )}
+                </div>
+                <div className="flex items-center gap-2">
+                  {activeFilterCount > 0 && (
+                    <Button variant="ghost" size="sm" onClick={clearAllFilters}>
+                      Clear all
+                    </Button>
+                  )}
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8"
+                    onClick={() => setShowFilterPanel(false)}
+                    aria-label="Close filter panel"
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                  <label className="block text-sm font-medium mb-1.5" htmlFor="dept-filter">
+                    Department
+                  </label>
+                  <select
+                    id="dept-filter"
+                    value={departmentFilter}
+                    onChange={(e) => setDepartmentFilter(e.target.value)}
+                    className="w-full h-10 px-3 rounded-md border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+                  >
+                    {departments.map((dept) => (
+                      <option key={dept} value={dept}>
+                        {dept === "all" ? "All Departments" : dept}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1.5" htmlFor="priority-filter">
+                    Priority
+                  </label>
+                  <select
+                    id="priority-filter"
+                    value={priorityFilter}
+                    onChange={(e) => setPriorityFilter(e.target.value)}
+                    className="w-full h-10 px-3 rounded-md border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+                  >
+                    {priorities.map((priority) => (
+                      <option key={priority} value={priority}>
+                        {priority === "all" ? "All Priorities" : priority.charAt(0).toUpperCase() + priority.slice(1)}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1.5" htmlFor="status-filter-panel">
+                    Status
+                  </label>
+                  <select
+                    id="status-filter-panel"
+                    value={statusFilter}
+                    onChange={(e) => setStatusFilter(e.target.value)}
+                    className="w-full h-10 px-3 rounded-md border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+                  >
+                    {statusOptions.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            </Card>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Table */}
       <motion.div
@@ -229,19 +359,16 @@ export default function ApplicationsPage() {
                           <div>
                             <p className="text-lg font-medium">No applications found</p>
                             <p className="text-sm text-muted-foreground mt-1">
-                              {searchQuery || statusFilter !== "all"
+                              {searchQuery || activeFilterCount > 0
                                 ? "Try adjusting your search or filter criteria"
                                 : "Get started by creating a new application"}
                             </p>
                           </div>
-                          {searchQuery || statusFilter !== "all" ? (
+                          {searchQuery || activeFilterCount > 0 ? (
                             <Button
                               variant="outline"
                               size="sm"
-                              onClick={() => {
-                                setSearchQuery("");
-                                setStatusFilter("all");
-                              }}
+                              onClick={clearAllFilters}
                             >
                               Clear filters
                             </Button>
