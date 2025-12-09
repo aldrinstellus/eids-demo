@@ -35,14 +35,15 @@ export function StatsCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1, duration: 0.4 }}
       whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+      className="h-full"
     >
-      <Card className="p-6 relative overflow-hidden group">
+      <Card className="p-6 relative overflow-hidden group h-full">
         {/* Gradient overlay on hover */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
-        <div className="flex items-start justify-between relative z-10">
-          <div className="space-y-2">
-            <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">{title}</p>
+        <div className="flex items-start justify-between relative z-10 h-full">
+          <div className="space-y-2 flex flex-col">
+            <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider min-h-[2.5rem] flex items-start">{title}</p>
             <p className="text-3xl font-bold font-mono tabular-nums tracking-tight">
               <AnimatedCounter
                 end={value}
