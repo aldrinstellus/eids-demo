@@ -68,10 +68,11 @@ body > div[style*="z-index"]:last-of-type {
     --warning: 45 100.0000% 51.3725%;
     --warning-foreground: 220 25.7143% 13.7255%;
 
-    /* Typography & Radius */
-    --font-sans: Roboto, sans-serif;
+    /* Typography & Radius - Edgy Military Tech */
+    --font-sans: "Exo 2", system-ui, sans-serif;
+    --font-display: "Rajdhani", sans-serif;
+    --font-mono: "IBM Plex Mono", monospace;
     --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-    --font-mono: JetBrains Mono, monospace;
     --radius: 0.375rem;
   }
 
@@ -120,10 +121,11 @@ body > div[style*="z-index"]:last-of-type {
     --warning: 32.7950 89.9441% 64.9020%;
     --warning-foreground: 220 25.7143% 13.7255%;
 
-    /* Typography & Radius */
-    --font-sans: Roboto, sans-serif;
+    /* Typography & Radius - Edgy Military Tech */
+    --font-sans: "Exo 2", system-ui, sans-serif;
+    --font-display: "Rajdhani", sans-serif;
+    --font-mono: "IBM Plex Mono", monospace;
     --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-    --font-mono: JetBrains Mono, monospace;
     --radius: 0.375rem;
   }
 }
@@ -135,7 +137,23 @@ body > div[style*="z-index"]:last-of-type {
 
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings: "rlig" 1, "calt" 1, "tnum" 1;
+  }
+
+  /* Edgy headings with display font */
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  /* Numbers use mono for that tech feel */
+  .font-data,
+  .tabular-nums {
+    font-family: var(--font-mono);
+    font-feature-settings: "tnum" 1;
+    letter-spacing: -0.02em;
   }
 
   /* Accessibility: Skip link */

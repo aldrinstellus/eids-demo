@@ -42,8 +42,8 @@ export function StatsCard({
 
         <div className="flex items-start justify-between relative z-10">
           <div className="space-y-2">
-            <p className="text-sm font-medium text-muted-foreground">{title}</p>
-            <p className="text-3xl font-bold">
+            <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">{title}</p>
+            <p className="text-3xl font-bold font-mono tabular-nums tracking-tight">
               <AnimatedCounter
                 end={value}
                 prefix={prefix}

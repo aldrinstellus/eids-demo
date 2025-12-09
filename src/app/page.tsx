@@ -192,9 +192,9 @@ export default function DashboardPage() {
                         <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">
                           {stat.title}
                         </p>
-                        <p className={cn("text-2xl font-bold", stat.color)}>
+                        <p className={cn("text-2xl font-bold font-mono tabular-nums", stat.color)}>
                           {stat.value}
-                          <span className="text-lg">{stat.suffix}</span>
+                          <span className="text-lg font-sans">{stat.suffix}</span>
                         </p>
                       </div>
                       <div className={cn("p-2 rounded-lg", stat.bgColor)}>
@@ -231,20 +231,20 @@ export default function DashboardPage() {
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-2 gap-3">
                   <div className="text-center p-3 rounded-lg bg-muted/50">
-                    <p className="text-2xl font-bold text-primary">82%</p>
-                    <p className="text-xs text-muted-foreground">First-time Approval</p>
+                    <p className="text-2xl font-bold font-mono tabular-nums text-primary">82%</p>
+                    <p className="text-xs text-muted-foreground uppercase tracking-wider">First-time Approval</p>
                   </div>
                   <div className="text-center p-3 rounded-lg bg-muted/50">
-                    <p className="text-2xl font-bold text-success">91%</p>
-                    <p className="text-xs text-muted-foreground">Doc Completeness</p>
+                    <p className="text-2xl font-bold font-mono tabular-nums text-success">91%</p>
+                    <p className="text-xs text-muted-foreground uppercase tracking-wider">Doc Completeness</p>
                   </div>
                   <div className="text-center p-3 rounded-lg bg-muted/50">
-                    <p className="text-2xl font-bold text-accent">156</p>
-                    <p className="text-xs text-muted-foreground">AI Insights</p>
+                    <p className="text-2xl font-bold font-mono tabular-nums text-accent">156</p>
+                    <p className="text-xs text-muted-foreground uppercase tracking-wider">AI Insights</p>
                   </div>
                   <div className="text-center p-3 rounded-lg bg-muted/50">
-                    <p className="text-2xl font-bold text-warning">89</p>
-                    <p className="text-xs text-muted-foreground">This Week</p>
+                    <p className="text-2xl font-bold font-mono tabular-nums text-warning">89</p>
+                    <p className="text-xs text-muted-foreground uppercase tracking-wider">This Week</p>
                   </div>
                 </div>
                 <Button variant="outline" className="w-full" asChild>
@@ -338,12 +338,12 @@ export default function DashboardPage() {
         <div className="p-4 border-t bg-muted/30">
           <div className="grid grid-cols-2 gap-4 text-center">
             <div>
-              <p className="text-lg font-bold text-primary">{recentActivity.length}</p>
-              <p className="text-xs text-muted-foreground">Today</p>
+              <p className="text-lg font-bold font-mono tabular-nums text-primary">{recentActivity.length}</p>
+              <p className="text-xs text-muted-foreground uppercase tracking-wider">Today</p>
             </div>
             <div>
-              <p className="text-lg font-bold text-success">24</p>
-              <p className="text-xs text-muted-foreground">This Week</p>
+              <p className="text-lg font-bold font-mono tabular-nums text-success">24</p>
+              <p className="text-xs text-muted-foreground uppercase tracking-wider">This Week</p>
             </div>
           </div>
         </div>

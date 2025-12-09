@@ -1,17 +1,25 @@
 import type { Metadata } from "next";
-import { Roboto, JetBrains_Mono } from "next/font/google";
+import { Rajdhani, IBM_Plex_Mono, Exo_2 } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 
-const roboto = Roboto({
+// Edgy military-tech font stack
+const rajdhani = Rajdhani({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
-  variable: "--font-roboto",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-display",
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const exo2 = Exo_2({
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-sans",
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-mono",
 });
 
@@ -28,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${roboto.variable} ${jetbrainsMono.variable} font-sans antialiased min-h-screen flex flex-col`}
+        className={`${rajdhani.variable} ${exo2.variable} ${ibmPlexMono.variable} font-sans antialiased min-h-screen flex flex-col`}
       >
         <Header />
         <main id="main-content" className="flex-1">

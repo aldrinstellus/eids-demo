@@ -75,8 +75,9 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: ["var(--font-roboto)", "Roboto", "system-ui", "sans-serif"],
-        mono: ["var(--font-mono)", "JetBrains Mono", "monospace"],
+        sans: ["var(--font-sans)", "Exo 2", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "Rajdhani", "sans-serif"],
+        mono: ["var(--font-mono)", "IBM Plex Mono", "monospace"],
       },
       keyframes: {
         "accordion-down": {
