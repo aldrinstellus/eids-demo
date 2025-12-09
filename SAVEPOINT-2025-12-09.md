@@ -20,6 +20,14 @@ EIDS (Enterprise Integrated Data Services) Demo Application for Trinova Veteran 
 
 ## Recent Changes (This Session)
 
+### RFP Compliance Documentation
+1. **RFP-COMPLIANCE-COMPARISON.md** - Created comprehensive comparison document
+   - Maps all RFP requirements to delivered features
+   - Overall compliance score: 93/100
+   - Covers 9 major categories (UI/UX, AI/ML, Scalability, etc.)
+   - Includes live demo URLs for each feature area
+   - Lists remaining submission items (video, transcript, etc.)
+
 ### Admin Page Enhancements
 1. **Sortable Table Headers** - All columns in User Management and API Metrics tables are now sortable with visual indicators (ChevronUp/ChevronDown)
 2. **Sort Dropdown Filter** - Added quick sort dropdown next to search with options:
@@ -40,8 +48,9 @@ EIDS (Enterprise Integrated Data Services) Demo Application for Trinova Veteran 
 - Screen reader support for status indicators
 
 ### Deployment Status
+- **Live URL**: https://eids-va.vercel.app
 - **GitHub**: https://github.com/aldrinstellus/eids-demo (branch: theme-3-enterprise-blend)
-- **Vercel**: Deployed to production
+- **Vercel**: Deployed to production with custom alias
 
 ---
 
