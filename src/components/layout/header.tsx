@@ -55,12 +55,6 @@ export function Header() {
                 )}
                 aria-current={isActive ? "page" : undefined}
               >
-                {/* Simple arrow indicator for active state */}
-                {isActive && (
-                  <span className="absolute -left-1 text-primary font-semibold">
-                    ›
-                  </span>
-                )}
                 <Icon
                   className={cn(
                     "h-4 w-4",
@@ -68,7 +62,7 @@ export function Header() {
                   )}
                   aria-hidden="true"
                 />
-                <span className={cn(isActive && "ml-1")}>{item.name}</span>
+                <span>{item.name}</span>
               </Link>
             );
           })}
