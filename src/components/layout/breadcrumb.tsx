@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 const routeLabels: Record<string, string> = {
   "": "Dashboard",
   applications: "Applications",
+  new: "New Application",
   analytics: "Analytics",
   "ai-insights": "AI Insights",
   profile: "Profile",

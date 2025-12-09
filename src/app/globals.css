@@ -442,7 +442,7 @@ div[style*="position: fixed"][style*="bottom"][style*="left"] > button {
   }
 
   .data-row.selected {
-    @apply bg-primary/8;
+    @apply bg-primary/10;
     box-shadow: inset 3px 0 0 hsl(var(--primary));
   }
 
