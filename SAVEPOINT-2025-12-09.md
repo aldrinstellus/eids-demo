@@ -30,12 +30,18 @@ EIDS (Enterprise Integrated Data Services) Demo Application for Trinova Veteran 
 4. **Department Dropdown** - Changed from text input to predefined dropdown with 10 departments
 5. **New Users at Top** - New users are prepended to the list
 6. **Equal Spacing** - Fixed spacing between search, sort dropdown, and Add User button (gap-3)
+7. **Edit User Modal** - Fully functional with pre-populated form fields
+8. **Delete User Modal** - Confirmation dialog with warning message
 
 ### Accessibility Fixes (Previous Session)
 - Color contrast fixes for WCAG AA compliance
 - aria-labels on all form inputs
 - aria-sort attributes on sortable columns
 - Screen reader support for status indicators
+
+### Deployment Status
+- **GitHub**: https://github.com/aldrinstellus/eids-demo (branch: theme-3-enterprise-blend)
+- **Vercel**: Deployed to production
 
 ---
 
