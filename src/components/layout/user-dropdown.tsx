@@ -67,6 +67,7 @@ export function UserDropdown() {
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     router.push('/login');
+    router.refresh(); // Force refresh to clear any cached state
   };
 
   const handleSignIn = () => {
