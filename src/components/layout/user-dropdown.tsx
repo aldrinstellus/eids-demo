@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import {
   User,
   Settings,
@@ -10,6 +12,7 @@ import {
   Moon,
   Sun,
   Monitor,
+  LogIn,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
@@ -26,8 +29,11 @@ import {
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
 } from "@/components/ui/dropdown-menu";
+import { createClient } from "@/lib/supabase/client";
+import type { User as SupabaseUser } from "@supabase/supabase-js";
 
-const user = {
+// Default demo user for when not authenticated
+const demoUser = {
   name: "Dr. Sarah Chen",
   email: "sarah.chen@dha.mil",
   role: "Principal Investigator",
@@ -37,6 +43,50 @@ const user = {
 
 export function UserDropdown() {
   const { theme, setTheme } = useTheme();
+  const router = useRouter();
+  const [user, setUser] = useState<SupabaseUser | null>(null);
+  const [loading, setLoading] = useState(true);
+  const supabase = createClient();
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+      setLoading(false);
+    };
+
+    getUser();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, [supabase.auth]);
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    router.push('/login');
+  };
+
+  const handleSignIn = () => {
+    router.push('/login');
+  };
+
+  // Get display info from authenticated user or demo user
+  const displayUser = user ? {
+    name: user.user_metadata?.full_name || user.email?.split('@')[0] || 'User',
+    email: user.email || '',
+    role: 'Authenticated User',
+    department: 'EIDS Platform',
+    avatar: user.user_metadata?.avatar_url || '/avatars/dr-sarah-chen.jpg',
+  } : demoUser;
+
+  if (loading) {
+    return (
+      <Button variant="ghost" className="h-10 w-10 rounded-full animate-pulse bg-muted" />
+    );
+  }
 
   return (
     <DropdownMenu>
@@ -47,36 +97,58 @@ export function UserDropdown() {
           aria-label="User menu"
         >
           <div className="text-right hidden sm:block">
-            <p className="text-sm font-medium">{user.name}</p>
-            <p className="text-xs text-muted-foreground">{user.role}</p>
+            <p className="text-sm font-medium">{displayUser.name}</p>
+            <p className="text-xs text-muted-foreground">{displayUser.role}</p>
           </div>
           <div className="rounded-full border border-border hover:border-primary/50 transition-colors duration-200 overflow-hidden">
-            <Image
-              src={user.avatar}
-              alt={user.name}
-              width={36}
-              height={36}
-              className="rounded-full object-cover"
-            />
+            {displayUser.avatar.startsWith('http') ? (
+              <Image
+                src={displayUser.avatar}
+                alt={displayUser.name}
+                width={36}
+                height={36}
+                className="rounded-full object-cover"
+                unoptimized
+              />
+            ) : (
+              <Image
+                src={displayUser.avatar}
+                alt={displayUser.name}
+                width={36}
+                height={36}
+                className="rounded-full object-cover"
+              />
+            )}
           </div>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[280px]">
         {/* User Info Header */}
         <div className="flex items-center gap-3 p-3">
-          <Image
-            src={user.avatar}
-            alt={user.name}
-            width={48}
-            height={48}
-            className="rounded-full object-cover border border-border"
-          />
+          {displayUser.avatar.startsWith('http') ? (
+            <Image
+              src={displayUser.avatar}
+              alt={displayUser.name}
+              width={48}
+              height={48}
+              className="rounded-full object-cover border border-border"
+              unoptimized
+            />
+          ) : (
+            <Image
+              src={displayUser.avatar}
+              alt={displayUser.name}
+              width={48}
+              height={48}
+              className="rounded-full object-cover border border-border"
+            />
+          )}
           <div className="flex-1 min-w-0">
-            <p className="font-semibold truncate">{user.name}</p>
+            <p className="font-semibold truncate">{displayUser.name}</p>
             <p className="text-xs text-muted-foreground truncate">
-              {user.email}
+              {displayUser.email}
             </p>
-            <p className="text-xs text-primary mt-0.5">{user.department}</p>
+            <p className="text-xs text-primary mt-0.5">{displayUser.department}</p>
           </div>
         </div>
 
@@ -137,19 +209,28 @@ export function UserDropdown() {
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem
-          className="cursor-not-allowed text-muted-foreground/50"
-          disabled
-        >
-          <LogOut className="h-4 w-4 mr-2" />
-          Sign Out
-          <span className="ml-auto text-[10px]">(Demo)</span>
-        </DropdownMenuItem>
+        {user ? (
+          <DropdownMenuItem
+            className="cursor-pointer text-red-500 focus:text-red-500"
+            onClick={handleSignOut}
+          >
+            <LogOut className="h-4 w-4 mr-2" />
+            Sign Out
+          </DropdownMenuItem>
+        ) : (
+          <DropdownMenuItem
+            className="cursor-pointer text-primary"
+            onClick={handleSignIn}
+          >
+            <LogIn className="h-4 w-4 mr-2" />
+            Sign In
+          </DropdownMenuItem>
+        )}
 
         <DropdownMenuSeparator />
 
         <div className="px-2 py-2 text-[10px] text-muted-foreground/60">
-          Session expires in 7h 23m
+          {user ? `Signed in as ${user.email}` : 'Demo Mode - Not signed in'}
         </div>
       </DropdownMenuContent>
     </DropdownMenu>
