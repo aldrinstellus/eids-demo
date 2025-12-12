@@ -2,7 +2,7 @@
 
 import { createClient } from '@/lib/supabase/client'
 import { useSearchParams } from 'next/navigation'
-import { Fingerprint, ScanLine, Activity, Lock, Server, ChevronRight, Users } from 'lucide-react'
+import { Fingerprint, ScanLine, Activity, Lock, Server, ChevronRight, Users, Shield } from 'lucide-react'
 import Link from 'next/link'
 import { Suspense, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
