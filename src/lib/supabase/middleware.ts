@@ -35,13 +35,17 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  // Protected routes - redirect to login if not authenticated
-  const protectedPaths = ['/applications', '/analytics', '/admin']
+  // Check for demo persona cookie (for demo mode authentication)
+  const demoPersona = request.cookies.get('eids-demo-persona')?.value
+
+  // Protected routes - redirect to login if not authenticated (either real user OR demo persona)
+  const protectedPaths = ['/applications', '/analytics', '/admin', '/profile', '/security', '/settings']
   const isProtectedPath = protectedPaths.some(path =>
     request.nextUrl.pathname.startsWith(path)
   )
 
-  if (!user && isProtectedPath) {
+  // Allow access if EITHER real Supabase user OR demo persona exists
+  if (!user && !demoPersona && isProtectedPath) {
     const url = request.nextUrl.clone()
     url.pathname = '/login'
     url.searchParams.set('redirect', request.nextUrl.pathname)
@@ -49,6 +53,7 @@ export async function updateSession(request: NextRequest) {
   }
 
   // Redirect authenticated users from login page to dashboard
+  // (Only real users - demo users handle their own redirect)
   if (user && request.nextUrl.pathname === '/login') {
     const url = request.nextUrl.clone()
     url.pathname = '/'

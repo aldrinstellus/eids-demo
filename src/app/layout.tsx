@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Orbitron, JetBrains_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { DemoProvider } from "@/contexts/demo-context";
 import { AppShell } from "@/components/layout/app-shell";
 
 // Neo-futuristic font stack
@@ -44,7 +45,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <AppShell>{children}</AppShell>
+          <DemoProvider>
+            <AppShell>{children}</AppShell>
+          </DemoProvider>
         </ThemeProvider>
       </body>
     </html>

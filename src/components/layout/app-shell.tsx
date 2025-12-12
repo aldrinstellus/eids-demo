@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Breadcrumb } from "@/components/layout/breadcrumb";
 import { ChatFAB } from "@/components/chat/chat-fab";
+import { DisclaimerModal } from "@/components/disclaimer-modal";
 
 // Routes that should NOT show the main app shell (header, footer, breadcrumb)
 const STANDALONE_ROUTES = ["/login", "/auth"];
@@ -25,6 +26,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   // For regular routes, render with full app shell
   return (
     <>
+      {/* DHA System Disclaimer Modal */}
+      <DisclaimerModal />
       {/* Skip link for accessibility */}
       <a href="#main-content" className="skip-link">
         Skip to main content

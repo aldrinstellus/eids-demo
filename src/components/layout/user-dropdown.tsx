@@ -64,6 +64,12 @@ const personaColors: Record<string, { bg: string; border: string; glow: string; 
     glow: "shadow-violet-500/20",
     text: "text-violet-400",
   },
+  rose: {
+    bg: "bg-rose-500/10",
+    border: "border-rose-500/30",
+    glow: "shadow-rose-500/20",
+    text: "text-rose-400",
+  },
 };
 
 export function UserDropdown() {
@@ -101,8 +107,10 @@ export function UserDropdown() {
   }, [supabase.auth]);
 
   const handleSignOut = async () => {
-    // Clear demo persona
+    // Clear demo persona from localStorage
     localStorage.removeItem(DEMO_STORAGE_KEY);
+    // Clear demo persona cookie for server-side middleware
+    document.cookie = "eids-demo-persona=; path=/; max-age=0; SameSite=Lax";
     setDemoPersona(null);
 
     // Sign out from Supabase if authenticated
@@ -118,6 +126,8 @@ export function UserDropdown() {
     const persona = getPersonaById(personaId);
     if (persona) {
       localStorage.setItem(DEMO_STORAGE_KEY, personaId);
+      // Also set cookie for server-side middleware
+      document.cookie = `eids-demo-persona=${personaId}; path=/; max-age=86400; SameSite=Lax`;
       setDemoPersona(persona);
       // Refresh to update all components
       window.location.reload();

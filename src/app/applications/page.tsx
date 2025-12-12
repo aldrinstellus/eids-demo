@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
@@ -12,13 +12,22 @@ import {
   FileX2,
   X,
   SlidersHorizontal,
+  CheckCircle,
+  XCircle,
+  DollarSign,
+  UserPlus,
+  AlertTriangle,
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { StatusBadge } from "@/components/applications/status-badge";
 import { formatCurrency, getTimeAgo } from "@/lib/utils";
-
-import applicationsData from "@/data/applications.json";
+import {
+  usePersonaApplications,
+  usePersonaConfig,
+  useHasPermission,
+} from "@/hooks/usePersonaConfig";
+import { useDemoContext } from "@/contexts/demo-context";
 
 type SortField = "name" | "status" | "updatedAt" | "requestedAmount";
 type SortDirection = "asc" | "desc";
@@ -32,23 +41,36 @@ export default function ApplicationsPage() {
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
   const [showFilterPanel, setShowFilterPanel] = useState(false);
 
-  const { applications } = applicationsData;
+  // Get persona-filtered applications
+  const personaApplications = usePersonaApplications();
+  const personaConfig = usePersonaConfig();
+  const { demoPersona } = useDemoContext();
 
-  // Get unique departments and priorities from data
-  const departments = ["all", ...Array.from(new Set(applications.map(app => app.department)))];
+  // Permission checks
+  const canCreateApplication = useHasPermission("create_application");
+  const canReviewApplication = useHasPermission("review_application");
+  const canApproveApplication = useHasPermission("approve_application");
+  const canFinancialReview = useHasPermission("financial_review");
+
+  // Get unique departments and priorities from filtered data
+  const departments = useMemo(() => {
+    return ["all", ...Array.from(new Set(personaApplications.map(app => app.department)))];
+  }, [personaApplications]);
   const priorities = ["all", "critical", "high", "medium", "low"];
 
-  // Filter applications
-  const filteredApps = applications.filter((app) => {
-    const matchesSearch =
-      app.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      app.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      app.department.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesStatus = statusFilter === "all" || app.status === statusFilter;
-    const matchesDepartment = departmentFilter === "all" || app.department === departmentFilter;
-    const matchesPriority = priorityFilter === "all" || app.priority === priorityFilter;
-    return matchesSearch && matchesStatus && matchesDepartment && matchesPriority;
-  });
+  // Filter applications (on top of persona filter)
+  const filteredApps = useMemo(() => {
+    return personaApplications.filter((app) => {
+      const matchesSearch =
+        app.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        app.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        app.department.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesStatus = statusFilter === "all" || app.status === statusFilter;
+      const matchesDepartment = departmentFilter === "all" || app.department === departmentFilter;
+      const matchesPriority = priorityFilter === "all" || app.priority === priorityFilter;
+      return matchesSearch && matchesStatus && matchesDepartment && matchesPriority;
+    });
+  }, [personaApplications, searchQuery, statusFilter, departmentFilter, priorityFilter]);
 
   // Count active filters
   const activeFilterCount = [statusFilter, departmentFilter, priorityFilter].filter(f => f !== "all").length;
@@ -62,24 +84,26 @@ export default function ApplicationsPage() {
   };
 
   // Sort applications
-  const sortedApps = [...filteredApps].sort((a, b) => {
-    let comparison = 0;
-    switch (sortField) {
-      case "name":
-        comparison = a.name.localeCompare(b.name);
-        break;
-      case "status":
-        comparison = a.status.localeCompare(b.status);
-        break;
-      case "updatedAt":
-        comparison = new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
-        break;
-      case "requestedAmount":
-        comparison = a.requestedAmount - b.requestedAmount;
-        break;
-    }
-    return sortDirection === "asc" ? comparison : -comparison;
-  });
+  const sortedApps = useMemo(() => {
+    return [...filteredApps].sort((a, b) => {
+      let comparison = 0;
+      switch (sortField) {
+        case "name":
+          comparison = a.name.localeCompare(b.name);
+          break;
+        case "status":
+          comparison = a.status.localeCompare(b.status);
+          break;
+        case "updatedAt":
+          comparison = new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+          break;
+        case "requestedAmount":
+          comparison = a.requestedAmount - b.requestedAmount;
+          break;
+      }
+      return sortDirection === "asc" ? comparison : -comparison;
+    });
+  }, [filteredApps, sortField, sortDirection]);
 
   const handleSort = (field: SortField) => {
     if (sortField === field) {
@@ -98,6 +122,87 @@ export default function ApplicationsPage() {
     { value: "completed", label: "Completed" },
   ];
 
+  // Get page title and description based on persona
+  const getPageInfo = () => {
+    switch (personaConfig.personaId) {
+      case "dr-sarah-chen":
+        return {
+          title: "My Applications",
+          description: "View and manage your submitted applications",
+        };
+      case "james-rodriguez":
+        return {
+          title: "Review Queue",
+          description: "Applications awaiting administrative review",
+        };
+      case "maria-thompson":
+        return {
+          title: "Financial Review Queue",
+          description: `Applications over $100K requiring financial analysis`,
+        };
+      default:
+        return {
+          title: "Applications",
+          description: "Manage and track applications",
+        };
+    }
+  };
+
+  const pageInfo = getPageInfo();
+
+  // Get action buttons based on permissions
+  const renderRowActions = (app: typeof sortedApps[0]) => {
+    const actions = [];
+
+    // View is always available
+    actions.push(
+      <Button key="view" variant="ghost" size="sm" asChild>
+        <Link href={`/applications/${app.id}`}>
+          View
+          <ChevronRight className="h-4 w-4 ml-1" />
+        </Link>
+      </Button>
+    );
+
+    // Approve/Reject for James (grants admin)
+    if (canApproveApplication && app.status === "review") {
+      actions.unshift(
+        <Button
+          key="approve"
+          variant="ghost"
+          size="sm"
+          className="text-success hover:text-success hover:bg-success/10"
+        >
+          <CheckCircle className="h-4 w-4" />
+        </Button>,
+        <Button
+          key="reject"
+          variant="ghost"
+          size="sm"
+          className="text-destructive hover:text-destructive hover:bg-destructive/10"
+        >
+          <XCircle className="h-4 w-4" />
+        </Button>
+      );
+    }
+
+    // Financial review for Maria
+    if (canFinancialReview && app.status !== "completed" && app.requestedAmount >= 100000) {
+      actions.unshift(
+        <Button
+          key="financial"
+          variant="ghost"
+          size="sm"
+          className="text-amber-500 hover:text-amber-500 hover:bg-amber-500/10"
+        >
+          <DollarSign className="h-4 w-4" />
+        </Button>
+      );
+    }
+
+    return <div className="flex items-center gap-1 justify-end">{actions}</div>;
+  };
+
   return (
     <div className="container mx-auto py-8 px-6">
       {/* Header */}
@@ -107,18 +212,52 @@ export default function ApplicationsPage() {
         className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6"
       >
         <div>
-          <h1 className="text-2xl font-bold">Applications</h1>
+          <h1 className="text-2xl font-bold">{pageInfo.title}</h1>
           <p className="text-muted-foreground">
-            Manage and track all your applications
+            {pageInfo.description}
           </p>
         </div>
-        <Button asChild>
-          <Link href="/applications/new">
-            <Plus className="h-4 w-4 mr-2" />
-            New Application
-          </Link>
-        </Button>
+        <div className="flex gap-2">
+          {/* Assign reviewer button for James */}
+          {canReviewApplication && (
+            <Button variant="outline">
+              <UserPlus className="h-4 w-4 mr-2" />
+              Assign Reviewer
+            </Button>
+          )}
+          {/* New application button - only for Dr. Chen */}
+          {canCreateApplication && (
+            <Button asChild>
+              <Link href="/applications/new">
+                <Plus className="h-4 w-4 mr-2" />
+                New Application
+              </Link>
+            </Button>
+          )}
+        </div>
       </motion.div>
+
+      {/* Persona context banner */}
+      {demoPersona && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.05 }}
+          className="mb-6"
+        >
+          <Card className="p-3 bg-muted/50 border-dashed">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <AlertTriangle className="h-4 w-4 text-amber-500" />
+              <span>
+                Viewing as <span className="font-medium text-foreground">{demoPersona.name}</span>
+                {personaConfig.applicationFilter.assigneeId && " — showing only your applications"}
+                {personaConfig.applicationFilter.minBudget && ` — showing applications >${formatCurrency(personaConfig.applicationFilter.minBudget)}`}
+                {personaConfig.applicationFilter.showAll && " — showing all applications"}
+              </span>
+            </div>
+          </Card>
+        </motion.div>
+      )}
 
       {/* Filters */}
       <motion.div
@@ -339,7 +478,7 @@ export default function ApplicationsPage() {
                     </button>
                   </th>
                   <th scope="col" className="text-right px-4 py-3 text-sm font-medium">
-                    Action
+                    Actions
                   </th>
                 </tr>
               </thead>
@@ -361,7 +500,9 @@ export default function ApplicationsPage() {
                             <p className="text-sm text-muted-foreground mt-1">
                               {searchQuery || activeFilterCount > 0
                                 ? "Try adjusting your search or filter criteria"
-                                : "Get started by creating a new application"}
+                                : canCreateApplication
+                                  ? "Get started by creating a new application"
+                                  : "No applications match your view criteria"}
                             </p>
                           </div>
                           {searchQuery || activeFilterCount > 0 ? (
@@ -372,14 +513,14 @@ export default function ApplicationsPage() {
                             >
                               Clear filters
                             </Button>
-                          ) : (
+                          ) : canCreateApplication ? (
                             <Button asChild size="sm">
                               <Link href="/applications/new">
                                 <Plus className="h-4 w-4 mr-2" />
                                 New Application
                               </Link>
                             </Button>
-                          )}
+                          ) : null}
                         </motion.div>
                       </td>
                     </tr>
@@ -431,13 +572,8 @@ export default function ApplicationsPage() {
                         <td className="px-4 py-3 text-sm text-muted-foreground">
                           {getTimeAgo(app.updatedAt)}
                         </td>
-                        <td className="px-4 py-3 text-right">
-                          <Button variant="ghost" size="sm" asChild>
-                            <Link href={`/applications/${app.id}`}>
-                              View
-                              <ChevronRight className="h-4 w-4 ml-1" />
-                            </Link>
-                          </Button>
+                        <td className="px-4 py-3">
+                          {renderRowActions(app)}
                         </td>
                       </motion.tr>
                     ))
@@ -450,7 +586,7 @@ export default function ApplicationsPage() {
           {/* Pagination */}
           <div className="flex items-center justify-between px-4 py-3 border-t">
             <p className="text-sm text-muted-foreground" aria-live="polite" aria-atomic="true">
-              Showing {sortedApps.length} of {applications.length} applications
+              Showing {sortedApps.length} of {personaApplications.length} applications
             </p>
             <div className="flex gap-2">
               <Button variant="outline" size="sm" disabled aria-label="Previous page (disabled - on first page)">

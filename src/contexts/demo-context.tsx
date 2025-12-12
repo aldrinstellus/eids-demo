@@ -27,12 +27,15 @@ export function DemoProvider({ children }: { children: ReactNode }) {
   const [isInitialized, setIsInitialized] = useState(false);
 
   // Load demo session from localStorage on mount
+  // Also ensure cookie is synced for server-side middleware
   useEffect(() => {
     const stored = localStorage.getItem(DEMO_STORAGE_KEY);
     if (stored) {
       const persona = getPersonaById(stored);
       if (persona) {
         setDemoPersona(persona);
+        // Ensure cookie is set for server-side middleware
+        document.cookie = `eids-demo-persona=${stored}; path=/; max-age=86400; SameSite=Lax`;
       }
     }
     setIsInitialized(true);
@@ -43,6 +46,8 @@ export function DemoProvider({ children }: { children: ReactNode }) {
     if (persona) {
       setDemoPersona(persona);
       localStorage.setItem(DEMO_STORAGE_KEY, personaId);
+      // Also set cookie for server-side middleware
+      document.cookie = `eids-demo-persona=${personaId}; path=/; max-age=86400; SameSite=Lax`;
       // Redirect to dashboard
       window.location.href = "/";
     }
@@ -51,6 +56,8 @@ export function DemoProvider({ children }: { children: ReactNode }) {
   const exitDemoMode = () => {
     setDemoPersona(null);
     localStorage.removeItem(DEMO_STORAGE_KEY);
+    // Also clear the cookie
+    document.cookie = "eids-demo-persona=; path=/; max-age=0; SameSite=Lax";
   };
 
   const getDisplayName = (fallbackName?: string) => {

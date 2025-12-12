@@ -1,6 +1,68 @@
 {
   "applications": [
     {
+      "id": "APP-VS-001",
+      "name": "Veteran's Support Program",
+      "type": "veterans",
+      "status": "active",
+      "priority": "critical",
+      "department": "Veterans Affairs",
+      "requestedAmount": 1250000,
+      "assignee": {
+        "id": "USR-VS-001",
+        "name": "Dr. Emily Carter",
+        "email": "emily.carter@health.mil",
+        "role": "Clinician"
+      },
+      "description": "Comprehensive veteran healthcare support program providing integrated care coordination, mental health services, and benefits navigation for transitioning service members.",
+      "createdAt": "2025-11-01T08:00:00Z",
+      "updatedAt": "2025-12-12T09:00:00Z",
+      "progress": 65,
+      "currentStep": 3,
+      "totalSteps": 5,
+      "steps": [
+        { "name": "Initial Submission", "status": "completed" },
+        { "name": "Documentation", "status": "completed" },
+        { "name": "Patient Records Review", "status": "in_progress" },
+        { "name": "Budget Review", "status": "pending" },
+        { "name": "Final Approval", "status": "pending" }
+      ],
+      "documents": [
+        { "id": "DOC-VS-001", "name": "veteran-care-plan.pdf", "size": 4500000, "type": "application/pdf", "uploadedAt": "2025-11-01T10:00:00Z" },
+        { "id": "DOC-VS-002", "name": "patient-roster.xlsx", "size": 890000, "type": "application/vnd.ms-excel", "uploadedAt": "2025-11-05T14:00:00Z" },
+        { "id": "DOC-VS-003", "name": "hipaa-compliance-cert.pdf", "size": 1200000, "type": "application/pdf", "uploadedAt": "2025-11-10T09:00:00Z" }
+      ],
+      "aiInsights": [
+        {
+          "id": "AI-VS-001",
+          "type": "info",
+          "icon": "users",
+          "message": "Program currently serving 847 veterans across 12 facilities.",
+          "confidence": 0.98,
+          "action": "View details"
+        },
+        {
+          "id": "AI-VS-002",
+          "type": "success",
+          "icon": "shield-check",
+          "message": "HIPAA and CUI compliance verified.",
+          "confidence": 1.0,
+          "action": null
+        },
+        {
+          "id": "AI-VS-003",
+          "type": "recommendation",
+          "icon": "lightbulb",
+          "message": "Consider expanding telehealth services based on veteran feedback.",
+          "confidence": 0.89,
+          "action": "View recommendations"
+        }
+      ],
+      "hasPatientData": true,
+      "patientCount": 847,
+      "facilities": 12
+    },
+    {
       "id": "APP-001",
       "name": "Healthcare Training Initiative",
       "type": "research",

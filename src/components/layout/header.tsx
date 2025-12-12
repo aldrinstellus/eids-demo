@@ -7,23 +7,38 @@ import {
   LayoutDashboard,
   FileText,
   BarChart3,
-  Brain,
+  Settings,
 } from "lucide-react";
 import { EIDSLogo } from "@/components/brand/eids-logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { NotificationsDropdown } from "@/components/layout/notifications-dropdown";
 import { HelpDropdown } from "@/components/layout/help-dropdown";
 import { UserDropdown } from "@/components/layout/user-dropdown";
+import { useNavVisibility } from "@/hooks/usePersonaConfig";
 
-const navigation = [
-  { name: "Dashboard", href: "/", icon: LayoutDashboard },
-  { name: "Applications", href: "/applications", icon: FileText },
-  { name: "Analytics", href: "/analytics", icon: BarChart3 },
-  { name: "AI Insights", href: "/analytics/ai-insights", icon: Brain },
+interface NavItem {
+  name: string;
+  href: string;
+  icon: React.ElementType;
+  visibilityKey?: keyof ReturnType<typeof useNavVisibility>;
+}
+
+const navigation: NavItem[] = [
+  { name: "Dashboard", href: "/", icon: LayoutDashboard, visibilityKey: "dashboard" },
+  { name: "Applications", href: "/applications", icon: FileText, visibilityKey: "applications" },
+  { name: "Analytics", href: "/analytics", icon: BarChart3, visibilityKey: "analytics" },
+  { name: "Admin", href: "/admin", icon: Settings, visibilityKey: "admin" },
 ];
 
 export function Header() {
   const pathname = usePathname();
+  const navVisibility = useNavVisibility();
+
+  // Filter navigation based on visibility settings
+  const visibleNavigation = navigation.filter((item) => {
+    if (!item.visibilityKey) return true;
+    return navVisibility[item.visibilityKey];
+  });
 
   return (
     <header className="sticky top-0 z-50 w-full bg-card border-b border-border">
@@ -35,7 +50,7 @@ export function Header() {
 
         {/* Navigation - clean and professional */}
         <nav aria-label="Main navigation" className="flex items-center gap-1">
-          {navigation.map((item) => {
+          {visibleNavigation.map((item) => {
             const isActive =
               item.href === "/"
                 ? pathname === "/"
@@ -66,6 +81,7 @@ export function Header() {
               </Link>
             );
           })}
+
         </nav>
 
         {/* Right side actions */}
