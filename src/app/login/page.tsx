@@ -152,16 +152,52 @@ function LoginContent() {
 
         {/* Content overlay */}
         <div className="relative z-10 flex flex-col justify-between p-12 w-full">
-          {/* Top - Logo */}
-          <div className={`transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
-            <div className="flex items-center gap-3">
-              <EIDSLogo size="xl" variant="dark" />
+          {/* Top - Logo & Hero */}
+          <div>
+            <div className={`transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
+              <div className="flex items-center gap-3">
+                <EIDSLogo size="xl" variant="dark" />
+              </div>
+              <p className="text-xs text-slate-500 tracking-widest uppercase mt-1 ml-[60px]">Secure Access Portal</p>
             </div>
-            <p className="text-xs text-slate-500 tracking-widest uppercase mt-1 ml-[60px]">Secure Access Portal</p>
+
+            {/* Hero Headline */}
+            <div className={`mt-12 transition-all duration-1000 delay-300 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+              <h1 className="text-4xl xl:text-5xl font-bold text-white leading-tight tracking-tight">
+                Empowering
+                <br />
+                <span className="bg-gradient-to-r from-emerald-400 via-cyan-400 to-emerald-400 bg-clip-text text-transparent">
+                  VA Healthcare
+                </span>
+                <br />
+                Grant Applications
+              </h1>
+              <p className="mt-6 text-slate-400 text-lg max-w-md leading-relaxed">
+                AI-powered platform streamlining grant management for Defense Health Agency programs.
+              </p>
+
+              {/* Stats row */}
+              <div className="mt-8 flex items-center gap-8">
+                <div>
+                  <p className="text-3xl font-bold text-white">2,400<span className="text-emerald-400">+</span></p>
+                  <p className="text-xs text-slate-500 uppercase tracking-wider">Applications Processed</p>
+                </div>
+                <div className="w-px h-12 bg-slate-700/50" />
+                <div>
+                  <p className="text-3xl font-bold text-white">94<span className="text-emerald-400">%</span></p>
+                  <p className="text-xs text-slate-500 uppercase tracking-wider">Success Rate</p>
+                </div>
+                <div className="w-px h-12 bg-slate-700/50" />
+                <div>
+                  <p className="text-3xl font-bold text-white">$1.2<span className="text-emerald-400">B</span></p>
+                  <p className="text-xs text-slate-500 uppercase tracking-wider">Funding Managed</p>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Center - Security Status */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             <div className={`transition-all duration-1000 delay-200 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
               <p className="text-xs text-emerald-400 uppercase tracking-[0.3em] mb-2">System Status</p>
               <div className="flex items-center gap-2 mb-6">
