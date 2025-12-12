@@ -126,7 +126,7 @@ function LoginContent() {
         <AnimatedGrid />
 
         {/* Content overlay */}
-        <div className="relative z-10 flex flex-col justify-between p-12 w-full">
+        <div className="relative z-10 flex flex-col p-12 w-full">
           {/* Top - Logo & Hero */}
           <div>
             <div className={`transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
@@ -168,18 +168,17 @@ function LoginContent() {
                   <p className="text-xs text-slate-500 uppercase tracking-wider">Funding Managed</p>
                 </div>
               </div>
-            </div>
-          </div>
 
-
-          {/* Bottom - Certifications */}
-          <div className={`transition-all duration-1000 delay-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-            <p className="text-xs text-slate-600 mb-3 uppercase tracking-widest">Compliance Certifications</p>
-            <div className="flex items-center gap-4">
-              <div className="px-3 py-1.5 rounded border border-slate-700/50 bg-slate-800/30 text-xs text-slate-400">HIPAA</div>
-              <div className="px-3 py-1.5 rounded border border-slate-700/50 bg-slate-800/30 text-xs text-slate-400">SOC 2</div>
-              <div className="px-3 py-1.5 rounded border border-slate-700/50 bg-slate-800/30 text-xs text-slate-400">FedRAMP</div>
-              <div className="px-3 py-1.5 rounded border border-slate-700/50 bg-slate-800/30 text-xs text-slate-400">NIST 800-53</div>
+              {/* Certifications - below stats */}
+              <div className={`mt-10 transition-all duration-1000 delay-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                <p className="text-xs text-slate-600 mb-3 uppercase tracking-widest">Compliance Certifications</p>
+                <div className="flex items-center gap-4">
+                  <div className="px-3 py-1.5 rounded border border-slate-700/50 bg-slate-800/30 text-xs text-slate-400">HIPAA</div>
+                  <div className="px-3 py-1.5 rounded border border-slate-700/50 bg-slate-800/30 text-xs text-slate-400">SOC 2</div>
+                  <div className="px-3 py-1.5 rounded border border-slate-700/50 bg-slate-800/30 text-xs text-slate-400">FedRAMP</div>
+                  <div className="px-3 py-1.5 rounded border border-slate-700/50 bg-slate-800/30 text-xs text-slate-400">NIST 800-53</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
