@@ -86,6 +86,7 @@ function DemoPersonaCard({ persona, onSelect }: { persona: DemoPersona; onSelect
     cyan: { bg: 'bg-cyan-500/10', border: 'border-cyan-500/30', text: 'text-cyan-400' },
     amber: { bg: 'bg-amber-500/10', border: 'border-amber-500/30', text: 'text-amber-400' },
     violet: { bg: 'bg-violet-500/10', border: 'border-violet-500/30', text: 'text-violet-400' },
+    rose: { bg: 'bg-rose-500/10', border: 'border-rose-500/30', text: 'text-rose-400' },
   }
   const colors = colorClasses[persona.color] || colorClasses.emerald
 
@@ -95,9 +96,11 @@ function DemoPersonaCard({ persona, onSelect }: { persona: DemoPersona; onSelect
       className={`w-full p-3 rounded-lg ${colors.bg} border ${colors.border} hover:border-opacity-60 transition-all duration-200 text-left group hover:-translate-y-0.5`}
     >
       <div className="flex items-center gap-3">
-        <div className={`w-8 h-8 rounded-full ${colors.bg} flex items-center justify-center text-sm font-semibold ${colors.text}`}>
-          {persona.name.split(' ').map(n => n[0]).join('')}
-        </div>
+        <img
+          src={persona.avatar}
+          alt={persona.name}
+          className={`w-8 h-8 rounded-full object-cover ring-2 ring-offset-1 ring-offset-slate-900 ${colors.border.replace('border-', 'ring-')}`}
+        />
         <div className="flex-1 min-w-0">
           <p className="text-sm font-medium text-white truncate">{persona.name}</p>
           <p className={`text-xs ${colors.text} truncate`}>{persona.role}</p>

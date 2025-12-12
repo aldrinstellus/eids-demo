@@ -284,9 +284,14 @@ export function UserDropdown() {
                     onClick={() => handleSwitchPersona(persona.id)}
                   >
                     <div className="flex items-center gap-3 w-full">
-                      <div className={`w-10 h-10 rounded-lg ${pColors.bg} ${pColors.border} border flex items-center justify-center flex-shrink-0`}>
-                        <span className={`text-sm font-bold ${pColors.text}`}>{pInitials}</span>
-                      </div>
+                      <Image
+                        src={persona.avatar}
+                        alt={persona.name}
+                        width={40}
+                        height={40}
+                        className={`rounded-lg ${pColors.border} border object-cover flex-shrink-0`}
+                        unoptimized
+                      />
                       <div className="flex-1 min-w-0">
                         <p className="font-medium text-sm truncate">{persona.name}</p>
                         <p className={`text-xs ${pColors.text}`}>{persona.role}</p>

@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import {
-  User,
   Mail,
   Building2,
   Calendar,
@@ -15,18 +15,9 @@ import {
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { getPersonaById, defaultPersona, type DemoPersona } from "@/data/demo-personas";
 
-const user = {
-  name: "Dr. Sarah Chen",
-  email: "sarah.chen@dha.mil",
-  role: "Principal Investigator",
-  department: "Medical Research",
-  avatar: "/avatars/dr-sarah-chen.jpg",
-  joinDate: "March 15, 2021",
-  lastLogin: "December 9, 2025 at 8:42 AM",
-  clearanceLevel: "Secret",
-  certifications: ["HIPAA Certified", "GCP Trained", "IRB Certified"],
-};
+const DEMO_STORAGE_KEY = "eids-demo-persona";
 
 const stats = [
   { label: "Applications Submitted", value: "47", icon: FileText },
@@ -42,7 +33,48 @@ const recentActivity = [
   { action: "Submitted application", detail: "Telemedicine Expansion", date: "3 days ago" },
 ];
 
+// Default certifications for display
+const defaultCertifications = ["HIPAA Certified", "GCP Trained", "IRB Certified"];
+
 export default function ProfilePage() {
+  const [persona, setPersona] = useState<DemoPersona | null>(null);
+
+  useEffect(() => {
+    const storedPersonaId = localStorage.getItem(DEMO_STORAGE_KEY);
+    if (storedPersonaId) {
+      const foundPersona = getPersonaById(storedPersonaId);
+      setPersona(foundPersona || defaultPersona);
+    } else {
+      setPersona(defaultPersona);
+    }
+  }, []);
+
+  if (!persona) {
+    return (
+      <div className="container mx-auto py-8 px-6 max-w-6xl">
+        <div className="animate-pulse space-y-4">
+          <div className="h-8 bg-muted rounded w-48"></div>
+          <div className="grid gap-6 md:grid-cols-3">
+            <div className="h-96 bg-muted rounded"></div>
+            <div className="md:col-span-2 h-96 bg-muted rounded"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const user = {
+    name: persona.name,
+    email: `${persona.id.replace(/-/g, '.')}@dha.mil`,
+    role: persona.role,
+    department: persona.department,
+    avatar: persona.avatar,
+    joinDate: "March 15, 2021",
+    lastLogin: "December 12, 2025 at 8:42 AM",
+    clearanceLevel: "Secret",
+    certifications: defaultCertifications,
+  };
+
   return (
     <div className="container mx-auto py-8 px-6 max-w-6xl">
       <h1 className="text-3xl font-bold tracking-tight mb-8">MY PROFILE</h1>
@@ -59,6 +91,7 @@ export default function ProfilePage() {
                   width={120}
                   height={120}
                   className="rounded-full object-cover"
+                  unoptimized
                 />
               </div>
               <h2 className="text-xl font-semibold">{user.name}</h2>
