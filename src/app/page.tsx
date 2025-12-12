@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   FileText,
@@ -24,9 +25,17 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { createClient } from "@/lib/supabase/client";
+import type { User } from "@supabase/supabase-js";
 
 import analyticsData from "@/data/analytics.json";
 import aiData from "@/data/ai-responses.json";
+
+// Default demo user for when not authenticated
+const demoUser = {
+  name: "Dr. Sarah Chen",
+  firstName: "Dr. Chen",
+};
 
 // Activity icon mapping
 const activityIcons = {
@@ -46,6 +55,29 @@ const activityStyles = {
 };
 
 export default function DashboardPage() {
+  const [user, setUser] = useState<User | null>(null);
+  const supabase = createClient();
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+    };
+
+    getUser();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, [supabase.auth]);
+
+  // Get display name from authenticated user or demo user
+  const displayName = user
+    ? user.user_metadata?.full_name || user.email?.split('@')[0] || 'User'
+    : demoUser.name;
+
   const { summary, monthlyVolume, recentActivity } = analyticsData as {
     summary: typeof analyticsData.summary;
     monthlyVolume: typeof analyticsData.monthlyVolume;
@@ -139,7 +171,7 @@ export default function DashboardPage() {
         >
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
             <div>
-              <h1 className="text-2xl font-bold">Welcome back, Dr. Sarah Chen</h1>
+              <h1 className="text-2xl font-bold">Welcome back, {displayName}</h1>
               <p className="text-muted-foreground">
                 Here&apos;s what&apos;s happening with your applications today.
               </p>
