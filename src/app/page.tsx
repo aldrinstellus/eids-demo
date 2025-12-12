@@ -26,10 +26,13 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
+import { getPersonaById, type DemoPersona } from "@/data/demo-personas";
 import type { User } from "@supabase/supabase-js";
 
 import analyticsData from "@/data/analytics.json";
 import aiData from "@/data/ai-responses.json";
+
+const DEMO_STORAGE_KEY = "eids-demo-persona";
 
 // Default demo user for when not authenticated
 const demoUser = {
@@ -56,9 +59,20 @@ const activityStyles = {
 
 export default function DashboardPage() {
   const [user, setUser] = useState<User | null>(null);
+  const [demoPersona, setDemoPersona] = useState<DemoPersona | null>(null);
   const supabase = createClient();
 
   useEffect(() => {
+    // Check for demo persona in localStorage
+    const storedPersonaId = localStorage.getItem(DEMO_STORAGE_KEY);
+    if (storedPersonaId) {
+      const persona = getPersonaById(storedPersonaId);
+      if (persona) {
+        setDemoPersona(persona);
+      }
+    }
+
+    // Check for Supabase auth
     const getUser = async () => {
       const { data: { user } } = await supabase.auth.getUser();
       setUser(user);
@@ -73,10 +87,12 @@ export default function DashboardPage() {
     return () => subscription.unsubscribe();
   }, [supabase.auth]);
 
-  // Get display name from authenticated user or demo user
-  const displayName = user
-    ? user.user_metadata?.full_name || user.email?.split('@')[0] || 'User'
-    : demoUser.name;
+  // Get display name - prioritize demo persona, then auth user, then default
+  const displayName = demoPersona
+    ? demoPersona.name
+    : user
+      ? user.user_metadata?.full_name || user.email?.split('@')[0] || 'User'
+      : demoUser.name;
 
   const { summary, monthlyVolume, recentActivity } = analyticsData as {
     summary: typeof analyticsData.summary;

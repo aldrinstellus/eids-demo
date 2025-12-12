@@ -2,9 +2,12 @@
 
 import { createClient } from '@/lib/supabase/client'
 import { useSearchParams } from 'next/navigation'
-import { Shield, Fingerprint, ScanLine, Activity, Lock, Server, ChevronRight } from 'lucide-react'
+import { Fingerprint, ScanLine, Activity, Lock, Server, ChevronRight, Users } from 'lucide-react'
 import Link from 'next/link'
 import { Suspense, useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { EIDSLogo } from '@/components/brand/eids-logo'
+import { demoPersonas, type DemoPersona } from '@/data/demo-personas'
 
 function AnimatedGrid() {
   return (
@@ -76,15 +79,53 @@ function SecurityMetric({ icon: Icon, label, value, delay }: { icon: typeof Shie
   )
 }
 
+// Demo persona card component
+function DemoPersonaCard({ persona, onSelect }: { persona: DemoPersona; onSelect: (id: string) => void }) {
+  const colorClasses: Record<string, { bg: string; border: string; text: string }> = {
+    emerald: { bg: 'bg-emerald-500/10', border: 'border-emerald-500/30', text: 'text-emerald-400' },
+    cyan: { bg: 'bg-cyan-500/10', border: 'border-cyan-500/30', text: 'text-cyan-400' },
+    amber: { bg: 'bg-amber-500/10', border: 'border-amber-500/30', text: 'text-amber-400' },
+    violet: { bg: 'bg-violet-500/10', border: 'border-violet-500/30', text: 'text-violet-400' },
+  }
+  const colors = colorClasses[persona.color] || colorClasses.emerald
+
+  return (
+    <button
+      onClick={() => onSelect(persona.id)}
+      className={`w-full p-3 rounded-lg ${colors.bg} border ${colors.border} hover:border-opacity-60 transition-all duration-200 text-left group hover:-translate-y-0.5`}
+    >
+      <div className="flex items-center gap-3">
+        <div className={`w-8 h-8 rounded-full ${colors.bg} flex items-center justify-center text-sm font-semibold ${colors.text}`}>
+          {persona.name.split(' ').map(n => n[0]).join('')}
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="text-sm font-medium text-white truncate">{persona.name}</p>
+          <p className={`text-xs ${colors.text} truncate`}>{persona.role}</p>
+        </div>
+        <ChevronRight className={`w-4 h-4 ${colors.text} opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all`} />
+      </div>
+    </button>
+  )
+}
+
 function LoginContent() {
   const searchParams = useSearchParams()
+  const router = useRouter()
   const error = searchParams.get('error')
   const redirect = searchParams.get('redirect') || '/'
   const [mounted, setMounted] = useState(false)
+  const [showDemoAccess, setShowDemoAccess] = useState(false)
 
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  const handleDemoLogin = (personaId: string) => {
+    // Store demo persona in localStorage
+    localStorage.setItem('eids-demo-persona', personaId)
+    // Redirect to dashboard
+    router.push('/')
+  }
 
   const handleGoogleSignIn = async () => {
     const supabase = createClient()
@@ -110,18 +151,9 @@ function LoginContent() {
           {/* Top - Logo */}
           <div className={`transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center shadow-lg shadow-emerald-500/20">
-                <Shield className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold tracking-tight">
-                  <span className="text-white">E</span>
-                  <span className="text-emerald-400">I</span>
-                  <span className="text-white">DS</span>
-                </h1>
-                <p className="text-xs text-slate-500 tracking-widest uppercase">Secure Access Portal</p>
-              </div>
+              <EIDSLogo size="xl" variant="dark" />
             </div>
+            <p className="text-xs text-slate-500 tracking-widest uppercase mt-1 ml-[60px]">Secure Access Portal</p>
           </div>
 
           {/* Center - Security Status */}
@@ -165,16 +197,9 @@ function LoginContent() {
 
         <div className="relative z-10 w-full max-w-md">
           {/* Mobile Logo */}
-          <div className={`lg:hidden text-center mb-10 transition-all duration-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-400 to-cyan-500 shadow-lg shadow-emerald-500/20 mb-4">
-              <Shield className="w-8 h-8 text-white" />
-            </div>
-            <h1 className="text-3xl font-bold tracking-tight">
-              <span className="text-white">E</span>
-              <span className="text-emerald-400">I</span>
-              <span className="text-white">DS</span>
-            </h1>
-            <p className="text-xs text-slate-500 tracking-widest uppercase mt-1">Secure Access Portal</p>
+          <div className={`lg:hidden flex flex-col items-center mb-10 transition-all duration-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
+            <EIDSLogo size="lg" variant="dark" />
+            <p className="text-xs text-slate-500 tracking-widest uppercase mt-2">Secure Access Portal</p>
           </div>
 
           {/* Login Card */}
@@ -253,6 +278,32 @@ function LoginContent() {
                     <Fingerprint className="w-3.5 h-3.5 text-emerald-400/60" />
                     <span>MFA Protected</span>
                   </div>
+                </div>
+
+                {/* Demo Access Toggle */}
+                <div className="mt-6 pt-6 border-t border-slate-700/50">
+                  <button
+                    onClick={() => setShowDemoAccess(!showDemoAccess)}
+                    className="w-full flex items-center justify-center gap-2 text-slate-400 hover:text-slate-300 text-sm transition-colors"
+                  >
+                    <Users className="w-4 h-4" />
+                    <span>Demo Access</span>
+                    <ChevronRight className={`w-4 h-4 transition-transform ${showDemoAccess ? 'rotate-90' : ''}`} />
+                  </button>
+
+                  {/* Demo Personas */}
+                  {showDemoAccess && (
+                    <div className="mt-4 space-y-2">
+                      <p className="text-xs text-slate-500 text-center mb-3">Select a demo persona to explore the platform</p>
+                      {demoPersonas.map((persona) => (
+                        <DemoPersonaCard
+                          key={persona.id}
+                          persona={persona}
+                          onSelect={handleDemoLogin}
+                        />
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

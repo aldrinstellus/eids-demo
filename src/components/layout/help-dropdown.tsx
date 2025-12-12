@@ -72,7 +72,7 @@ export function HelpDropdown() {
           aria-label="Help"
           className="hover:bg-secondary/50 transition-colors duration-200"
         >
-          <HelpCircle className="h-5 w-5" />
+          <HelpCircle className="h-5 w-5 text-slate-700 dark:text-slate-300" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[280px]">

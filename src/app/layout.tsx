@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import { Orbitron, JetBrains_Mono, Inter } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
-import { Breadcrumb } from "@/components/layout/breadcrumb";
 import { ThemeProvider } from "@/components/theme-provider";
-import { ChatFAB } from "@/components/chat/chat-fab";
+import { AppShell } from "@/components/layout/app-shell";
 
 // Neo-futuristic font stack
 const orbitron = Orbitron({
@@ -47,19 +44,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {/* Skip link for accessibility */}
-          <a href="#main-content" className="skip-link">
-            Skip to main content
-          </a>
-          <Header />
-          <main id="main-content" className="flex-1">
-            <div className="container mx-auto px-6 pt-4">
-              <Breadcrumb />
-            </div>
-            {children}
-          </main>
-          <Footer />
-          <ChatFAB />
+          <AppShell>{children}</AppShell>
         </ThemeProvider>
       </body>
     </html>

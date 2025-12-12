@@ -114,7 +114,7 @@ export function NotificationsDropdown() {
           aria-label={`Notifications${unreadCount > 0 ? ` (${unreadCount} unread)` : ""}`}
           className="relative hover:bg-secondary/50 transition-colors duration-200"
         >
-          <Bell className="h-5 w-5" />
+          <Bell className="h-5 w-5 text-slate-700 dark:text-slate-300" />
           {unreadCount > 0 && (
             <span className="absolute top-1 right-1 w-2 h-2 bg-destructive rounded-full" />
           )}
