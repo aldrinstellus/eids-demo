@@ -2,8 +2,7 @@
 
 import { createClient } from '@/lib/supabase/client'
 import { useSearchParams } from 'next/navigation'
-import { Fingerprint, ScanLine, Activity, Lock, Server, ChevronRight, Users, Shield } from 'lucide-react'
-import Link from 'next/link'
+import { Fingerprint, ScanLine, Lock, ChevronRight, Users } from 'lucide-react'
 import { Suspense, useEffect, useState } from 'react'
 import { EIDSLogo } from '@/components/brand/eids-logo'
 import { demoPersonas, type DemoPersona } from '@/data/demo-personas'
@@ -53,30 +52,6 @@ function AnimatedGrid() {
   )
 }
 
-function SecurityMetric({ icon: Icon, label, value, delay }: { icon: typeof Shield, label: string, value: string, delay: number }) {
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const timer = setTimeout(() => setVisible(true), delay)
-    return () => clearTimeout(timer)
-  }, [delay])
-
-  return (
-    <div
-      className={`flex items-center gap-3 p-3 rounded-lg bg-slate-800/30 border border-slate-700/30 backdrop-blur-sm transition-all duration-700 ${
-        visible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
-      }`}
-    >
-      <div className="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center">
-        <Icon className="w-5 h-5 text-emerald-400" />
-      </div>
-      <div>
-        <p className="text-xs text-slate-500 uppercase tracking-wider">{label}</p>
-        <p className="text-sm font-semibold text-white">{value}</p>
-      </div>
-    </div>
-  )
-}
 
 // Demo persona card component
 function DemoPersonaCard({ persona, onSelect }: { persona: DemoPersona; onSelect: (id: string) => void }) {
@@ -196,21 +171,6 @@ function LoginContent() {
             </div>
           </div>
 
-          {/* Center - Security Status */}
-          <div className="space-y-3">
-            <div className={`transition-all duration-1000 delay-200 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-              <p className="text-xs text-emerald-400 uppercase tracking-[0.3em] mb-2">System Status</p>
-              <div className="flex items-center gap-2 mb-6">
-                <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-sm text-slate-400">All systems operational</span>
-              </div>
-            </div>
-
-            <SecurityMetric icon={Lock} label="Encryption" value="AES-256-GCM" delay={400} />
-            <SecurityMetric icon={Server} label="Compliance" value="FedRAMP High" delay={600} />
-            <SecurityMetric icon={Fingerprint} label="Authentication" value="MFA Enabled" delay={800} />
-            <SecurityMetric icon={Activity} label="Uptime" value="99.99% SLA" delay={1000} />
-          </div>
 
           {/* Bottom - Certifications */}
           <div className={`transition-all duration-1000 delay-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
