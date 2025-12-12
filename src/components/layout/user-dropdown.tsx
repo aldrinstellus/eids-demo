@@ -129,8 +129,8 @@ export function UserDropdown() {
       // Also set cookie for server-side middleware
       document.cookie = `eids-demo-persona=${personaId}; path=/; max-age=86400; SameSite=Lax`;
       setDemoPersona(persona);
-      // Refresh to update all components
-      window.location.reload();
+      // Navigate to home - the dashboard will handle persona-specific redirects
+      window.location.href = "/";
     }
   };
 

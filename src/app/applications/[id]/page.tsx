@@ -20,6 +20,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { StatusBadge } from "@/components/applications/status-badge";
+import { ConfidenceBadge, ConfidenceRing } from "@/components/ui/confidence-score";
+import { ApplicationSplitView } from "@/components/layout/split-view";
 import { formatCurrency } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 
@@ -66,6 +68,185 @@ export default function ApplicationDetailPage({ params }: PageProps) {
     success: "text-success",
     info: "text-primary",
   };
+
+  // Form content for left panel
+  const FormContent = (
+    <div className="space-y-6">
+      {/* Program Details */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Program Details</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div>
+            <label className="text-sm font-medium" htmlFor="name">
+              Program Name <span className="text-destructive">*</span>
+            </label>
+            <input
+              id="name"
+              type="text"
+              defaultValue={application.name}
+              className="mt-1.5 w-full h-10 px-3 rounded-md border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+            />
+          </div>
+          <div>
+            <label className="text-sm font-medium" htmlFor="type">
+              Program Type <span className="text-destructive">*</span>
+            </label>
+            <select
+              id="type"
+              defaultValue={application.type}
+              className="mt-1.5 w-full h-10 px-3 rounded-md border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+            >
+              <option value="research">Research & Development</option>
+              <option value="training">Training</option>
+              <option value="procurement">Procurement</option>
+              <option value="modernization">Modernization</option>
+              <option value="infrastructure">Infrastructure</option>
+            </select>
+          </div>
+          <div>
+            <label className="text-sm font-medium" htmlFor="description">
+              Description <span className="text-destructive">*</span>
+            </label>
+            <textarea
+              id="description"
+              rows={4}
+              defaultValue={application.description}
+              className="mt-1.5 w-full px-3 py-2 rounded-md border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring resize-none"
+            />
+            <p className="text-xs text-muted-foreground mt-1">
+              {application.description.length}/500 characters
+            </p>
+          </div>
+          <div>
+            <label className="text-sm font-medium" htmlFor="amount">
+              Requested Amount <span className="text-destructive">*</span>
+            </label>
+            <input
+              id="amount"
+              type="text"
+              defaultValue={formatCurrency(application.requestedAmount)}
+              className="mt-1.5 w-full h-10 px-3 rounded-md border bg-background text-sm font-mono focus:outline-none focus:ring-2 focus:ring-ring"
+            />
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Documents */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Supporting Documents</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="border-2 border-dashed rounded-lg p-6 text-center mb-4">
+            <Upload className="h-8 w-8 mx-auto text-muted-foreground mb-2" />
+            <p className="text-sm text-muted-foreground">
+              Drop files here or{" "}
+              <button className="text-primary hover:underline">browse</button>
+            </p>
+          </div>
+          {application.documents.length > 0 && (
+            <ul className="space-y-2">
+              {application.documents.map((doc) => (
+                <li
+                  key={doc.id}
+                  className="flex items-center gap-3 p-3 rounded-lg bg-muted/50"
+                >
+                  <FileText className="h-5 w-5 text-primary" />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium truncate">{doc.name}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {(doc.size / 1000000).toFixed(1)} MB
+                    </p>
+                  </div>
+                  <Badge variant="success">Uploaded</Badge>
+                </li>
+              ))}
+            </ul>
+          )}
+        </CardContent>
+      </Card>
+    </div>
+  );
+
+  // AI content for right panel
+  const AIContent = (
+    <div className="space-y-4">
+      {/* AI Header with overall accuracy */}
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-2">
+          <motion.div
+            animate={{
+              boxShadow: [
+                "0 0 10px rgba(14, 165, 233, 0.4)",
+                "0 0 20px rgba(14, 165, 233, 0.6)",
+                "0 0 10px rgba(14, 165, 233, 0.4)",
+              ],
+            }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="p-2 rounded-lg bg-primary/20"
+          >
+            <Bot className="h-5 w-5 text-primary" />
+          </motion.div>
+          <span className="font-semibold">AI Assistant</span>
+        </div>
+        <ConfidenceRing score={94} size="sm" showLabel={false} />
+      </div>
+
+      <p className="text-sm text-muted-foreground">
+        Based on your input, here are some suggestions:
+      </p>
+
+      {application.aiInsights.map((insight, index) => {
+        const Icon = insightIcons[insight.type] || Lightbulb;
+        return (
+          <motion.div
+            key={insight.id}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 + index * 0.1 }}
+            className="p-3 rounded-lg bg-muted/50 hover:bg-muted/70 transition-colors"
+          >
+            <div className="flex gap-3">
+              <Icon
+                className={cn(
+                  "h-5 w-5 mt-0.5 shrink-0",
+                  insightStyles[insight.type]
+                )}
+              />
+              <div className="flex-1">
+                <p className="text-sm">{insight.message}</p>
+                <div className="flex items-center gap-2 mt-1.5">
+                  <ConfidenceBadge score={Math.round(insight.confidence * 100)} size="sm" />
+                  {insight.action && (
+                    <Button
+                      variant="link"
+                      size="sm"
+                      className="h-auto p-0"
+                    >
+                      {insight.action}
+                      <ChevronRight className="h-3 w-3 ml-1" />
+                    </Button>
+                  )}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        );
+      })}
+
+      <div className="pt-3 border-t">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="w-full text-muted-foreground"
+        >
+          Why am I seeing this?
+        </Button>
+      </div>
+    </div>
+  );
 
   return (
     <div className="container mx-auto py-8 px-6">
@@ -171,200 +352,25 @@ export default function ApplicationDetailPage({ params }: PageProps) {
         </Card>
       </motion.div>
 
-      {/* Main content */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Form section */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.3 }}
-          className="lg:col-span-2 space-y-6"
-        >
-          <Card>
-            <CardHeader>
-              <CardTitle>Program Details</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <label className="text-sm font-medium" htmlFor="name">
-                  Program Name <span className="text-destructive">*</span>
-                </label>
-                <input
-                  id="name"
-                  type="text"
-                  defaultValue={application.name}
-                  className="mt-1.5 w-full h-10 px-3 rounded-md border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-                />
-              </div>
-              <div>
-                <label className="text-sm font-medium" htmlFor="type">
-                  Program Type <span className="text-destructive">*</span>
-                </label>
-                <select
-                  id="type"
-                  defaultValue={application.type}
-                  className="mt-1.5 w-full h-10 px-3 rounded-md border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-                >
-                  <option value="research">Research & Development</option>
-                  <option value="training">Training</option>
-                  <option value="procurement">Procurement</option>
-                  <option value="modernization">Modernization</option>
-                  <option value="infrastructure">Infrastructure</option>
-                </select>
-              </div>
-              <div>
-                <label className="text-sm font-medium" htmlFor="description">
-                  Description <span className="text-destructive">*</span>
-                </label>
-                <textarea
-                  id="description"
-                  rows={4}
-                  defaultValue={application.description}
-                  className="mt-1.5 w-full px-3 py-2 rounded-md border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring resize-none"
-                />
-                <p className="text-xs text-muted-foreground mt-1">
-                  {application.description.length}/500 characters
-                </p>
-              </div>
-              <div>
-                <label className="text-sm font-medium" htmlFor="amount">
-                  Requested Amount <span className="text-destructive">*</span>
-                </label>
-                <input
-                  id="amount"
-                  type="text"
-                  defaultValue={formatCurrency(application.requestedAmount)}
-                  className="mt-1.5 w-full h-10 px-3 rounded-md border bg-background text-sm font-mono focus:outline-none focus:ring-2 focus:ring-ring"
-                />
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Documents */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Supporting Documents</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="border-2 border-dashed rounded-lg p-6 text-center mb-4">
-                <Upload className="h-8 w-8 mx-auto text-muted-foreground mb-2" />
-                <p className="text-sm text-muted-foreground">
-                  Drop files here or{" "}
-                  <button className="text-primary hover:underline">browse</button>
-                </p>
-              </div>
-              {application.documents.length > 0 && (
-                <ul className="space-y-2">
-                  {application.documents.map((doc) => (
-                    <li
-                      key={doc.id}
-                      className="flex items-center gap-3 p-3 rounded-lg bg-muted/50"
-                    >
-                      <FileText className="h-5 w-5 text-primary" />
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium truncate">{doc.name}</p>
-                        <p className="text-xs text-muted-foreground">
-                          {(doc.size / 1000000).toFixed(1)} MB
-                        </p>
-                      </div>
-                      <Badge variant="success">Uploaded</Badge>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </CardContent>
-          </Card>
-        </motion.div>
-
-        {/* AI Assistant sidebar */}
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.4 }}
-        >
-          <Card className="sticky top-24 border-primary/20">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent rounded-xl" />
-            <CardHeader className="relative z-10">
-              <CardTitle className="flex items-center gap-2">
-                <motion.div
-                  animate={{
-                    boxShadow: [
-                      "0 0 10px rgba(14, 165, 233, 0.4)",
-                      "0 0 20px rgba(14, 165, 233, 0.6)",
-                      "0 0 10px rgba(14, 165, 233, 0.4)",
-                    ],
-                  }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="p-2 rounded-lg bg-primary/20"
-                >
-                  <Bot className="h-5 w-5 text-primary" />
-                </motion.div>
-                AI Assistant
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="relative z-10 space-y-4">
-              <p className="text-sm text-muted-foreground">
-                Based on your input, here are some suggestions:
-              </p>
-
-              {application.aiInsights.map((insight, index) => {
-                const Icon = insightIcons[insight.type] || Lightbulb;
-                return (
-                  <motion.div
-                    key={insight.id}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 + index * 0.1 }}
-                    className="p-3 rounded-lg bg-background/50"
-                  >
-                    <div className="flex gap-3">
-                      <Icon
-                        className={cn(
-                          "h-5 w-5 mt-0.5 shrink-0",
-                          insightStyles[insight.type]
-                        )}
-                      />
-                      <div>
-                        <p className="text-sm">{insight.message}</p>
-                        <p className="text-xs text-muted-foreground mt-1">
-                          {Math.round(insight.confidence * 100)}% confidence
-                        </p>
-                        {insight.action && (
-                          <Button
-                            variant="link"
-                            size="sm"
-                            className="h-auto p-0 mt-1"
-                          >
-                            {insight.action}
-                            <ChevronRight className="h-3 w-3 ml-1" />
-                          </Button>
-                        )}
-                      </div>
-                    </div>
-                  </motion.div>
-                );
-              })}
-
-              <div className="pt-3 border-t">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="w-full text-muted-foreground"
-                >
-                  Why am I seeing this?
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
-      </div>
+      {/* Split-View Layout: Form on left, AI on right */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+      >
+        <ApplicationSplitView
+          formContent={FormContent}
+          aiContent={AIContent}
+          className="mb-8"
+        />
+      </motion.div>
 
       {/* Action buttons */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
-        className="flex justify-end gap-3 mt-8 pt-6 border-t"
+        transition={{ delay: 0.4 }}
+        className="flex justify-end gap-3 pt-6 border-t"
       >
         <Button variant="outline">Cancel</Button>
         <Button variant="outline">

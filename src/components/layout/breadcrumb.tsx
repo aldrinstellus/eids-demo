@@ -17,7 +17,12 @@ const routeLabels: Record<string, string> = {
   security: "Security & Privacy",
   admin: "Admin",
   brand: "Brand",
+  veterans: "Veterans",
+  "patient-records": "Patient records",
 };
+
+// Routes that should NOT be clickable (intermediate routes without pages)
+const nonLinkableRoutes = ["/veterans"];
 
 // Get label for a route segment
 function getLabel(segment: string): string {
@@ -76,23 +81,31 @@ export function Breadcrumb({ className, currentLabel }: BreadcrumbProps) {
           </Link>
         </li>
 
-        {breadcrumbs.map((crumb, index) => (
-          <li key={crumb.href} className="flex items-center gap-1.5">
-            <ChevronRight className="h-4 w-4 text-muted-foreground/50" aria-hidden="true" />
-            {crumb.isLast ? (
-              <span className="font-medium text-foreground" aria-current="page">
-                {crumb.label}
-              </span>
-            ) : (
-              <Link
-                href={crumb.href}
-                className="hover:text-foreground transition-colors"
-              >
-                {crumb.label}
-              </Link>
-            )}
-          </li>
-        ))}
+        {breadcrumbs.map((crumb, index) => {
+          const isNonLinkable = nonLinkableRoutes.includes(crumb.href);
+          return (
+            <li key={crumb.href} className="flex items-center gap-1.5">
+              <ChevronRight className="h-4 w-4 text-muted-foreground/50" aria-hidden="true" />
+              {crumb.isLast || isNonLinkable ? (
+                <span
+                  className={cn(
+                    crumb.isLast ? "font-medium text-foreground" : "text-muted-foreground"
+                  )}
+                  aria-current={crumb.isLast ? "page" : undefined}
+                >
+                  {crumb.label}
+                </span>
+              ) : (
+                <Link
+                  href={crumb.href}
+                  className="hover:text-foreground transition-colors"
+                >
+                  {crumb.label}
+                </Link>
+              )}
+            </li>
+          );
+        })}
       </ol>
     </nav>
   );

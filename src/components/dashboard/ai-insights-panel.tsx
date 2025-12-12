@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { ConfidenceBadge, ConfidenceRing } from "@/components/ui/confidence-score";
 import { cn } from "@/lib/utils";
 
 export interface AIInsight {
@@ -24,10 +25,12 @@ export interface AIInsight {
   severity: "success" | "warning" | "error" | "info";
   actionable: boolean;
   action: string | null;
+  confidence?: number; // 0-100 confidence score
 }
 
 interface AIInsightsPanelProps {
   insights: AIInsight[];
+  overallAccuracy?: number; // 0-100 overall model accuracy
 }
 
 const iconMap: Record<string, React.ElementType> = {
@@ -46,7 +49,7 @@ const severityStyles: Record<string, string> = {
   info: "text-primary",
 };
 
-export function AIInsightsPanel({ insights }: AIInsightsPanelProps) {
+export function AIInsightsPanel({ insights, overallAccuracy = 94 }: AIInsightsPanelProps) {
   return (
     <motion.div
       initial={{ opacity: 0, x: 20 }}
@@ -58,22 +61,25 @@ export function AIInsightsPanel({ insights }: AIInsightsPanelProps) {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent" />
 
         <CardHeader className="relative z-10">
-          <CardTitle className="flex items-center gap-2">
-            <motion.div
-              animate={{
-                boxShadow: [
-                  "0 0 10px rgba(14, 165, 233, 0.4)",
-                  "0 0 20px rgba(14, 165, 233, 0.6)",
-                  "0 0 10px rgba(14, 165, 233, 0.4)",
-                ],
-              }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="p-2 rounded-lg bg-primary/20"
-            >
-              <Bot className="h-5 w-5 text-primary" />
-            </motion.div>
-            <span>AI Assistant</span>
-          </CardTitle>
+          <div className="flex items-center justify-between">
+            <CardTitle className="flex items-center gap-2">
+              <motion.div
+                animate={{
+                  boxShadow: [
+                    "0 0 10px rgba(14, 165, 233, 0.4)",
+                    "0 0 20px rgba(14, 165, 233, 0.6)",
+                    "0 0 10px rgba(14, 165, 233, 0.4)",
+                  ],
+                }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="p-2 rounded-lg bg-primary/20"
+              >
+                <Bot className="h-5 w-5 text-primary" />
+              </motion.div>
+              <span>AI Assistant</span>
+            </CardTitle>
+            <ConfidenceRing score={overallAccuracy} size="sm" showLabel={false} />
+          </div>
         </CardHeader>
 
         <CardContent className="relative z-10 space-y-4">
@@ -97,7 +103,12 @@ export function AIInsightsPanel({ insights }: AIInsightsPanelProps) {
                   <Icon className="h-5 w-5" aria-hidden="true" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium">{insight.title}</p>
+                  <div className="flex items-center justify-between gap-2">
+                    <p className="text-sm font-medium">{insight.title}</p>
+                    {insight.confidence && (
+                      <ConfidenceBadge score={insight.confidence} size="sm" />
+                    )}
+                  </div>
                   <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2">
                     {insight.description}
                   </p>

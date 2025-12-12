@@ -13,7 +13,8 @@
         "description": "Based on historical patterns, these applications may require additional documentation or clarification.",
         "severity": "warning",
         "actionable": true,
-        "action": "View applications"
+        "action": "View applications",
+        "confidence": 87
       },
       {
         "id": "HL-002",
@@ -23,7 +24,8 @@
         "description": "HIPAA documentation missing or incomplete in flagged applications.",
         "severity": "error",
         "actionable": true,
-        "action": "Review issues"
+        "action": "Review issues",
+        "confidence": 95
       },
       {
         "id": "HL-003",
@@ -33,7 +35,8 @@
         "description": "Current pipeline is on track to meet service level agreements.",
         "severity": "success",
         "actionable": false,
-        "action": null
+        "action": null,
+        "confidence": 91
       },
       {
         "id": "HL-004",
@@ -43,7 +46,8 @@
         "description": "AI-assisted form validation has reduced manual review time.",
         "severity": "info",
         "actionable": false,
-        "action": null
+        "action": null,
+        "confidence": 98
       }
     ]
   },

@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
@@ -33,6 +34,7 @@ type SortField = "name" | "status" | "updatedAt" | "requestedAmount";
 type SortDirection = "asc" | "desc";
 
 export default function ApplicationsPage() {
+  const searchParams = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [departmentFilter, setDepartmentFilter] = useState<string>("all");
@@ -40,6 +42,23 @@ export default function ApplicationsPage() {
   const [sortField, setSortField] = useState<SortField>("updatedAt");
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
   const [showFilterPanel, setShowFilterPanel] = useState(false);
+
+  // State for financial filter mode
+  const [financialFilterActive, setFinancialFilterActive] = useState(false);
+
+  // Sync URL search params with filter state
+  useEffect(() => {
+    const statusParam = searchParams.get("status");
+    if (statusParam && ["draft", "active", "review", "completed"].includes(statusParam)) {
+      setStatusFilter(statusParam);
+    }
+
+    // Handle ?filter=financial for Maria Thompson's Quick Action
+    const filterParam = searchParams.get("filter");
+    if (filterParam === "financial") {
+      setFinancialFilterActive(true);
+    }
+  }, [searchParams]);
 
   // Get persona-filtered applications
   const personaApplications = usePersonaApplications();
@@ -68,12 +87,14 @@ export default function ApplicationsPage() {
       const matchesStatus = statusFilter === "all" || app.status === statusFilter;
       const matchesDepartment = departmentFilter === "all" || app.department === departmentFilter;
       const matchesPriority = priorityFilter === "all" || app.priority === priorityFilter;
-      return matchesSearch && matchesStatus && matchesDepartment && matchesPriority;
+      // Financial filter: only show apps >= $100K when active
+      const matchesFinancial = !financialFilterActive || app.requestedAmount >= 100000;
+      return matchesSearch && matchesStatus && matchesDepartment && matchesPriority && matchesFinancial;
     });
-  }, [personaApplications, searchQuery, statusFilter, departmentFilter, priorityFilter]);
+  }, [personaApplications, searchQuery, statusFilter, departmentFilter, priorityFilter, financialFilterActive]);
 
-  // Count active filters
-  const activeFilterCount = [statusFilter, departmentFilter, priorityFilter].filter(f => f !== "all").length;
+  // Count active filters (include financial filter)
+  const activeFilterCount = [statusFilter, departmentFilter, priorityFilter].filter(f => f !== "all").length + (financialFilterActive ? 1 : 0);
 
   // Clear all filters
   const clearAllFilters = () => {
@@ -81,6 +102,7 @@ export default function ApplicationsPage() {
     setStatusFilter("all");
     setDepartmentFilter("all");
     setPriorityFilter("all");
+    setFinancialFilterActive(false);
   };
 
   // Sort applications
@@ -253,6 +275,7 @@ export default function ApplicationsPage() {
                 {personaConfig.applicationFilter.assigneeId && " — showing only your applications"}
                 {personaConfig.applicationFilter.minBudget && ` — showing applications >${formatCurrency(personaConfig.applicationFilter.minBudget)}`}
                 {personaConfig.applicationFilter.showAll && " — showing all applications"}
+                {financialFilterActive && " — filtered to financial review items (≥$100K)"}
               </span>
             </div>
           </Card>

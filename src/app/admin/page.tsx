@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Users,
@@ -90,8 +91,19 @@ type ApiSortField = "endpoint" | "calls" | "avgTime" | "status";
 type SortDirection = "asc" | "desc";
 
 export default function AdminPage() {
+  const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState<"users" | "audit" | "system" | "api">("users");
   const [users, setUsers] = useState<User[]>(initialUsers);
+
+  // Sync URL search params with tab state
+  useEffect(() => {
+    const tabParam = searchParams.get("tab");
+    if (tabParam && ["users", "audit", "system", "api", "settings"].includes(tabParam)) {
+      // Map "settings" to "system" since that's the closest equivalent
+      const mappedTab = tabParam === "settings" ? "system" : tabParam;
+      setActiveTab(mappedTab as typeof activeTab);
+    }
+  }, [searchParams]);
   const [auditLogs, setAuditLogs] = useState<AuditLog[]>(initialAuditLogs);
   const [searchQuery, setSearchQuery] = useState("");
   const [severityFilter, setSeverityFilter] = useState<string>("all");
