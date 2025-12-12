@@ -6,6 +6,7 @@ import { Fingerprint, ScanLine, Lock, ChevronRight, Users, ShieldCheck, FileChec
 import { Suspense, useEffect, useState } from 'react'
 import { EIDSLogo } from '@/components/brand/eids-logo'
 import { demoPersonas, type DemoPersona } from '@/data/demo-personas'
+import { SystemBanner } from '@/components/layout/system-banner'
 
 function AnimatedGrid() {
   return (
@@ -134,7 +135,10 @@ function LoginContent() {
   }
 
   return (
-    <div className="min-h-screen flex bg-slate-950">
+    <div className="min-h-screen flex flex-col bg-slate-950">
+      {/* CUI/PHI/PII System Banner */}
+      <SystemBanner />
+      <div className="flex-1 flex">
       {/* Left Panel - Data Visualization */}
       <div className="hidden lg:flex lg:w-1/2 relative bg-gradient-to-br from-slate-900 via-slate-900 to-slate-950 overflow-hidden">
         <AnimatedGrid />
@@ -475,6 +479,7 @@ function LoginContent() {
           animation: scan 3s ease-in-out infinite;
         }
       `}</style>
+      </div>
     </div>
   )
 }
