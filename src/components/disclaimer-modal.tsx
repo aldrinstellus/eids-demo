@@ -65,21 +65,18 @@ interface DisclaimerModalProps {
 }
 
 export function DisclaimerModal({ onAccept }: DisclaimerModalProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  // Always show disclaimer on every page load (no sessionStorage caching)
+  const [isOpen, setIsOpen] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
-    // Check if disclaimer has been accepted this session
-    const accepted = sessionStorage.getItem(DISCLAIMER_STORAGE_KEY);
-    if (!accepted) {
-      setIsOpen(true);
-    }
+    // Small delay to ensure component mounts properly
     setIsLoading(false);
   }, []);
 
   const handleAccept = () => {
-    sessionStorage.setItem(DISCLAIMER_STORAGE_KEY, "true");
+    // No longer storing in sessionStorage - always show on each page load
     setIsOpen(false);
     onAccept?.();
   };
