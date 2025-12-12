@@ -2,7 +2,7 @@
 
 import { createClient } from '@/lib/supabase/client'
 import { useSearchParams } from 'next/navigation'
-import { Fingerprint, ScanLine, Lock, ChevronRight, Users } from 'lucide-react'
+import { Fingerprint, ScanLine, Lock, ChevronRight, Users, ShieldCheck, FileCheck, Building2, Server } from 'lucide-react'
 import { Suspense, useEffect, useState } from 'react'
 import { EIDSLogo } from '@/components/brand/eids-logo'
 import { demoPersonas, type DemoPersona } from '@/data/demo-personas'
@@ -28,26 +28,6 @@ function AnimatedGrid() {
         <rect width="100%" height="100%" fill="url(#grid)" />
       </svg>
 
-      {/* Floating data nodes */}
-      <div className="absolute top-1/4 left-1/4 w-3 h-3 rounded-full bg-emerald-400/60 animate-pulse" style={{ animationDelay: '0s' }} />
-      <div className="absolute top-1/3 right-1/3 w-2 h-2 rounded-full bg-cyan-400/60 animate-pulse" style={{ animationDelay: '0.5s' }} />
-      <div className="absolute bottom-1/3 left-1/3 w-2 h-2 rounded-full bg-emerald-400/40 animate-pulse" style={{ animationDelay: '1s' }} />
-      <div className="absolute top-1/2 right-1/4 w-3 h-3 rounded-full bg-cyan-400/50 animate-pulse" style={{ animationDelay: '1.5s' }} />
-      <div className="absolute bottom-1/4 right-1/2 w-2 h-2 rounded-full bg-emerald-400/60 animate-pulse" style={{ animationDelay: '2s' }} />
-
-      {/* Connection lines */}
-      <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
-        <line x1="25%" y1="25%" x2="66%" y2="33%" stroke="url(#lineGradient)" strokeWidth="1" className="opacity-30" />
-        <line x1="66%" y1="33%" x2="75%" y2="50%" stroke="url(#lineGradient)" strokeWidth="1" className="opacity-30" />
-        <line x1="33%" y1="66%" x2="50%" y2="75%" stroke="url(#lineGradient)" strokeWidth="1" className="opacity-30" />
-        <defs>
-          <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#10b981" stopOpacity="0" />
-            <stop offset="50%" stopColor="#10b981" stopOpacity="0.5" />
-            <stop offset="100%" stopColor="#10b981" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-      </svg>
     </div>
   )
 }
@@ -125,58 +105,107 @@ function LoginContent() {
       <div className="hidden lg:flex lg:w-1/2 relative bg-gradient-to-br from-slate-900 via-slate-900 to-slate-950 overflow-hidden">
         <AnimatedGrid />
 
-        {/* Content overlay */}
-        <div className="relative z-10 flex flex-col p-12 w-full">
-          {/* Top - Logo & Hero */}
-          <div>
-            <div className={`transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
-              <div className="flex items-center gap-3">
-                <EIDSLogo size="xl" variant="dark" />
-              </div>
-              <p className="text-xs text-slate-500 tracking-widest uppercase mt-1 ml-[60px]">Secure Access Portal</p>
+        {/* Content overlay - top-aligned like right panel */}
+        <div className="relative z-10 flex flex-col p-8 lg:p-10 w-full h-full">
+          {/* Top - Logo (fixed at top) */}
+          <div className={`transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
+            <div className="flex items-center gap-3">
+              <EIDSLogo size="xl" variant="dark" />
             </div>
+            <p className="text-xs text-slate-500 tracking-widest uppercase mt-1 ml-[60px]">Secure Access Portal</p>
+          </div>
 
-            {/* Hero Headline */}
-            <div className={`mt-12 transition-all duration-1000 delay-300 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-              <h1 className="text-4xl xl:text-5xl font-bold text-white leading-tight tracking-tight">
-                Empowering
-                <br />
-                <span className="bg-gradient-to-r from-emerald-400 via-cyan-400 to-emerald-400 bg-clip-text text-transparent">
-                  VA Healthcare
-                </span>
-                <br />
-                Grant Applications
-              </h1>
-              <p className="mt-6 text-slate-400 text-lg max-w-md leading-relaxed">
-                AI-powered platform streamlining grant management for Defense Health Agency programs.
-              </p>
+          {/* Hero Headline - with top margin to create space */}
+          <div className={`mt-12 transition-all duration-1000 delay-300 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+            <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-tight tracking-tight">
+              Empowering
+              <br />
+              <span className="bg-gradient-to-r from-emerald-400 via-cyan-400 to-emerald-400 bg-clip-text text-transparent">
+                VA Healthcare
+              </span>
+              <br />
+              Grant Applications
+            </h1>
+            <p className="mt-4 text-slate-400 text-base lg:text-lg max-w-md leading-relaxed">
+              AI-powered platform streamlining grant management for Defense Health Agency programs.
+            </p>
 
-              {/* Stats row */}
-              <div className="mt-8 flex items-center gap-8">
-                <div>
-                  <p className="text-3xl font-bold text-white">2,400<span className="text-emerald-400">+</span></p>
-                  <p className="text-xs text-slate-500 uppercase tracking-wider">Applications Processed</p>
-                </div>
-                <div className="w-px h-12 bg-slate-700/50" />
-                <div>
-                  <p className="text-3xl font-bold text-white">94<span className="text-emerald-400">%</span></p>
-                  <p className="text-xs text-slate-500 uppercase tracking-wider">Success Rate</p>
-                </div>
-                <div className="w-px h-12 bg-slate-700/50" />
-                <div>
-                  <p className="text-3xl font-bold text-white">$1.2<span className="text-emerald-400">B</span></p>
-                  <p className="text-xs text-slate-500 uppercase tracking-wider">Funding Managed</p>
+            {/* Stats row */}
+            <div className="mt-6 flex items-center gap-6 lg:gap-8">
+              <div>
+                <p className="text-2xl lg:text-3xl font-bold text-white">2,400<span className="text-emerald-400">+</span></p>
+                <p className="text-[10px] lg:text-xs text-slate-500 uppercase tracking-wider">Applications Processed</p>
+              </div>
+              <div className="w-px h-10 lg:h-12 bg-slate-700/50" />
+              <div>
+                <p className="text-2xl lg:text-3xl font-bold text-white">94<span className="text-emerald-400">%</span></p>
+                <p className="text-[10px] lg:text-xs text-slate-500 uppercase tracking-wider">Success Rate</p>
+              </div>
+              <div className="w-px h-10 lg:h-12 bg-slate-700/50" />
+              <div>
+                <p className="text-2xl lg:text-3xl font-bold text-white">$1.2<span className="text-emerald-400">B</span></p>
+                <p className="text-[10px] lg:text-xs text-slate-500 uppercase tracking-wider">Funding Managed</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Compliance Certifications - Premium Design */}
+          <div className={`mt-8 transition-all duration-1000 delay-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+            <p className="text-xs text-slate-500 mb-4 uppercase tracking-[0.2em] font-medium">Compliance Certifications</p>
+            <div className="grid grid-cols-2 gap-3">
+              {/* HIPAA */}
+              <div className="group relative">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-rose-500/20 to-pink-500/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition duration-300" />
+                <div className="relative flex items-center gap-3 px-4 py-3 rounded-xl border border-slate-700/50 bg-slate-800/40 backdrop-blur-sm hover:border-rose-500/30 transition-all duration-300">
+                  <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-rose-500/20 to-pink-500/20 flex items-center justify-center border border-rose-500/30">
+                    <ShieldCheck className="w-4 h-4 text-rose-400" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold text-white">HIPAA</p>
+                    <p className="text-[10px] text-slate-500 truncate">Healthcare Privacy</p>
+                  </div>
                 </div>
               </div>
 
-              {/* Certifications - below stats */}
-              <div className={`mt-10 transition-all duration-1000 delay-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                <p className="text-xs text-slate-600 mb-3 uppercase tracking-widest">Compliance Certifications</p>
-                <div className="flex items-center gap-4">
-                  <div className="px-3 py-1.5 rounded border border-slate-700/50 bg-slate-800/30 text-xs text-slate-400">HIPAA</div>
-                  <div className="px-3 py-1.5 rounded border border-slate-700/50 bg-slate-800/30 text-xs text-slate-400">SOC 2</div>
-                  <div className="px-3 py-1.5 rounded border border-slate-700/50 bg-slate-800/30 text-xs text-slate-400">FedRAMP</div>
-                  <div className="px-3 py-1.5 rounded border border-slate-700/50 bg-slate-800/30 text-xs text-slate-400">NIST 800-53</div>
+              {/* SOC 2 */}
+              <div className="group relative">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition duration-300" />
+                <div className="relative flex items-center gap-3 px-4 py-3 rounded-xl border border-slate-700/50 bg-slate-800/40 backdrop-blur-sm hover:border-blue-500/30 transition-all duration-300">
+                  <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center border border-blue-500/30">
+                    <FileCheck className="w-4 h-4 text-blue-400" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold text-white">SOC 2</p>
+                    <p className="text-[10px] text-slate-500 truncate">Type II Certified</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* FedRAMP */}
+              <div className="group relative">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition duration-300" />
+                <div className="relative flex items-center gap-3 px-4 py-3 rounded-xl border border-slate-700/50 bg-slate-800/40 backdrop-blur-sm hover:border-emerald-500/30 transition-all duration-300">
+                  <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-500/20 to-teal-500/20 flex items-center justify-center border border-emerald-500/30">
+                    <Building2 className="w-4 h-4 text-emerald-400" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold text-white">FedRAMP</p>
+                    <p className="text-[10px] text-slate-500 truncate">High Authority</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* NIST 800-53 */}
+              <div className="group relative">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500/20 to-orange-500/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition duration-300" />
+                <div className="relative flex items-center gap-3 px-4 py-3 rounded-xl border border-slate-700/50 bg-slate-800/40 backdrop-blur-sm hover:border-amber-500/30 transition-all duration-300">
+                  <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-amber-500/20 to-orange-500/20 flex items-center justify-center border border-amber-500/30">
+                    <Server className="w-4 h-4 text-amber-400" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold text-white">NIST 800-53</p>
+                    <p className="text-[10px] text-slate-500 truncate">Security Controls</p>
+                  </div>
                 </div>
               </div>
             </div>
