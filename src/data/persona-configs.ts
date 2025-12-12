@@ -91,34 +91,43 @@ export interface PersonaConfig {
   welcomeSubtitle: string;
 }
 
-// KPI value getters (hardcoded for demo)
+// KPI value getters (hardcoded for demo - updated to match applications.json)
 const kpiValues = {
-  // Dr. Sarah Chen - Principal Investigator
+  // Dr. Sarah Chen - Principal Investigator (7 apps: APP-001, APP-SC-002 to APP-SC-006)
   "dr-sarah-chen": {
-    myApplications: 3,
-    pendingAction: 1,
-    approvalRate: 83,
-    fundingReceived: "$450K",
+    myApplications: 7,
+    pendingAction: 2,
+    approvalRate: 86,
+    fundingReceived: "$1.125M",
     drafts: 1,
     avgProcessingDays: 2.8,
   },
-  // James Rodriguez - Grants Administrator
+  // James Rodriguez - Grants Administrator (sees all 26 apps, 12 in review status)
   "james-rodriguez": {
-    pendingReview: 8,
-    slaAtRisk: 2,
-    complianceRate: 95,
-    processedThisWeek: 12,
-    totalActive: 112,
-    avgProcessingDays: 3.2,
+    pendingReview: 12,
+    slaAtRisk: 3,
+    complianceRate: 96,
+    processedThisWeek: 15,
+    totalActive: 26,
+    avgProcessingDays: 3.1,
   },
-  // Maria Thompson - Financial Analyst
+  // Dr. Emily Carter - Clinician (4 apps: APP-VS-001, APP-EC-002 to APP-EC-004)
+  "dr-emily-carter": {
+    myApplications: 4,
+    patientsCovered: 1323,
+    facilitiesServed: 24,
+    fundingReceived: "$3.3M",
+    pendingAction: 1,
+    approvalRate: 92,
+  },
+  // Maria Thompson - Financial Analyst (18 high-budget apps $100K+)
   "maria-thompson": {
-    pendingFinancialReview: 5,
-    totalCommitted: "$4.2M",
-    budgetUtilization: 78,
-    avgRequestAmount: "$275K",
-    highValueApps: 8,
-    budgetVariance: -2.3,
+    pendingFinancialReview: 8,
+    totalCommitted: "$12.4M",
+    budgetUtilization: 82,
+    avgRequestAmount: "$520K",
+    highValueApps: 18,
+    budgetVariance: -1.8,
   },
   // David Kim - System Administrator
   "david-kim": {
@@ -474,11 +483,97 @@ export const systemAdminConfig: PersonaConfig = {
 };
 
 // ============================================
+// DR. EMILY CARTER - Clinician (Veterans Health)
+// ============================================
+export const clinicianConfig: PersonaConfig = {
+  personaId: "dr-emily-carter",
+  permissions: [
+    "create_application",
+    "edit_own_application",
+    "submit_application",
+    "export_data",
+  ],
+  applicationFilter: {
+    assigneeId: "USR-VS-001", // Only her own veteran applications
+    showAll: false,
+  },
+  primaryKPIs: [
+    {
+      id: "my-applications",
+      label: "My Applications",
+      icon: FileText,
+      getValue: () => kpiValues["dr-emily-carter"]?.myApplications ?? 4,
+      color: "text-primary",
+      bgColor: "bg-primary/10",
+      borderColor: "border-primary/20",
+      trend: { value: 1, direction: "up", isPositive: true },
+    },
+    {
+      id: "patients-covered",
+      label: "Patients Covered",
+      icon: Users,
+      getValue: () => kpiValues["dr-emily-carter"]?.patientsCovered ?? 1323,
+      color: "text-success",
+      bgColor: "bg-success/10",
+      borderColor: "border-success/20",
+      trend: { value: 12, direction: "up", isPositive: true },
+    },
+    {
+      id: "facilities-served",
+      label: "Facilities Served",
+      icon: Activity,
+      getValue: () => kpiValues["dr-emily-carter"]?.facilitiesServed ?? 24,
+      color: "text-accent",
+      bgColor: "bg-accent/10",
+      borderColor: "border-accent/20",
+    },
+    {
+      id: "funding-received",
+      label: "Funding Received",
+      icon: DollarSign,
+      getValue: () => kpiValues["dr-emily-carter"]?.fundingReceived ?? "$3.3M",
+      color: "text-warning",
+      bgColor: "bg-warning/10",
+      borderColor: "border-warning/20",
+    },
+  ],
+  secondaryKPIs: [
+    {
+      id: "pending-action",
+      label: "Pending Action",
+      icon: Clock,
+      getValue: () => kpiValues["dr-emily-carter"]?.pendingAction ?? 1,
+    },
+    {
+      id: "approval-rate",
+      label: "Approval Rate",
+      icon: CheckCircle,
+      getValue: () => kpiValues["dr-emily-carter"]?.approvalRate ?? 92,
+      suffix: "%",
+    },
+  ],
+  quickActions: [
+    { label: "New Application", href: "/applications/new", icon: Plus, variant: "default" },
+    { label: "Patient Records", href: "/veterans/patient-records", icon: FileText, variant: "outline" },
+    { label: "View My Apps", href: "/applications", icon: FileText, variant: "outline" },
+  ],
+  navVisibility: {
+    dashboard: true,
+    applications: true,
+    newApplication: true,
+    analytics: true,
+    admin: false,
+  },
+  welcomeSubtitle: "Managing care for 1,323 veterans across 24 facilities.",
+};
+
+// ============================================
 // CONFIG LOOKUP
 // ============================================
 const personaConfigs: Record<string, PersonaConfig> = {
   "dr-sarah-chen": principalInvestigatorConfig,
   "james-rodriguez": grantsAdminConfig,
+  "dr-emily-carter": clinicianConfig,
   "maria-thompson": financialAnalystConfig,
   "david-kim": systemAdminConfig,
 };

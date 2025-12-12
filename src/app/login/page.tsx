@@ -5,7 +5,6 @@ import { useSearchParams } from 'next/navigation'
 import { Fingerprint, ScanLine, Activity, Lock, Server, ChevronRight, Users, Shield } from 'lucide-react'
 import Link from 'next/link'
 import { Suspense, useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { EIDSLogo } from '@/components/brand/eids-logo'
 import { demoPersonas, type DemoPersona } from '@/data/demo-personas'
 
@@ -113,7 +112,6 @@ function DemoPersonaCard({ persona, onSelect }: { persona: DemoPersona; onSelect
 
 function LoginContent() {
   const searchParams = useSearchParams()
-  const router = useRouter()
   const error = searchParams.get('error')
   const redirect = searchParams.get('redirect') || '/'
   const [mounted, setMounted] = useState(false)
@@ -128,8 +126,9 @@ function LoginContent() {
     localStorage.setItem('eids-demo-persona', personaId)
     // Also set cookie (for server-side middleware to read)
     document.cookie = `eids-demo-persona=${personaId}; path=/; max-age=86400; SameSite=Lax`
-    // Redirect to dashboard
-    router.push('/')
+    // Full page reload to ensure React context re-reads localStorage
+    // Using window.location.href instead of router.push to clear cached state
+    window.location.href = '/'
   }
 
   const handleGoogleSignIn = async () => {

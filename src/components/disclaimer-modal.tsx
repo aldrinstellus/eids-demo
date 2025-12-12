@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { AlertTriangle, Shield, Eye } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { AlertTriangle, Shield, Eye, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -11,8 +12,53 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
+// Term definitions for tooltips
+const termDefinitions = {
+  CUI: {
+    term: "Controlled Unclassified Information",
+    description: "Government information requiring safeguarding but not classified. Includes military health research, operational data, and sensitive federal records.",
+  },
+  PHI: {
+    term: "Protected Health Information",
+    description: "Health data protected under HIPAA including diagnoses, treatments, medical records, and any individually identifiable health information.",
+  },
+  PII: {
+    term: "Personally Identifiable Information",
+    description: "Data that can identify an individual such as SSN, name, address, date of birth, biometric data, or any unique identifier.",
+  },
+};
+
+function TermWithTooltip({ term, children }: { term: keyof typeof termDefinitions; children: React.ReactNode }) {
+  const definition = termDefinitions[term];
+  return (
+    <TooltipProvider delayDuration={200}>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <span className="inline-flex items-center gap-0.5 cursor-help border-b border-dotted border-amber-400/50 hover:border-amber-400">
+            {children}
+            <Info className="h-3 w-3 text-amber-400/70" />
+          </span>
+        </TooltipTrigger>
+        <TooltipContent side="top" className="max-w-[280px] bg-slate-800 border-slate-600 p-3">
+          <div className="space-y-1">
+            <p className="font-semibold text-amber-300 text-sm">{term}: {definition.term}</p>
+            <p className="text-slate-300 text-xs leading-relaxed">{definition.description}</p>
+          </div>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  );
+}
 
 const DISCLAIMER_STORAGE_KEY = "eids-disclaimer-accepted";
+const DEMO_STORAGE_KEY = "eids-demo-persona";
 
 interface DisclaimerModalProps {
   onAccept?: () => void;
@@ -21,6 +67,7 @@ interface DisclaimerModalProps {
 export function DisclaimerModal({ onAccept }: DisclaimerModalProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     // Check if disclaimer has been accepted this session
@@ -37,11 +84,20 @@ export function DisclaimerModal({ onAccept }: DisclaimerModalProps) {
     onAccept?.();
   };
 
+  const handleDecline = () => {
+    // Clear demo persona from localStorage
+    localStorage.removeItem(DEMO_STORAGE_KEY);
+    // Clear demo persona cookie for server-side middleware
+    document.cookie = "eids-demo-persona=; path=/; max-age=0; SameSite=Lax";
+    // Navigate back to login
+    window.location.href = '/login';
+  };
+
   // Don't render anything during loading to prevent flash
   if (isLoading) return null;
 
   return (
-    <Dialog open={isOpen} onOpenChange={() => {}}>
+    <Dialog open={isOpen} onOpenChange={(open) => { if (!open) handleDecline(); }}>
       <DialogContent
         className="sm:max-w-[500px] bg-slate-900 border-amber-500/30"
         onPointerDownOutside={(e) => e.preventDefault()}
@@ -71,7 +127,9 @@ export function DisclaimerModal({ onAccept }: DisclaimerModalProps) {
                   Sensitive Information Notice
                 </p>
                 <p className="text-slate-300 text-sm mt-1">
-                  Access to CUI, PHI, and PII is restricted to authorized users only.
+                  Access to <TermWithTooltip term="CUI">CUI</TermWithTooltip>,{" "}
+                  <TermWithTooltip term="PHI">PHI</TermWithTooltip>, and{" "}
+                  <TermWithTooltip term="PII">PII</TermWithTooltip> is restricted to authorized users only.
                   All activity is monitored.
                 </p>
               </div>

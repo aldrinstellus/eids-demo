@@ -14,6 +14,16 @@
         "email": "emily.carter@health.mil",
         "role": "Clinician"
       },
+      "reviewer": {
+        "id": "USR-JR-001",
+        "name": "James Rodriguez",
+        "role": "Grants Administrator"
+      },
+      "financialReviewer": {
+        "id": "USR-MT-001",
+        "name": "Maria Thompson",
+        "role": "Financial Analyst"
+      },
       "description": "Comprehensive veteran healthcare support program providing integrated care coordination, mental health services, and benefits navigation for transitioning service members.",
       "createdAt": "2025-11-01T08:00:00Z",
       "updatedAt": "2025-12-12T09:00:00Z",
@@ -63,6 +73,164 @@
       "facilities": 12
     },
     {
+      "id": "APP-EC-002",
+      "name": "Combat Trauma Recovery Initiative",
+      "type": "veterans",
+      "status": "review",
+      "priority": "high",
+      "department": "Veterans Affairs",
+      "requestedAmount": 485000,
+      "assignee": {
+        "id": "USR-VS-001",
+        "name": "Dr. Emily Carter",
+        "email": "emily.carter@health.mil",
+        "role": "Clinician"
+      },
+      "reviewer": {
+        "id": "USR-JR-001",
+        "name": "James Rodriguez",
+        "role": "Grants Administrator"
+      },
+      "financialReviewer": {
+        "id": "USR-MT-001",
+        "name": "Maria Thompson",
+        "role": "Financial Analyst"
+      },
+      "description": "Specialized trauma recovery program for combat veterans utilizing evidence-based therapies including CPT, PE, and EMDR across 8 military treatment facilities.",
+      "createdAt": "2025-10-15T09:00:00Z",
+      "updatedAt": "2025-12-11T14:30:00Z",
+      "progress": 75,
+      "currentStep": 4,
+      "totalSteps": 5,
+      "steps": [
+        { "name": "Initial Submission", "status": "completed" },
+        { "name": "Clinical Protocol Review", "status": "completed" },
+        { "name": "IRB Approval", "status": "completed" },
+        { "name": "Administrative Review", "status": "in_progress" },
+        { "name": "Final Approval", "status": "pending" }
+      ],
+      "documents": [
+        { "id": "DOC-EC-001", "name": "trauma-protocol.pdf", "size": 3800000, "type": "application/pdf", "uploadedAt": "2025-10-15T10:00:00Z" },
+        { "id": "DOC-EC-002", "name": "irb-approval-letter.pdf", "size": 450000, "type": "application/pdf", "uploadedAt": "2025-11-01T11:00:00Z" },
+        { "id": "DOC-EC-003", "name": "facility-agreements.pdf", "size": 2100000, "type": "application/pdf", "uploadedAt": "2025-11-15T09:00:00Z" }
+      ],
+      "aiInsights": [
+        {
+          "id": "AI-EC-001",
+          "type": "info",
+          "icon": "heart",
+          "message": "Program targets 320 veterans with combat-related PTSD.",
+          "confidence": 0.95,
+          "action": "View demographics"
+        },
+        {
+          "id": "AI-EC-002",
+          "type": "recommendation",
+          "icon": "lightbulb",
+          "message": "Collaboration opportunity with Dr. Sarah Chen's PTSD research study.",
+          "confidence": 0.87,
+          "action": "View collaboration"
+        }
+      ],
+      "hasPatientData": true,
+      "patientCount": 320,
+      "facilities": 8
+    },
+    {
+      "id": "APP-EC-003",
+      "name": "Wounded Warrior Rehabilitation Program",
+      "type": "veterans",
+      "status": "completed",
+      "priority": "critical",
+      "department": "Veterans Affairs",
+      "requestedAmount": 890000,
+      "assignee": {
+        "id": "USR-VS-001",
+        "name": "Dr. Emily Carter",
+        "email": "emily.carter@health.mil",
+        "role": "Clinician"
+      },
+      "reviewer": {
+        "id": "USR-JR-001",
+        "name": "James Rodriguez",
+        "role": "Grants Administrator"
+      },
+      "description": "Comprehensive physical and occupational therapy program for service members with severe combat injuries, including prosthetics integration and adaptive sports.",
+      "createdAt": "2025-06-01T08:00:00Z",
+      "updatedAt": "2025-11-20T16:00:00Z",
+      "progress": 100,
+      "currentStep": 5,
+      "totalSteps": 5,
+      "steps": [
+        { "name": "Initial Submission", "status": "completed" },
+        { "name": "Clinical Protocol Review", "status": "completed" },
+        { "name": "Equipment Procurement", "status": "completed" },
+        { "name": "Budget Approval", "status": "completed" },
+        { "name": "Program Launch", "status": "completed" }
+      ],
+      "documents": [
+        { "id": "DOC-EC-004", "name": "rehabilitation-outcomes.pdf", "size": 5600000, "type": "application/pdf", "uploadedAt": "2025-11-15T10:00:00Z" },
+        { "id": "DOC-EC-005", "name": "patient-satisfaction-survey.xlsx", "size": 780000, "type": "application/vnd.ms-excel", "uploadedAt": "2025-11-18T14:00:00Z" }
+      ],
+      "aiInsights": [
+        {
+          "id": "AI-EC-003",
+          "type": "success",
+          "icon": "trophy",
+          "message": "Program achieved 94% patient satisfaction rating.",
+          "confidence": 1.0,
+          "action": null
+        }
+      ],
+      "hasPatientData": true,
+      "patientCount": 156,
+      "facilities": 4
+    },
+    {
+      "id": "APP-EC-004",
+      "name": "Veteran Suicide Prevention Network",
+      "type": "veterans",
+      "status": "draft",
+      "priority": "critical",
+      "department": "Veterans Affairs",
+      "requestedAmount": 675000,
+      "assignee": {
+        "id": "USR-VS-001",
+        "name": "Dr. Emily Carter",
+        "email": "emily.carter@health.mil",
+        "role": "Clinician"
+      },
+      "description": "24/7 crisis intervention network with peer support specialists, hotline services, and community outreach targeting high-risk veteran populations.",
+      "createdAt": "2025-12-08T11:00:00Z",
+      "updatedAt": "2025-12-11T09:30:00Z",
+      "progress": 20,
+      "currentStep": 1,
+      "totalSteps": 5,
+      "steps": [
+        { "name": "Initial Submission", "status": "in_progress" },
+        { "name": "Clinical Review", "status": "pending" },
+        { "name": "Partnership Agreements", "status": "pending" },
+        { "name": "Budget Review", "status": "pending" },
+        { "name": "Final Approval", "status": "pending" }
+      ],
+      "documents": [
+        { "id": "DOC-EC-006", "name": "draft-proposal.pdf", "size": 2900000, "type": "application/pdf", "uploadedAt": "2025-12-08T11:30:00Z" }
+      ],
+      "aiInsights": [
+        {
+          "id": "AI-EC-004",
+          "type": "warning",
+          "icon": "alert-triangle",
+          "message": "Requires VA partnership agreement - 2-3 weeks lead time.",
+          "confidence": 0.92,
+          "action": "View requirements"
+        }
+      ],
+      "hasPatientData": false,
+      "patientCount": 0,
+      "facilities": 0
+    },
+    {
       "id": "APP-001",
       "name": "Healthcare Training Initiative",
       "type": "research",
@@ -75,6 +243,16 @@
         "name": "Dr. Sarah Chen",
         "email": "sarah.chen@health.mil",
         "role": "Principal Investigator"
+      },
+      "reviewer": {
+        "id": "USR-JR-001",
+        "name": "James Rodriguez",
+        "role": "Grants Administrator"
+      },
+      "financialReviewer": {
+        "id": "USR-MT-001",
+        "name": "Maria Thompson",
+        "role": "Financial Analyst"
       },
       "description": "This program aims to provide comprehensive training for healthcare professionals in emerging medical technologies and AI-assisted diagnostic tools.",
       "createdAt": "2025-11-15T10:00:00Z",
@@ -121,6 +299,287 @@
       ]
     },
     {
+      "id": "APP-SC-002",
+      "name": "PTSD Treatment Outcomes Research",
+      "type": "research",
+      "status": "completed",
+      "priority": "high",
+      "department": "Clinical Research",
+      "requestedAmount": 225000,
+      "assignee": {
+        "id": "USR-001",
+        "name": "Dr. Sarah Chen",
+        "email": "sarah.chen@health.mil",
+        "role": "Principal Investigator"
+      },
+      "reviewer": {
+        "id": "USR-JR-001",
+        "name": "James Rodriguez",
+        "role": "Grants Administrator"
+      },
+      "financialReviewer": {
+        "id": "USR-MT-001",
+        "name": "Maria Thompson",
+        "role": "Financial Analyst"
+      },
+      "collaborators": [
+        {
+          "id": "USR-VS-001",
+          "name": "Dr. Emily Carter",
+          "role": "Clinical Consultant"
+        }
+      ],
+      "description": "Randomized controlled trial examining efficacy of novel cognitive-behavioral interventions for combat-related PTSD in active duty service members. Collaborating with Dr. Emily Carter's Veteran's Support Program for patient referrals.",
+      "createdAt": "2025-08-10T09:00:00Z",
+      "updatedAt": "2025-11-28T14:30:00Z",
+      "progress": 100,
+      "currentStep": 5,
+      "totalSteps": 5,
+      "steps": [
+        { "name": "Initial Submission", "status": "completed" },
+        { "name": "IRB Approval", "status": "completed" },
+        { "name": "Data Collection", "status": "completed" },
+        { "name": "Analysis Review", "status": "completed" },
+        { "name": "Final Publication", "status": "completed" }
+      ],
+      "documents": [
+        { "id": "DOC-SC-001", "name": "irb-approval.pdf", "size": 1200000, "type": "application/pdf", "uploadedAt": "2025-08-15T10:00:00Z" },
+        { "id": "DOC-SC-002", "name": "study-protocol.pdf", "size": 3400000, "type": "application/pdf", "uploadedAt": "2025-08-12T14:00:00Z" },
+        { "id": "DOC-SC-003", "name": "final-results.pdf", "size": 5600000, "type": "application/pdf", "uploadedAt": "2025-11-25T09:00:00Z" }
+      ],
+      "aiInsights": [
+        {
+          "id": "AI-SC-001",
+          "type": "success",
+          "icon": "check-circle",
+          "message": "Study completed successfully with statistically significant results.",
+          "confidence": 1.0,
+          "action": null
+        }
+      ]
+    },
+    {
+      "id": "APP-SC-003",
+      "name": "AI-Assisted Diagnostic Imaging Study",
+      "type": "research",
+      "status": "review",
+      "priority": "high",
+      "department": "Clinical Research",
+      "requestedAmount": 340000,
+      "assignee": {
+        "id": "USR-001",
+        "name": "Dr. Sarah Chen",
+        "email": "sarah.chen@health.mil",
+        "role": "Principal Investigator"
+      },
+      "reviewer": {
+        "id": "USR-JR-001",
+        "name": "James Rodriguez",
+        "role": "Grants Administrator"
+      },
+      "financialReviewer": {
+        "id": "USR-MT-001",
+        "name": "Maria Thompson",
+        "role": "Financial Analyst"
+      },
+      "description": "Validation study of machine learning algorithms for early detection of traumatic brain injury markers in MRI scans of military personnel.",
+      "createdAt": "2025-10-20T08:00:00Z",
+      "updatedAt": "2025-12-10T11:00:00Z",
+      "progress": 75,
+      "currentStep": 4,
+      "totalSteps": 5,
+      "steps": [
+        { "name": "Initial Submission", "status": "completed" },
+        { "name": "IRB Approval", "status": "completed" },
+        { "name": "Algorithm Development", "status": "completed" },
+        { "name": "Clinical Validation", "status": "in_progress" },
+        { "name": "Final Approval", "status": "pending" }
+      ],
+      "documents": [
+        { "id": "DOC-SC-004", "name": "ai-model-documentation.pdf", "size": 8900000, "type": "application/pdf", "uploadedAt": "2025-10-22T10:00:00Z" },
+        { "id": "DOC-SC-005", "name": "preliminary-results.xlsx", "size": 1200000, "type": "application/vnd.ms-excel", "uploadedAt": "2025-12-01T15:00:00Z" }
+      ],
+      "aiInsights": [
+        {
+          "id": "AI-SC-002",
+          "type": "info",
+          "icon": "brain",
+          "message": "AI model showing 94.2% accuracy in preliminary validation.",
+          "confidence": 0.94,
+          "action": "View metrics"
+        },
+        {
+          "id": "AI-SC-003",
+          "type": "warning",
+          "icon": "alert-circle",
+          "message": "Additional patient consent forms needed for expanded cohort.",
+          "confidence": 0.88,
+          "action": "Review requirements"
+        }
+      ]
+    },
+    {
+      "id": "APP-SC-004",
+      "name": "Military Family Mental Health Survey",
+      "type": "research",
+      "status": "draft",
+      "priority": "medium",
+      "department": "Clinical Research",
+      "requestedAmount": 95000,
+      "assignee": {
+        "id": "USR-001",
+        "name": "Dr. Sarah Chen",
+        "email": "sarah.chen@health.mil",
+        "role": "Principal Investigator"
+      },
+      "description": "Longitudinal survey study examining mental health trends and support service utilization among military families during deployment cycles.",
+      "createdAt": "2025-12-05T14:00:00Z",
+      "updatedAt": "2025-12-11T09:30:00Z",
+      "progress": 25,
+      "currentStep": 1,
+      "totalSteps": 5,
+      "steps": [
+        { "name": "Initial Submission", "status": "in_progress" },
+        { "name": "IRB Approval", "status": "pending" },
+        { "name": "Survey Design", "status": "pending" },
+        { "name": "Data Collection", "status": "pending" },
+        { "name": "Analysis & Report", "status": "pending" }
+      ],
+      "documents": [
+        { "id": "DOC-SC-006", "name": "draft-proposal.pdf", "size": 2100000, "type": "application/pdf", "uploadedAt": "2025-12-05T14:30:00Z" }
+      ],
+      "aiInsights": [
+        {
+          "id": "AI-SC-004",
+          "type": "suggestion",
+          "icon": "lightbulb",
+          "message": "Consider partnership with VA for expanded reach.",
+          "confidence": 0.82,
+          "action": "View suggestions"
+        }
+      ]
+    },
+    {
+      "id": "APP-SC-005",
+      "name": "Telemedicine Efficacy for Rural Veterans",
+      "type": "research",
+      "status": "active",
+      "priority": "high",
+      "department": "Clinical Research",
+      "requestedAmount": 180000,
+      "assignee": {
+        "id": "USR-001",
+        "name": "Dr. Sarah Chen",
+        "email": "sarah.chen@health.mil",
+        "role": "Principal Investigator"
+      },
+      "reviewer": {
+        "id": "USR-JR-001",
+        "name": "James Rodriguez",
+        "role": "Grants Administrator"
+      },
+      "financialReviewer": {
+        "id": "USR-MT-001",
+        "name": "Maria Thompson",
+        "role": "Financial Analyst"
+      },
+      "collaborators": [
+        {
+          "id": "USR-VS-001",
+          "name": "Dr. Emily Carter",
+          "role": "Co-Investigator"
+        }
+      ],
+      "description": "Comparative effectiveness study of telemedicine vs. in-person care for managing chronic conditions in veterans residing in rural and underserved areas. Joint study with Dr. Emily Carter leveraging her veteran patient network.",
+      "createdAt": "2025-09-15T10:00:00Z",
+      "updatedAt": "2025-12-08T16:00:00Z",
+      "progress": 55,
+      "currentStep": 3,
+      "totalSteps": 5,
+      "steps": [
+        { "name": "Initial Submission", "status": "completed" },
+        { "name": "IRB Approval", "status": "completed" },
+        { "name": "Patient Enrollment", "status": "in_progress" },
+        { "name": "Data Analysis", "status": "pending" },
+        { "name": "Final Report", "status": "pending" }
+      ],
+      "documents": [
+        { "id": "DOC-SC-007", "name": "study-design.pdf", "size": 4500000, "type": "application/pdf", "uploadedAt": "2025-09-16T11:00:00Z" },
+        { "id": "DOC-SC-008", "name": "recruitment-status.xlsx", "size": 890000, "type": "application/vnd.ms-excel", "uploadedAt": "2025-12-01T09:00:00Z" },
+        { "id": "DOC-SC-009", "name": "hipaa-compliance.pdf", "size": 1100000, "type": "application/pdf", "uploadedAt": "2025-09-20T14:00:00Z" }
+      ],
+      "aiInsights": [
+        {
+          "id": "AI-SC-005",
+          "type": "info",
+          "icon": "users",
+          "message": "Currently enrolled 127 of 200 target participants (63.5%).",
+          "confidence": 0.99,
+          "action": "View enrollment"
+        },
+        {
+          "id": "AI-SC-006",
+          "type": "success",
+          "icon": "shield-check",
+          "message": "All HIPAA and research compliance requirements met.",
+          "confidence": 1.0,
+          "action": null
+        }
+      ]
+    },
+    {
+      "id": "APP-SC-006",
+      "name": "Sleep Disorder Treatment Protocol",
+      "type": "research",
+      "status": "active",
+      "priority": "medium",
+      "department": "Clinical Research",
+      "requestedAmount": 135000,
+      "assignee": {
+        "id": "USR-001",
+        "name": "Dr. Sarah Chen",
+        "email": "sarah.chen@health.mil",
+        "role": "Principal Investigator"
+      },
+      "reviewer": {
+        "id": "USR-JR-001",
+        "name": "James Rodriguez",
+        "role": "Grants Administrator"
+      },
+      "financialReviewer": {
+        "id": "USR-MT-001",
+        "name": "Maria Thompson",
+        "role": "Financial Analyst"
+      },
+      "description": "Clinical trial evaluating cognitive behavioral therapy for insomnia (CBT-I) combined with sleep hygiene education for military personnel with deployment-related sleep disorders.",
+      "createdAt": "2025-10-01T09:00:00Z",
+      "updatedAt": "2025-12-10T10:00:00Z",
+      "progress": 45,
+      "currentStep": 2,
+      "totalSteps": 5,
+      "steps": [
+        { "name": "Initial Submission", "status": "completed" },
+        { "name": "IRB Approval", "status": "in_progress" },
+        { "name": "Patient Recruitment", "status": "pending" },
+        { "name": "Treatment Phase", "status": "pending" },
+        { "name": "Final Analysis", "status": "pending" }
+      ],
+      "documents": [
+        { "id": "DOC-SC-010", "name": "study-protocol.pdf", "size": 3200000, "type": "application/pdf", "uploadedAt": "2025-10-01T10:00:00Z" },
+        { "id": "DOC-SC-011", "name": "recruitment-materials.pdf", "size": 1800000, "type": "application/pdf", "uploadedAt": "2025-10-15T14:00:00Z" }
+      ],
+      "aiInsights": [
+        {
+          "id": "AI-SC-007",
+          "type": "info",
+          "icon": "moon",
+          "message": "Target population: 150 service members with chronic insomnia.",
+          "confidence": 0.95,
+          "action": "View details"
+        }
+      ]
+    },
+    {
       "id": "APP-002",
       "name": "Medical Equipment Procurement",
       "type": "procurement",
@@ -163,17 +622,27 @@
       "id": "APP-003",
       "name": "Cybersecurity Training Program",
       "type": "training",
-      "status": "active",
+      "status": "review",
       "priority": "high",
       "department": "IT Security",
-      "requestedAmount": 85000,
+      "requestedAmount": 185000,
       "assignee": {
         "id": "USR-003",
         "name": "Jennifer Martinez",
         "email": "jennifer.martinez@health.mil",
         "role": "Security Training Lead"
       },
-      "description": "Comprehensive cybersecurity awareness and technical training program for all EIDS personnel.",
+      "reviewer": {
+        "id": "USR-JR-001",
+        "name": "James Rodriguez",
+        "role": "Grants Administrator"
+      },
+      "financialReviewer": {
+        "id": "USR-MT-001",
+        "name": "Maria Thompson",
+        "role": "Financial Analyst"
+      },
+      "description": "Comprehensive cybersecurity awareness and technical training program for all EIDS personnel covering NIST frameworks, zero-trust architecture, and incident response.",
       "createdAt": "2025-11-20T14:00:00Z",
       "updatedAt": "2025-12-08T11:45:00Z",
       "progress": 80,
@@ -216,6 +685,16 @@
         "email": "robert.williams@health.mil",
         "role": "Program Manager"
       },
+      "reviewer": {
+        "id": "USR-JR-001",
+        "name": "James Rodriguez",
+        "role": "Grants Administrator"
+      },
+      "financialReviewer": {
+        "id": "USR-MT-001",
+        "name": "Maria Thompson",
+        "role": "Financial Analyst"
+      },
       "description": "Upgrade existing analytics platform to support real-time data processing and AI/ML workloads.",
       "createdAt": "2025-10-01T08:00:00Z",
       "updatedAt": "2025-12-07T17:30:00Z",
@@ -249,7 +728,29 @@
         "email": "amanda.foster@health.mil",
         "role": "Telehealth Director"
       },
-      "description": "Deploy secure telehealth infrastructure to enable remote patient consultations across military medical facilities.",
+      "reviewer": {
+        "id": "USR-JR-001",
+        "name": "James Rodriguez",
+        "role": "Grants Administrator"
+      },
+      "financialReviewer": {
+        "id": "USR-MT-001",
+        "name": "Maria Thompson",
+        "role": "Financial Analyst"
+      },
+      "collaborators": [
+        {
+          "id": "USR-001",
+          "name": "Dr. Sarah Chen",
+          "role": "Research Advisor"
+        },
+        {
+          "id": "USR-VS-001",
+          "name": "Dr. Emily Carter",
+          "role": "Clinical Advisor"
+        }
+      ],
+      "description": "Deploy secure telehealth infrastructure to enable remote patient consultations across military medical facilities. Leveraging insights from Dr. Chen's telemedicine research and Dr. Carter's veteran care network.",
       "createdAt": "2025-11-28T10:00:00Z",
       "updatedAt": "2025-12-06T14:20:00Z",
       "progress": 70,
@@ -291,6 +792,16 @@
         "name": "Dr. Michael Chang",
         "email": "michael.chang@health.mil",
         "role": "Chief Medical Informatics Officer"
+      },
+      "reviewer": {
+        "id": "USR-JR-001",
+        "name": "James Rodriguez",
+        "role": "Grants Administrator"
+      },
+      "financialReviewer": {
+        "id": "USR-MT-001",
+        "name": "Maria Thompson",
+        "role": "Financial Analyst"
       },
       "description": "Modernize legacy patient records system to support interoperability with VA and civilian healthcare systems.",
       "createdAt": "2025-11-10T08:00:00Z",
@@ -371,6 +882,16 @@
         "email": "david.park@health.mil",
         "role": "Cloud Architect"
       },
+      "reviewer": {
+        "id": "USR-JR-001",
+        "name": "James Rodriguez",
+        "role": "Grants Administrator"
+      },
+      "financialReviewer": {
+        "id": "USR-MT-001",
+        "name": "Maria Thompson",
+        "role": "Financial Analyst"
+      },
       "description": "Continue migration of legacy applications to AWS GovCloud with enhanced security controls.",
       "createdAt": "2025-11-25T09:00:00Z",
       "updatedAt": "2025-12-04T11:00:00Z",
@@ -399,12 +920,565 @@
           "action": null
         }
       ]
+    },
+    {
+      "id": "APP-JR-001",
+      "name": "Military Health Records Interoperability",
+      "type": "modernization",
+      "status": "review",
+      "priority": "critical",
+      "department": "Health Information Exchange",
+      "requestedAmount": 1450000,
+      "assignee": {
+        "id": "USR-009",
+        "name": "Dr. Patricia Moore",
+        "email": "patricia.moore@health.mil",
+        "role": "Health Informatics Director"
+      },
+      "reviewer": {
+        "id": "USR-JR-001",
+        "name": "James Rodriguez",
+        "role": "Grants Administrator"
+      },
+      "financialReviewer": {
+        "id": "USR-MT-001",
+        "name": "Maria Thompson",
+        "role": "Financial Analyst"
+      },
+      "description": "Enterprise-wide initiative to establish seamless health record exchange between DoD, VA, and civilian healthcare systems using FHIR standards.",
+      "createdAt": "2025-11-05T08:00:00Z",
+      "updatedAt": "2025-12-12T08:00:00Z",
+      "progress": 65,
+      "currentStep": 3,
+      "totalSteps": 5,
+      "steps": [
+        { "name": "Initial Submission", "status": "completed" },
+        { "name": "Technical Architecture Review", "status": "completed" },
+        { "name": "Security Assessment", "status": "in_progress" },
+        { "name": "Budget Review", "status": "pending" },
+        { "name": "Final Approval", "status": "pending" }
+      ],
+      "documents": [
+        { "id": "DOC-JR-001", "name": "interoperability-proposal.pdf", "size": 12500000, "type": "application/pdf", "uploadedAt": "2025-11-05T09:00:00Z" },
+        { "id": "DOC-JR-002", "name": "fhir-implementation-guide.pdf", "size": 8900000, "type": "application/pdf", "uploadedAt": "2025-11-10T14:00:00Z" },
+        { "id": "DOC-JR-003", "name": "risk-assessment.xlsx", "size": 1200000, "type": "application/vnd.ms-excel", "uploadedAt": "2025-11-15T11:00:00Z" }
+      ],
+      "aiInsights": [
+        {
+          "id": "AI-JR-001",
+          "type": "info",
+          "icon": "database",
+          "message": "Will integrate 47 disparate systems across 156 facilities.",
+          "confidence": 0.92,
+          "action": "View scope"
+        },
+        {
+          "id": "AI-JR-002",
+          "type": "warning",
+          "icon": "alert-circle",
+          "message": "Requires FedRAMP authorization - 4-6 month timeline.",
+          "confidence": 0.89,
+          "action": "View requirements"
+        }
+      ]
+    },
+    {
+      "id": "APP-JR-002",
+      "name": "Behavioral Health Integration Initiative",
+      "type": "research",
+      "status": "review",
+      "priority": "high",
+      "department": "Mental Health Services",
+      "requestedAmount": 385000,
+      "assignee": {
+        "id": "USR-010",
+        "name": "Dr. Rachel Kim",
+        "email": "rachel.kim@health.mil",
+        "role": "Director of Behavioral Health"
+      },
+      "reviewer": {
+        "id": "USR-JR-001",
+        "name": "James Rodriguez",
+        "role": "Grants Administrator"
+      },
+      "financialReviewer": {
+        "id": "USR-MT-001",
+        "name": "Maria Thompson",
+        "role": "Financial Analyst"
+      },
+      "collaborators": [
+        {
+          "id": "USR-001",
+          "name": "Dr. Sarah Chen",
+          "role": "Research Collaborator"
+        }
+      ],
+      "description": "Integrate behavioral health screenings into primary care workflows across military treatment facilities. Building on Dr. Chen's mental health research findings.",
+      "createdAt": "2025-11-12T10:00:00Z",
+      "updatedAt": "2025-12-11T15:00:00Z",
+      "progress": 70,
+      "currentStep": 4,
+      "totalSteps": 5,
+      "steps": [
+        { "name": "Initial Submission", "status": "completed" },
+        { "name": "Clinical Protocol Review", "status": "completed" },
+        { "name": "Staff Training Plan", "status": "completed" },
+        { "name": "Budget Review", "status": "in_progress" },
+        { "name": "Final Approval", "status": "pending" }
+      ],
+      "documents": [
+        { "id": "DOC-JR-004", "name": "integration-proposal.pdf", "size": 5400000, "type": "application/pdf", "uploadedAt": "2025-11-12T11:00:00Z" },
+        { "id": "DOC-JR-005", "name": "screening-protocols.pdf", "size": 3200000, "type": "application/pdf", "uploadedAt": "2025-11-18T09:00:00Z" }
+      ],
+      "aiInsights": [
+        {
+          "id": "AI-JR-003",
+          "type": "recommendation",
+          "icon": "lightbulb",
+          "message": "Consider pilot at 3 facilities before full rollout.",
+          "confidence": 0.87,
+          "action": "View recommendations"
+        }
+      ]
+    },
+    {
+      "id": "APP-JR-003",
+      "name": "Medical Supply Chain Optimization",
+      "type": "modernization",
+      "status": "active",
+      "priority": "high",
+      "department": "Logistics",
+      "requestedAmount": 295000,
+      "assignee": {
+        "id": "USR-011",
+        "name": "Col. Steven Bradley",
+        "email": "steven.bradley@health.mil",
+        "role": "Chief Logistics Officer"
+      },
+      "reviewer": {
+        "id": "USR-JR-001",
+        "name": "James Rodriguez",
+        "role": "Grants Administrator"
+      },
+      "financialReviewer": {
+        "id": "USR-MT-001",
+        "name": "Maria Thompson",
+        "role": "Financial Analyst"
+      },
+      "description": "Implement AI-driven demand forecasting and inventory optimization across medical supply chain.",
+      "createdAt": "2025-10-25T09:00:00Z",
+      "updatedAt": "2025-12-09T14:00:00Z",
+      "progress": 55,
+      "currentStep": 3,
+      "totalSteps": 5,
+      "steps": [
+        { "name": "Initial Submission", "status": "completed" },
+        { "name": "Requirements Analysis", "status": "completed" },
+        { "name": "Vendor Selection", "status": "in_progress" },
+        { "name": "Implementation", "status": "pending" },
+        { "name": "Go-Live", "status": "pending" }
+      ],
+      "documents": [
+        { "id": "DOC-JR-006", "name": "optimization-proposal.pdf", "size": 4100000, "type": "application/pdf", "uploadedAt": "2025-10-25T10:00:00Z" },
+        { "id": "DOC-JR-007", "name": "vendor-comparison.xlsx", "size": 890000, "type": "application/vnd.ms-excel", "uploadedAt": "2025-11-15T14:00:00Z" }
+      ],
+      "aiInsights": [
+        {
+          "id": "AI-JR-004",
+          "type": "info",
+          "icon": "package",
+          "message": "Projected 23% reduction in waste and 15% cost savings.",
+          "confidence": 0.88,
+          "action": "View projections"
+        }
+      ]
+    },
+    {
+      "id": "APP-MT-001",
+      "name": "Enterprise Financial Management System",
+      "type": "modernization",
+      "status": "review",
+      "priority": "critical",
+      "department": "Finance",
+      "requestedAmount": 2100000,
+      "assignee": {
+        "id": "USR-012",
+        "name": "Catherine Wells",
+        "email": "catherine.wells@health.mil",
+        "role": "Chief Financial Officer"
+      },
+      "reviewer": {
+        "id": "USR-JR-001",
+        "name": "James Rodriguez",
+        "role": "Grants Administrator"
+      },
+      "financialReviewer": {
+        "id": "USR-MT-001",
+        "name": "Maria Thompson",
+        "role": "Financial Analyst"
+      },
+      "description": "Replace legacy financial management system with modern, cloud-native solution supporting real-time reporting and compliance automation.",
+      "createdAt": "2025-10-15T08:00:00Z",
+      "updatedAt": "2025-12-11T16:00:00Z",
+      "progress": 80,
+      "currentStep": 4,
+      "totalSteps": 5,
+      "steps": [
+        { "name": "Initial Submission", "status": "completed" },
+        { "name": "Requirements Gathering", "status": "completed" },
+        { "name": "RFP & Selection", "status": "completed" },
+        { "name": "Financial Review", "status": "in_progress" },
+        { "name": "Contract Award", "status": "pending" }
+      ],
+      "documents": [
+        { "id": "DOC-MT-001", "name": "efs-proposal.pdf", "size": 15600000, "type": "application/pdf", "uploadedAt": "2025-10-15T09:00:00Z" },
+        { "id": "DOC-MT-002", "name": "roi-analysis.xlsx", "size": 2300000, "type": "application/vnd.ms-excel", "uploadedAt": "2025-11-01T11:00:00Z" },
+        { "id": "DOC-MT-003", "name": "vendor-evaluations.pdf", "size": 8900000, "type": "application/pdf", "uploadedAt": "2025-11-20T14:00:00Z" }
+      ],
+      "aiInsights": [
+        {
+          "id": "AI-MT-001",
+          "type": "info",
+          "icon": "calculator",
+          "message": "ROI analysis shows 340% return over 5 years.",
+          "confidence": 0.94,
+          "action": "View analysis"
+        },
+        {
+          "id": "AI-MT-002",
+          "type": "warning",
+          "icon": "alert-circle",
+          "message": "Requires DFAS coordination - 2-month lead time.",
+          "confidence": 0.91,
+          "action": "View requirements"
+        }
+      ]
+    },
+    {
+      "id": "APP-MT-002",
+      "name": "Research Grants Automation Platform",
+      "type": "modernization",
+      "status": "active",
+      "priority": "high",
+      "department": "Grants Management",
+      "requestedAmount": 425000,
+      "assignee": {
+        "id": "USR-013",
+        "name": "Dr. Anthony Barnes",
+        "email": "anthony.barnes@health.mil",
+        "role": "Grants Program Director"
+      },
+      "reviewer": {
+        "id": "USR-JR-001",
+        "name": "James Rodriguez",
+        "role": "Grants Administrator"
+      },
+      "financialReviewer": {
+        "id": "USR-MT-001",
+        "name": "Maria Thompson",
+        "role": "Financial Analyst"
+      },
+      "description": "Implement automated grants management platform to streamline application processing, compliance tracking, and financial reporting.",
+      "createdAt": "2025-11-01T10:00:00Z",
+      "updatedAt": "2025-12-10T09:00:00Z",
+      "progress": 50,
+      "currentStep": 3,
+      "totalSteps": 5,
+      "steps": [
+        { "name": "Initial Submission", "status": "completed" },
+        { "name": "Requirements Definition", "status": "completed" },
+        { "name": "Platform Configuration", "status": "in_progress" },
+        { "name": "Financial Review", "status": "pending" },
+        { "name": "Go-Live", "status": "pending" }
+      ],
+      "documents": [
+        { "id": "DOC-MT-004", "name": "automation-proposal.pdf", "size": 6700000, "type": "application/pdf", "uploadedAt": "2025-11-01T11:00:00Z" },
+        { "id": "DOC-MT-005", "name": "workflow-diagrams.pdf", "size": 3400000, "type": "application/pdf", "uploadedAt": "2025-11-15T14:00:00Z" }
+      ],
+      "aiInsights": [
+        {
+          "id": "AI-MT-003",
+          "type": "success",
+          "icon": "clock",
+          "message": "Projected 60% reduction in application processing time.",
+          "confidence": 0.89,
+          "action": "View metrics"
+        }
+      ]
+    },
+    {
+      "id": "APP-MT-003",
+      "name": "Clinical Trial Financial Tracking System",
+      "type": "research",
+      "status": "review",
+      "priority": "high",
+      "department": "Clinical Research Finance",
+      "requestedAmount": 315000,
+      "assignee": {
+        "id": "USR-014",
+        "name": "Dr. Nancy Patel",
+        "email": "nancy.patel@health.mil",
+        "role": "Clinical Research Finance Director"
+      },
+      "reviewer": {
+        "id": "USR-JR-001",
+        "name": "James Rodriguez",
+        "role": "Grants Administrator"
+      },
+      "financialReviewer": {
+        "id": "USR-MT-001",
+        "name": "Maria Thompson",
+        "role": "Financial Analyst"
+      },
+      "collaborators": [
+        {
+          "id": "USR-001",
+          "name": "Dr. Sarah Chen",
+          "role": "Advisory Role - PI Perspective"
+        }
+      ],
+      "description": "Develop specialized financial tracking system for clinical trials with real-time budget monitoring, milestone tracking, and compliance reporting. Consulting with active PIs including Dr. Chen.",
+      "createdAt": "2025-11-08T09:00:00Z",
+      "updatedAt": "2025-12-11T10:00:00Z",
+      "progress": 65,
+      "currentStep": 3,
+      "totalSteps": 5,
+      "steps": [
+        { "name": "Initial Submission", "status": "completed" },
+        { "name": "Stakeholder Requirements", "status": "completed" },
+        { "name": "System Design", "status": "in_progress" },
+        { "name": "Financial Review", "status": "pending" },
+        { "name": "Implementation", "status": "pending" }
+      ],
+      "documents": [
+        { "id": "DOC-MT-006", "name": "tracking-system-proposal.pdf", "size": 5200000, "type": "application/pdf", "uploadedAt": "2025-11-08T10:00:00Z" },
+        { "id": "DOC-MT-007", "name": "pi-requirements-survey.xlsx", "size": 890000, "type": "application/vnd.ms-excel", "uploadedAt": "2025-11-20T11:00:00Z" }
+      ],
+      "aiInsights": [
+        {
+          "id": "AI-MT-004",
+          "type": "info",
+          "icon": "file-text",
+          "message": "Will integrate with 23 active clinical trials.",
+          "confidence": 0.93,
+          "action": "View trials"
+        }
+      ]
+    },
+    {
+      "id": "APP-MT-004",
+      "name": "Budget Forecasting AI Tool",
+      "type": "modernization",
+      "status": "active",
+      "priority": "medium",
+      "department": "Budget & Finance",
+      "requestedAmount": 198000,
+      "assignee": {
+        "id": "USR-MT-001",
+        "name": "Maria Thompson",
+        "email": "maria.thompson@health.mil",
+        "role": "Financial Analyst"
+      },
+      "reviewer": {
+        "id": "USR-JR-001",
+        "name": "James Rodriguez",
+        "role": "Grants Administrator"
+      },
+      "description": "Implement machine learning-based budget forecasting tool to improve accuracy of fiscal year projections and identify potential budget variances early.",
+      "createdAt": "2025-10-20T14:00:00Z",
+      "updatedAt": "2025-12-08T11:00:00Z",
+      "progress": 40,
+      "currentStep": 2,
+      "totalSteps": 5,
+      "steps": [
+        { "name": "Initial Submission", "status": "completed" },
+        { "name": "Data Analysis", "status": "in_progress" },
+        { "name": "Model Development", "status": "pending" },
+        { "name": "Testing & Validation", "status": "pending" },
+        { "name": "Deployment", "status": "pending" }
+      ],
+      "documents": [
+        { "id": "DOC-MT-008", "name": "ai-forecasting-proposal.pdf", "size": 4100000, "type": "application/pdf", "uploadedAt": "2025-10-20T15:00:00Z" },
+        { "id": "DOC-MT-009", "name": "historical-data-analysis.xlsx", "size": 12500000, "type": "application/vnd.ms-excel", "uploadedAt": "2025-11-05T10:00:00Z" }
+      ],
+      "aiInsights": [
+        {
+          "id": "AI-MT-005",
+          "type": "info",
+          "icon": "trending-up",
+          "message": "Initial models showing 15% improvement in forecast accuracy.",
+          "confidence": 0.86,
+          "action": "View metrics"
+        }
+      ]
+    },
+    {
+      "id": "APP-GEN-001",
+      "name": "Nurse Staffing Optimization Study",
+      "type": "research",
+      "status": "active",
+      "priority": "high",
+      "department": "Nursing Services",
+      "requestedAmount": 245000,
+      "assignee": {
+        "id": "USR-015",
+        "name": "Col. Margaret Davis",
+        "email": "margaret.davis@health.mil",
+        "role": "Chief Nursing Officer"
+      },
+      "reviewer": {
+        "id": "USR-JR-001",
+        "name": "James Rodriguez",
+        "role": "Grants Administrator"
+      },
+      "financialReviewer": {
+        "id": "USR-MT-001",
+        "name": "Maria Thompson",
+        "role": "Financial Analyst"
+      },
+      "description": "Research study to optimize nurse staffing ratios using predictive analytics while maintaining quality patient outcomes.",
+      "createdAt": "2025-11-18T08:00:00Z",
+      "updatedAt": "2025-12-09T16:00:00Z",
+      "progress": 35,
+      "currentStep": 2,
+      "totalSteps": 5,
+      "steps": [
+        { "name": "Initial Submission", "status": "completed" },
+        { "name": "IRB Review", "status": "in_progress" },
+        { "name": "Data Collection", "status": "pending" },
+        { "name": "Analysis", "status": "pending" },
+        { "name": "Implementation Plan", "status": "pending" }
+      ],
+      "documents": [
+        { "id": "DOC-GEN-001", "name": "staffing-study-proposal.pdf", "size": 3800000, "type": "application/pdf", "uploadedAt": "2025-11-18T09:00:00Z" }
+      ],
+      "aiInsights": [
+        {
+          "id": "AI-GEN-001",
+          "type": "info",
+          "icon": "users",
+          "message": "Study will cover 12 MTFs with 2,400+ nursing staff.",
+          "confidence": 0.94,
+          "action": "View scope"
+        }
+      ]
+    },
+    {
+      "id": "APP-GEN-002",
+      "name": "Emergency Response Training Simulator",
+      "type": "training",
+      "status": "review",
+      "priority": "high",
+      "department": "Emergency Medicine",
+      "requestedAmount": 560000,
+      "assignee": {
+        "id": "USR-016",
+        "name": "Dr. James Wilson",
+        "email": "james.wilson@health.mil",
+        "role": "Emergency Medicine Director"
+      },
+      "reviewer": {
+        "id": "USR-JR-001",
+        "name": "James Rodriguez",
+        "role": "Grants Administrator"
+      },
+      "financialReviewer": {
+        "id": "USR-MT-001",
+        "name": "Maria Thompson",
+        "role": "Financial Analyst"
+      },
+      "description": "Develop VR-based emergency response training simulator for mass casualty incident preparedness.",
+      "createdAt": "2025-11-22T10:00:00Z",
+      "updatedAt": "2025-12-10T14:00:00Z",
+      "progress": 70,
+      "currentStep": 4,
+      "totalSteps": 5,
+      "steps": [
+        { "name": "Initial Submission", "status": "completed" },
+        { "name": "Technical Requirements", "status": "completed" },
+        { "name": "Vendor Selection", "status": "completed" },
+        { "name": "Budget Review", "status": "in_progress" },
+        { "name": "Contract Award", "status": "pending" }
+      ],
+      "documents": [
+        { "id": "DOC-GEN-002", "name": "vr-simulator-proposal.pdf", "size": 8900000, "type": "application/pdf", "uploadedAt": "2025-11-22T11:00:00Z" },
+        { "id": "DOC-GEN-003", "name": "training-curriculum.pdf", "size": 4500000, "type": "application/pdf", "uploadedAt": "2025-11-28T09:00:00Z" }
+      ],
+      "aiInsights": [
+        {
+          "id": "AI-GEN-002",
+          "type": "success",
+          "icon": "check-circle",
+          "message": "Vendor demos completed - all requirements met.",
+          "confidence": 0.96,
+          "action": null
+        }
+      ]
+    },
+    {
+      "id": "APP-GEN-003",
+      "name": "Military Family Support Network",
+      "type": "veterans",
+      "status": "active",
+      "priority": "medium",
+      "department": "Family Services",
+      "requestedAmount": 175000,
+      "assignee": {
+        "id": "USR-017",
+        "name": "Sandra Mitchell",
+        "email": "sandra.mitchell@health.mil",
+        "role": "Family Services Coordinator"
+      },
+      "reviewer": {
+        "id": "USR-JR-001",
+        "name": "James Rodriguez",
+        "role": "Grants Administrator"
+      },
+      "financialReviewer": {
+        "id": "USR-MT-001",
+        "name": "Maria Thompson",
+        "role": "Financial Analyst"
+      },
+      "collaborators": [
+        {
+          "id": "USR-001",
+          "name": "Dr. Sarah Chen",
+          "role": "Mental Health Consultant"
+        }
+      ],
+      "description": "Establish peer support network for military families with resources for deployment transitions, childcare, and mental health support. Incorporating Dr. Chen's family mental health research.",
+      "createdAt": "2025-11-05T14:00:00Z",
+      "updatedAt": "2025-12-07T10:00:00Z",
+      "progress": 50,
+      "currentStep": 3,
+      "totalSteps": 5,
+      "steps": [
+        { "name": "Initial Submission", "status": "completed" },
+        { "name": "Partnership Development", "status": "completed" },
+        { "name": "Resource Development", "status": "in_progress" },
+        { "name": "Pilot Launch", "status": "pending" },
+        { "name": "Full Deployment", "status": "pending" }
+      ],
+      "documents": [
+        { "id": "DOC-GEN-004", "name": "support-network-proposal.pdf", "size": 3600000, "type": "application/pdf", "uploadedAt": "2025-11-05T15:00:00Z" }
+      ],
+      "aiInsights": [
+        {
+          "id": "AI-GEN-003",
+          "type": "info",
+          "icon": "heart",
+          "message": "Initial pilot targeting 500 military families.",
+          "confidence": 0.91,
+          "action": "View details"
+        }
+      ]
     }
   ],
   "metadata": {
-    "total": 8,
+    "total": 26,
     "page": 1,
-    "perPage": 10,
-    "totalPages": 1
+    "perPage": 50,
+    "totalPages": 1,
+    "lastUpdated": "2025-12-12T10:00:00Z"
   }
 }
