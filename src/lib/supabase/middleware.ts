@@ -2,9 +2,10 @@ import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
 export async function updateSession(request: NextRequest) {
-  // Check for demo persona cookie FIRST (for demo mode authentication)
+  // Check for demo persona cookie OR local user cookie FIRST (for demo mode authentication)
   // This check happens before Supabase to ensure demo mode always works
   const demoPersona = request.cookies.get('eids-demo-persona')?.value
+  const localUser = request.cookies.get('eids-user')?.value
 
   // Public routes that don't require authentication
   const publicPaths = ['/login', '/auth', '/api', '/_next', '/favicon.ico', '/manifest']
